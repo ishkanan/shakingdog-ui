@@ -1,0 +1,95 @@
+
+import { getDogs, getDog, getFamily } from "../data/api";
+
+
+const FETCH_DOGS_BEGIN = "FETCH_DOGS_BEGIN";
+const FETCH_DOGS_SUCCESS = "FETCH_DOGS_SUCCESS";
+const FETCH_DOGS_FAILURE = "FETCH_DOGS_FAILURE";
+const FETCH_DOG_BEGIN = "FETCH_DOG_BEGIN";
+const FETCH_DOG_SUCCESS = "FETCH_DOG_SUCCESS";
+const FETCH_DOG_FAILURE = "FETCH_DOG_FAILURE";
+const FETCH_FAMILY_BEGIN = "FETCH_FAMILY_BEGIN";
+const FETCH_FAMILY_SUCCESS = "FETCH_FAMILY_SUCCESS";
+const FETCH_FAMILY_FAILURE = "FETCH_FAMILY_FAILURE";
+
+// Fetch all dogs
+
+const fetchDogsBegin = () => ({
+  type: FETCH_DOGS_BEGIN
+});
+
+const fetchDogsSuccess = dogs => ({
+  type: FETCH_DOGS_SUCCESS,
+  dogs
+});
+
+const fetchDogsFailure = (error, auth) => ({
+  type: FETCH_DOGS_FAILURE,
+  error,
+  auth
+});
+
+export const fetchDogs = () => dispatch => {
+  dispatch(fetchDogsBegin());
+  return getDogs(
+    data => dispatch(fetchDogsSuccess(data.dogs)),
+    error => dispatch(fetchDogsFailure(error.error, error.auth))
+  );
+};
+
+// Fetch single dog
+
+const fetchDogBegin = () => ({
+  type: FETCH_DOG_BEGIN
+});
+
+const fetchDogSuccess = (dog, familyAsChild, familiesAsParent) => ({
+  type: FETCH_DOG_SUCCESS,
+  dog,
+  familyAsChild,
+  familiesAsParent
+});
+
+const fetchDogFailure = (error, auth) => ({
+  type: FETCH_DOG_FAILURE,
+  error,
+  auth
+});
+
+export const fetchDog = dogId => dispatch => {
+  dispatch(fetchDogBegin());
+  return getDog(
+    dogId,
+    data => dispatch(fetchDogSuccess(data.dog, data.familyaschild, data.familiesasparent)),
+    error => dispatch(fetchDogFailure(error.error, error.auth))
+  );
+};
+
+// Fetch particular family
+
+const fetchFamilyBegin = () => ({
+  type: FETCH_FAMILY_BEGIN
+});
+
+const fetchFamilySuccess = (sire, dam, children) => ({
+  type: FETCH_FAMILY_SUCCESS,
+  sire,
+  dam,
+  children
+});
+
+const fetchFamilyFailure = (error, auth) => ({
+  type: FETCH_FAMILY_FAILURE,
+  error,
+  auth
+});
+
+export const fetchFamily = (sireId, damId) => dispatch => {
+  dispatch(fetchFamilyBegin());
+  return getFamily(
+    sireId,
+    damId,
+    data => dispatch(fetchFamilySuccess(data.sire, data.dam, data.children)),
+    error => dispatch(fetchFamilyFailure(error.error, error.auth))
+  );
+};

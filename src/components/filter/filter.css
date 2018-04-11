@@ -1,0 +1,13 @@
+
+.filter-entries-container {
+  width: 100%;
+  background-color: #EAEAEA;
+  border: 2px solid #EAEAEA;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  padding: 10px 10px 3px 10px;
+}
+
+.tag {
+  height: 22px;
+}

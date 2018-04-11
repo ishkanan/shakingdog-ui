@@ -1,0 +1,63 @@
+{
+  "name": "shakingdog-ui",
+  "version": "1.0.0",
+  "description": "UI component for Shaking Dog / CECS register",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --debug",
+    "start": "webpack-dev-server --inline --host 0.0.0.0",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/Rusty1958/shakingdog-ui"
+  },
+  "keywords": [],
+  "author": "Anthony Ishkan",
+  "homepage": "",
+  "license": "ISC",
+  "dependencies": {
+    "abortcontroller-polyfill": "^1.1.4",
+    "bulma": "^0.6.2",
+    "deepmerge": "^2.1.0",
+    "es6-promise": "^4.2.4",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-redux": "^5.0.7",
+    "redux-thunk": "^2.2.0",
+    "sprintf-js": "^1.1.1",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.1.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.9",
+    "eslint": "^4.16.0",
+    "eslint-loader": "^1.9.0",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "jest": "^22.1.4",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.0.10",
+    "precss": "^3.1.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-hot-middleware": "^2.21.0"
+  }
+}
