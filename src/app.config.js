@@ -1,8 +1,5 @@
 
 export const config = {
-  apiUrl: "https://ubuntudev:3001",
-  env: "development",
-  initState: {
-
-  }
-};
+  apiUrl: "https://ubuntudev:3000",
+  env: "development"
+}

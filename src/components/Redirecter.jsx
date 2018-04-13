@@ -1,6 +1,6 @@
 
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import PropTypes from "prop-types"
+import React, { Component } from "react"
 
 
 export default class Redirecter extends Component {
@@ -10,11 +10,11 @@ export default class Redirecter extends Component {
     message: PropTypes.string.isRequired,
     // URL
     url: PropTypes.string.isRequired
-  };
+  }
 
   componentDidMount() {
     // redirect AFTER render
-    window.location.replace(this.props.url);
+    window.location.replace(this.props.url)
   }
 
   render() {
@@ -31,7 +31,7 @@ export default class Redirecter extends Component {
           </div>
         </nav>
       </div>
-    );
+    )
   }
 
 }

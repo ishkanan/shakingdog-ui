@@ -1,35 +1,38 @@
 
-import "bulma/css/bulma.css";
-import React from "react";
-import { render } from "react-dom";
-import { createStore, applyMiddleware } from "redux";
-import { createLogger } from "redux-logger";
-import { Provider } from "react-redux";
-import thunk from "redux-promise";
+import "bulma/css/bulma.css"
+import { fromJS } from "immutable"
+import React from "react"
+import { render } from "react-dom"
+import { createStore, applyMiddleware } from "redux"
+import { createLogger } from "redux-logger"
+import { Provider } from "react-redux"
+import thunk from "redux-thunk"
 
-import "./global.css";
-import { config } from "./app.config";
-import App from "./containers/App.jsx";
-import { fetchDogs } from "./actions/api.jsx"
-import rootReducer from "./reducers";
+import "./global.css"
+import { config } from "./app.config"
+import { fetchDogs } from "./actions/api"
+import App from "./components/App.jsx"
+import initialState from "./init.data"
+import rootReducer from "./reducers"
 
 
 const middleware = [ thunk ]
 if (config.env !== "production") {
-  middleware.push(createLogger());
+  middleware.push(createLogger())
 }
 
 const store = createStore(
   rootReducer,
+  fromJS(initialState),
   applyMiddleware(...middleware)
-);
+)
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById("app")
-);
+)
 
 // failure scenario is handled by the UI components
-store.dispatch(fetchDogs());
+store.dispatch(fetchDogs())

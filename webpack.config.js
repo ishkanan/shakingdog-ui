@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Callpicker II',
+      title: 'Shaking Dog / CECS Register',
       inject: 'body',
       template: __dirname + '/src/index.html'
     }),
