@@ -11,7 +11,7 @@ import thunk from "redux-thunk"
 import "./global.css"
 import { config } from "./app.config"
 import { fetchDogs } from "./actions/api"
-import App from "./components/App.jsx"
+import App from "./containers/App.jsx"
 import initialState from "./init.data"
 import rootReducer from "./reducers"
 

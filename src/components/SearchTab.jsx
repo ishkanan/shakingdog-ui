@@ -1,18 +1,20 @@
 
 import PropTypes from "prop-types"
-import React, { Component } from "react"
+import React from "react"
+import { connect } from "react-redux"
 
-import FilterableDogSelect from "../containers/FilterableDogSelect.jsx"
+import SearchControls from "../containers/SearchControls.jsx"
+import SearchResults from "../containers/SearchResults.jsx"
 
 
 const SearchTab = () => {
   return (
     <div className="columns">
       <div className="column is-one-third">
-        <FilterableDogSelect />
+        <SearchControls />
       </div>
       <div className="column">
-        Search results
+        <SearchResults />
       </div>
     </div>
   )

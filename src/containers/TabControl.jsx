@@ -1,21 +1,15 @@
 
 import PropTypes from "prop-types"
 import React from "react"
+import { connect } from "react-redux"
 
-import Redirecter from "../components/Redirecter.jsx"
-import SearchTab from "./SearchTab.jsx"
+import { changeSelectedTab } from "../actions/app"
+import SearchTab from "../components/SearchTab.jsx"
+import TabPage from "../components/TabPage.jsx"
+import { toJS } from "../data/util.jsx"
 
 
-const TabbedContent = ({redirect, selectedTab, onTabChange}) => {
-  // redirect override
-  if (redirect !== null) {
-    return (
-      <Redirecter message={redirect.message}
-                  url={redirect.url} />
-    )
-  }
-
-  // authorised, so render
+const TabControl = ({selectedTab, onTabChange}) => {
   return (
     <React.Fragment>
       <div className="tabs is-boxed">
@@ -34,20 +28,21 @@ const TabbedContent = ({redirect, selectedTab, onTabChange}) => {
           </li>
         </ul>
       </div>
-      {selectedTab === "search" && 
-      <SearchTab />
-      }
+      <TabPage isVisible={selectedTab === "search"}
+               contents={<SearchTab />} />
     </React.Fragment>
   )
 }
 
-TabbedContent.propTypes = {
-  // Redirect state
-  redirect: PropTypes.object,
-  // Currently selected tab
-  selectedTab: PropTypes.string.isRequired,
-  // Events
-  onTabChange: PropTypes.func.isRequired
-}
+const mapStateToProps = (state) => ({
+  selectedTab: state.getIn(["ui", "selectedTab"])
+})
 
-export default TabbedContent
+const mapDispatchToProps = ({
+  onTabChange: changeSelectedTab
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(toJS(TabControl))
