@@ -12,8 +12,9 @@ const auth = (state, action) => {
     case FETCH_DOG_FAILURE:
     case FETCH_FAMILY_FAILURE:
       return state.setIn(["redirect"], Map({
-        message: "Redirecting to Okta...",
-        url: action.url
+        initiate: action.auth.redirect.initiate,
+        message: (action.auth.redirect.initiate ? "Redirecting to Okta..." : null),
+        url: action.auth.redirect.url
       }))
     default:
       return state

@@ -1,7 +1,11 @@
 
 const initialState = {
   auth: {
-    redirect: null
+    redirect: {
+      initiate: false,
+      message: null,
+      url: null
+    }
   },
   data: {
     dogs: {

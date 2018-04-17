@@ -10,33 +10,44 @@ import Button from "../components/Button.jsx"
 import RadioMultiSelect from "../components/RadioMultiSelect.jsx"
 import { toJS } from "../data/util.jsx"
 import { getSires, getDams } from "../selectors/dogs"
-import { coalesce } from "../utils"
+import { coalesce } from "../util"
 
 
-const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDam, canSearch, onModeChange, onDogChange, onDoSearch}) => {
+const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDam, canSearch, isSearching, onModeChange, onDogChange, onDoSearch}) => {
   const radios = [
     {id: "single", value: "Single Dog"},
     {id: "couple", value: "Couple"}
   ]
 
   const selects = [
-    {radioId: "single", caption: "Dog", data: _.map(dogs, d => ({id: d.id, value: d.name}))},
-    {radioId: "couple", caption: "Sire", data: _.map(sires, d => ({id: d.id, value: d.name}))},
-    {radioId: "couple", caption: "Dam", data: _.map(dams, d => ({id: d.id, value: d.name}))}
+    {radioId: "single", id: "sire", caption: "Dog", data: _.map(dogs, d => ({id: d.id, value: d.name}))},
+    {radioId: "couple", id: "sire", caption: "Sire", data: _.map(sires, d => ({id: d.id, value: d.name}))},
+    {radioId: "couple", id: "dam", caption: "Dam", data: _.map(dams, d => ({id: d.id, value: d.name}))}
   ]
 
-  return [
-    <RadioMultiSelect radios={radios}
-                      selects={selects}
-                      selectedRadio={searchMode}
-                      selectedValues={[selectedSire, selectedDam]}
-                      onRadioChange={onModeChange}
-                      onSelectChange={onDogChange} />,
-    <Button caption="Search"
-            className="is-primary"
-            disabled={!canSearch}
-            onClick={onDoSearch} />
-  ]
+  return (
+    <React.Fragment>
+      <RadioMultiSelect radios={radios}
+                        selects={selects}
+                        selectedRadio={searchMode}
+                        selectedValues={[selectedSire, selectedDam]}
+                        onRadioChange={onModeChange}
+                        onSelectChange={onDogChange} />
+      <div className="field is-horizontal">
+        <div className="field-label" />
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <Button caption="Search"
+                      className={"is-primary is-rounded" + (isSearching ? " is-loading" : "")}
+                      disabled={!canSearch}
+                      onClick={onDoSearch} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  )
 }
 
 const canSearch = (mode, sire, dam) => {
@@ -55,17 +66,15 @@ const canSearch = (mode, sire, dam) => {
 const doSearchAction = () => {
   return (dispatch, getState) => {
     const state = getState()
-    const search = canSearch(state)
     const mode = state.getIn(["search", "mode"])
     const sire = state.getIn(["ui", "selectedSire"])
     const dam = state.getIn(["ui", "selectedDam"])
+    const search = canSearch(mode, sire, dam)
 
     if (search && mode === "single") {
-      return () => fetchDog(sire)
+      dispatch(fetchDog(sire))
     } else if (search && mode === "couple") {
-      return () => fetchFamily(sire, dam)
-    } else {
-      return () => {}
+      dispatch(fetchFamily(sire, dam))
     }
   }
 }
@@ -77,6 +86,7 @@ const mapStateToProps = (state) => ({
   searchMode: state.getIn(["search", "mode"]),
   selectedSire: state.getIn(["ui", "selectedSire"]),
   selectedDam: state.getIn(["ui", "selectedDam"]),
+  isSearching: state.getIn(["data", "dogReport", "isFetching"]) || state.getIn(["data", "couplesReport", "isFetching"]),
   canSearch: canSearch(
     state.getIn(["search", "mode"]),
     state.getIn(["ui", "selectedSire"]),
@@ -84,9 +94,9 @@ const mapStateToProps = (state) => ({
   )
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  onModeChange: changeSearchMode,
-  onDogChange: (role, index, dog) => role === "sire" ? changeSelectedSire(dog) : changeSelectedDam(dog),
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onModeChange: (mode) => dispatch(changeSearchMode(mode)),
+  onDogChange: (mode, role, dogId) => dispatch(role === "sire" ? changeSelectedSire(dogId) : changeSelectedDam(dogId)),
   onDoSearch: () => dispatch(doSearchAction())
 })
 

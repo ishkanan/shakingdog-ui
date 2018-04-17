@@ -36,8 +36,10 @@ function genericAsyncFetch(path, success, failure) {
     .catch(error => {
       failure({
         auth: {
-          redirect: (error.redirectUrl !== undefined),
-          url: error.redirectUrl
+          redirect: {
+            initiate: (error.redirectUrl !== undefined),
+            url: error.redirectUrl
+          }
         },
         error: error
       })
@@ -55,5 +57,5 @@ export function getDog(dogId, success, failure) {
 
 export function getFamily(sireId, damId, success, failure) {
   return genericAsyncFetch(sprintf(
-    "/api/family?sireId=%s&damId=%s", sireId, damId), success, failure)
+    "/api/family?sireid=%s&damid=%s", sireId, damId), success, failure)
 }

@@ -10,12 +10,12 @@ import { toJS } from "../data/util.jsx"
 
 const App = ({redirect}) => (
   <div className="container">
-    {redirect !== null &&
+    {redirect.initiate &&
     <Redirecter message={redirect.message}
                 url={redirect.url} />
     }
-    {redirect === null &&
-      <TabControl />
+    {!redirect.initiate &&
+    <TabControl />
     }
   </div>
 )

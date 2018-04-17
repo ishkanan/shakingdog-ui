@@ -20,7 +20,7 @@ const RadioMultiSelect = ({radios, selects, selectedRadio, selectedValues, onRad
             <div className="control">
               {_.map(radios, r => (
               <label key={r.id} className="radio">
-                <input type="radio" name="mode" checked={r.id === selectedRadio} onChange={(e) => onRadioChange(r.id)} />
+                <input type="radio" name="mode" checked={(r.id === selectedRadio)} onChange={(e) => onRadioChange(r.id)} />
                 {r.value}
               </label>
               ))}
@@ -34,8 +34,8 @@ const RadioMultiSelect = ({radios, selects, selectedRadio, selectedValues, onRad
           <label className="label">{s.caption}</label>
         </div>
         <div className="field-body">
-          <Select value={(selectedValues[i] === undefined ? "" : selectedValues[i])}
-                  onChange={(value) => onSelectChange(s.radioId, i, (value !== null ? value.id : null))}
+          <Select value={(selectedValues[i] !== null ? selectedValues[i] : "")}
+                  onChange={(value) => onSelectChange(s.radioId, s.id, (value !== null ? value.id : null))}
                   options={s.data}
                   labelKey="value"
                   valueKey="id"

@@ -3,6 +3,14 @@
   padding: 1.5rem;
 }
 
+.is-box-header {
+  margin-bottom: 0px;
+}
+
+.notification {
+  margin-bottom: 12px;
+}
+
 .section {
   padding-top: 1.5rem;
 }

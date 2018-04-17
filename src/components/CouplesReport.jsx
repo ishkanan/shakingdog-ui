@@ -2,12 +2,15 @@
 import PropTypes from "prop-types"
 import React from "react"
 
+import FamilyInfo from "./FamilyInfo.jsx"
+
 
 const CouplesReport = ({sire, dam, children}) => {
   return (
-    <div className="notification">
-      COUPLES REPORT
-    </div>
+    <FamilyInfo headerCaption="Immediate Family"
+                sire={sire}
+                dam={dam}
+                children={children} />
   )
 }
 

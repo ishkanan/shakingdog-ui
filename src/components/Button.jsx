@@ -5,10 +5,10 @@ import React from "react"
 
 const Button = ({caption, className, disabled, onClick}) => {
   const additionalClassName = (className === undefined ? "" : " " + className)
-  const disabledClassName = (disabled ? " is-disabled" : "")
 
   return (
-    <a className={"button" + additionalClassName + disabledClassName}
+    <a className={"button" + additionalClassName}
+       disabled={disabled}
        onClick={(e) => {e.preventDefault(); onClick()}}>
       {caption}
     </a>
