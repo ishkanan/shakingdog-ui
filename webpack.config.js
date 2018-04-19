@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Shaking Dog / CECS Register',
+      title: 'Shaking Dog Register',
       inject: 'body',
       template: __dirname + '/src/index.html'
     }),

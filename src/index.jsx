@@ -8,6 +8,7 @@ import { createLogger } from "redux-logger"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 
+import "./favicon.ico"
 import "./global.css"
 import { config } from "./app.config"
 import { fetchDogs } from "./actions/api"
