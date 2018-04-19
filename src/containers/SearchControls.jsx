@@ -7,10 +7,11 @@ import { fetchDog, fetchFamily } from "../actions/api"
 import { changeSearchMode } from "../actions/search"
 import { changeSelectedSire, changeSelectedDam } from "../actions/ui"
 import Button from "../components/Button.jsx"
+import HorizontalFormField from "../components/HorizontalFormField.jsx"
 import RadioMultiSelect from "../components/RadioMultiSelect.jsx"
 import { toJS } from "../data/util.jsx"
 import { getSires, getDams } from "../selectors/dogs"
-import { coalesce } from "../util"
+import { coalesce } from "../util/data"
 
 
 const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDam, canSearch, isSearching, onModeChange, onDogChange, onDoSearch}) => {
@@ -33,19 +34,12 @@ const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDa
                         selectedValues={[selectedSire, selectedDam]}
                         onRadioChange={onModeChange}
                         onSelectChange={onDogChange} />
-      <div className="field is-horizontal">
-        <div className="field-label" />
-        <div className="field-body">
-          <div className="field">
-            <div className="control">
-              <Button caption="Search"
-                      className={"is-primary is-rounded" + (isSearching ? " is-loading" : "")}
-                      disabled={!canSearch}
-                      onClick={onDoSearch} />
-            </div>
-          </div>
-        </div>
-      </div>
+      <HorizontalFormField caption=""
+                           content={<Button caption="Search"
+                                      className={"is-primary is-rounded" + (isSearching ? " is-loading" : "")}
+                                      disabled={!canSearch}
+                                      onClick={onDoSearch} />}
+                           isNarrow={false} />
     </React.Fragment>
   )
 }
@@ -61,7 +55,6 @@ const canSearch = (mode, sire, dam) => {
   }
 }
 
-// have to do some funk to get access to state within mapDispatchToProps
 // https://stackoverflow.com/questions/35836290/access-state-inside-of-mapdispatchtoprops-method
 const doSearchAction = () => {
   return (dispatch, getState) => {

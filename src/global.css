@@ -1,4 +1,8 @@
 
+.column + .column {
+  border-left: 1px solid lightgray;
+}
+
 .hero-body.is-narrow {
   padding: 1.5rem;
 }
@@ -17,4 +21,61 @@
 
 .tabs {
   margin-bottom: 0rem;
+}
+
+/* Dog status badges */
+
+.dogstatus {
+  border-radius: 6px;
+  padding: 0px 4px 0px 4px;
+}
+
+.dogstatus.is-affected {
+  background-color: red;
+  border: 1px solid red;
+  color: black !important;
+}
+
+.dogstatus.is-carrier {
+  background-color: yellow;
+  border: 1px solid yellow;
+  color: black !important;
+}
+
+.dogstatus.is-carrierbyprogeny {
+  background-color: lightsalmon;
+  border: 1px solid lightsalmon;
+  color: black !important;
+}
+
+.dogstatus.is-clear {
+  background-color: forestgreen;
+  border: 1px solid forestgreen;
+  color: white !important;
+}
+
+.dogstatus.is-clearbyparentage {
+  background-color: lightgreen;
+  border: 1px solid lightgreen;
+  color: black !important;
+}
+
+.dogstatus.is-unknown {
+
+}
+
+p.dogsearchlink {
+  padding-top: 5px;
+}
+
+a.dogsearchlink {
+  display: inline;
+}
+
+a.dogsearchlink + span.dogstatus {
+  margin-left: 15px;
+}
+
+span.dogstatus + span.dogstatus {
+  margin-left: 10px;
 }

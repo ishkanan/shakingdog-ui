@@ -5,43 +5,34 @@ import React from "react"
 import Select from "react-select"
 import "react-select/dist/react-select.css"
 
+import HorizontalFormField from "./HorizontalFormField.jsx"
+
 
 const RadioMultiSelect = ({radios, selects, selectedRadio, selectedValues, onRadioChange, onSelectChange}) => {
   const visibleSelects = _.filter(selects, s => s.radioId === selectedRadio)
 
+  const renderedOptions = _.map(radios, (r, i) => (
+    <label key={i} className="radio">
+      <input type="radio" name="mode" checked={(r.id === selectedRadio)} onChange={(e) => onRadioChange(r.id)} />
+      {r.value}
+    </label>
+  ))
+
   return (
     <React.Fragment>
-      <div className="field is-horizontal">
-        <div className="field-label is-narrow">
-          <label className="label"></label>
-        </div>
-        <div className="field-body">
-          <div className="field is-narrow">
-            <div className="control">
-              {_.map(radios, r => (
-              <label key={r.id} className="radio">
-                <input type="radio" name="mode" checked={(r.id === selectedRadio)} onChange={(e) => onRadioChange(r.id)} />
-                {r.value}
-              </label>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      <HorizontalFormField caption=""
+                           content={renderedOptions}
+                           isNarrow={true} />
       {_.map(visibleSelects, (s, i) => (
-      <div key={i} className="field is-horizontal">
-        <div className="field-label is-normal">
-          <label className="label">{s.caption}</label>
-        </div>
-        <div className="field-body">
-          <Select value={(selectedValues[i] !== null ? selectedValues[i] : "")}
-                  onChange={(value) => onSelectChange(s.radioId, s.id, (value !== null ? value.id : null))}
-                  options={s.data}
-                  labelKey="value"
-                  valueKey="id"
-                  className="field is-expanded" />
-        </div>
-      </div>
+      <HorizontalFormField key={i}
+                           caption={s.caption}
+                           content={<Select value={(selectedValues[i] !== null ? selectedValues[i] : "")}
+                                      onChange={(value) => onSelectChange(s.radioId, s.id, (value !== null ? value.id : null))}
+                                      options={s.data}
+                                      labelKey="value"
+                                      valueKey="id"
+                                      className="field is-expanded" />}
+                                      isNarrow={false} />
       ))}
     </React.Fragment>
   )

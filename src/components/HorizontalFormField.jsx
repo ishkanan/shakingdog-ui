@@ -24,7 +24,10 @@ HorizontalFormField.propTypes = {
   // Label text
   caption: PropTypes.string.isRequired,
   // Control content
-  content: PropTypes.object.isRequired,
+  content: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]).isRequired,
   // Use is-narrow Bulma class
   isNarrow: PropTypes.bool.isRequired
 }

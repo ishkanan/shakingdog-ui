@@ -11,7 +11,7 @@ import { toJS } from "../data/util.jsx"
 
 const DogSearchLink = ({dogId, dogName, className, onDoSearch}) => {
   return (
-    <a className={className} onClick={(e) => {e.preventDefault(); onDoSearch(dogId)}}>{dogName}</a>
+    <a className={"dogsearchlink " + className} onClick={(e) => {e.preventDefault(); onDoSearch(dogId)}}>{dogName}</a>
   )
 }
 

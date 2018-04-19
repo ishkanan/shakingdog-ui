@@ -2,14 +2,13 @@
 import PropTypes from "prop-types"
 import React from "react"
 
-import { coalesce } from "../util"
+import DogStatusBadge from "./DogStatusBadge.jsx"
+import { coalesce } from "../util/data"
+import { genderUIMap } from "../util/ui"
 
 
 const DogInfo = ({name, gender, shakingDogStatus, cecsStatus}) => {
-  const genders = {
-    "D": "Male",
-    "B": "Female"
-  }
+  const genderText = coalesce(genderUIMap[gender], "Unknown")
 
   return (
     <React.Fragment>
@@ -19,19 +18,21 @@ const DogInfo = ({name, gender, shakingDogStatus, cecsStatus}) => {
           <div className="level-item has-text-centered">
             <div>
               <p className="heading">Gender</p>
-              <p className="title is-5">{coalesce(genders[gender], "Unknown")}</p>
+              <p className="title is-4">{genderText}</p>
             </div>
           </div>
           <div className="level-item has-text-centered">
             <div>
               <p className="heading">Shaking Dog Status</p>
-              <p className="title is-5">{shakingDogStatus}</p>
+              <DogStatusBadge status={shakingDogStatus}
+                              size="is-5" />
             </div>
           </div>
           <div className="level-item has-text-centered">
             <div>
               <p className="heading">CECS Status</p>
-              <p className="title is-5">{cecsStatus}</p>
+              <DogStatusBadge status={cecsStatus}
+                              size="is-5" />
             </div>
           </div>
         </nav>
