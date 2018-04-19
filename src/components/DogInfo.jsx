@@ -28,13 +28,6 @@ const DogInfo = ({name, gender, shakingDogStatus, cecsStatus}) => {
                               size="is-5" />
             </div>
           </div>
-          <div className="level-item has-text-centered">
-            <div>
-              <p className="heading">CECS Status</p>
-              <DogStatusBadge status={cecsStatus}
-                              size="is-5" />
-            </div>
-          </div>
         </nav>
       </div>
     </React.Fragment>

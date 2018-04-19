@@ -20,8 +20,6 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                                        className="input is-static" />
                                         <DogStatusBadge status={sire.shakingdogstatus}
                                                         size="is-6" />
-                                        <DogStatusBadge status={sire.cecsstatus}
-                                                        size="is-6" />
                                       </p>}
                              isNarrow={false} />
         <HorizontalFormField caption="Dam:"
@@ -30,8 +28,6 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                                        dogName={dam.name}
                                                        className="input is-static" />
                                         <DogStatusBadge status={dam.shakingdogstatus}
-                                                        size="is-6" />
-                                        <DogStatusBadge status={dam.cecsstatus}
                                                         size="is-6" />
                                       </p>}
                              isNarrow={false} />
@@ -43,8 +39,6 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                                        dogName={child.name}
                                                        className="input is-static" />
                                         <DogStatusBadge status={child.shakingdogstatus}
-                                                        size="is-6" />
-                                        <DogStatusBadge status={child.cecsstatus}
                                                         size="is-6" />
                                       </p>}
                              isNarrow={false} />
