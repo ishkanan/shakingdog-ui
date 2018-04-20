@@ -12,5 +12,6 @@ export const dogStatusUIMap = {
 // mapping from DB values to UI caption
 export const genderUIMap = {
   "D": "D",
-  "B": "B"
+  "B": "B",
+  "U": "Unknown"
 }

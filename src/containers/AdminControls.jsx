@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 
+import NewDogPage from "./NewDogPage.jsx"
 import { toJS } from "../data/util.jsx"
 
 
@@ -10,7 +11,7 @@ const AdminControls = ({adminMode}) => {
   return (
     <React.Fragment>
       {adminMode === "newdog" &&
-      <p>NEW DOG</p>
+      <NewDogPage />
       }
       {adminMode === "newlitter" &&
       <p>NEW LITTER</p>

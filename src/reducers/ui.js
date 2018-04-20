@@ -11,7 +11,10 @@ import {
 const ui = (state, action) => {
   switch (action.type) {
     case CHANGE_ADMIN_MODE:
-      return state.setIn(["adminMode"], action.mode)
+      return (state
+        .setIn(["adminMode"], action.mode)
+        .setIn(["error"], null)
+      )
     case CHANGE_SEARCH_MODE:
       return (state
         .setIn(["searchMode"], action.mode)
@@ -23,7 +26,10 @@ const ui = (state, action) => {
     case CHANGE_SELECTED_SIRE:
       return state.setIn(["selectedSire"], action.sireId)
     case CHANGE_SELECTED_TAB:
-      return state.setIn(["selectedTab"], action.tab)
+      return (state
+        .setIn(["error"], null)
+        .setIn(["selectedTab"], action.tab)
+      )
     default:
       return state
   }

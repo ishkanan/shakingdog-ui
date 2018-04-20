@@ -27,12 +27,12 @@ const RadioMultiSelect = ({radios, selects, selectedRadio, selectedValues, onRad
       <HorizontalFormField key={i}
                            caption={s.caption}
                            content={<Select value={(selectedValues[i] !== null ? selectedValues[i] : "")}
-                                      onChange={(value) => onSelectChange(s.radioId, s.id, (value !== null ? value.id : null))}
-                                      options={s.data}
-                                      labelKey="value"
-                                      valueKey="id"
-                                      className="field is-expanded" />}
-                                      isNarrow={false} />
+                                            onChange={(value) => onSelectChange(s.radioId, s.id, (value !== null ? value.id : null))}
+                                            options={s.data}
+                                            labelKey="value"
+                                            valueKey="id"
+                                            className="field is-expanded" />}
+                           isNarrow={false} />
       ))}
     </React.Fragment>
   )

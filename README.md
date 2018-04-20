@@ -30,11 +30,12 @@ Common UI operations are:
 AdminTab|CP
   AdminMenu|CT
   AdminControls|CT
-    AddNewDogPage|CT
+    NewDogPage|CT
       NewDogForm|CP
-    AddNewLitterPage|CT
+    NewLitterPage|CT
       Search
-    AddTestResultPage|CT
+    TestResultPage|CT
+    Button
 
 Admin -> Actions:
 =================
@@ -113,7 +114,6 @@ Admin -> State Tree:
     }
   },
   ui: {
-    dataOperation: "",
     error: ""
   }
 }

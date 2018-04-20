@@ -2,6 +2,11 @@
 import { fromJS, Map } from "immutable"
 
 import {
+  CHANGE_NEWDOG_GENDER,
+  CHANGE_NEWDOG_NAME,
+  CHANGE_NEWDOG_SHAKINGDOGSTATUS
+} from "../actions/admin"
+import {
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
   FETCH_DOG_BEGIN, FETCH_DOG_SUCCESS, FETCH_DOG_FAILURE,
   FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE
@@ -15,10 +20,19 @@ const data = (state, action) => {
     
     case CHANGE_ADMIN_MODE:
       return (state
-        .setIn(["data", "newdog"], fromJS(initialState.data.newdog))
-        .setIn(["data", "newlitter"], fromJS(initialState.data.newlitter))
-        .setIn(["data", "testresult"], fromJS(initialState.data.testresult))
+        .setIn(["newdog"], fromJS(initialState.data.newdog))
+        .setIn(["newlitter"], fromJS(initialState.data.newlitter))
+        .setIn(["testresult"], fromJS(initialState.data.testresult))
       )
+    
+    case CHANGE_NEWDOG_GENDER:
+      return state.setIn(["newdog", "dog", "gender"], action.gender)
+    
+    case CHANGE_NEWDOG_NAME:
+      return state.setIn(["newdog", "dog", "name"], action.name)
+    
+    case CHANGE_NEWDOG_SHAKINGDOGSTATUS:
+      return state.setIn(["newdog", "dog", "shakingdogstatus"], action.status)
     
     case FETCH_DOGS_BEGIN:
       return state.setIn(["dogs"], Map({

@@ -25,39 +25,64 @@ const initialState = {
       children: null
     },
     newdog: {
-      acceptedStatuses: ["Affected", "Carrier", "Clear", "Unknown"],
-      dog: null
+      dog: {
+        gender: "U",
+        name: "",
+        shakingdogstatus: "",
+        cecsstatus: "unknown"
+      }
     },
     newlitter: {
       sire: {
         create: false,
         selected: null,
-        dog: null
+        dog: {
+          gender: "U",
+          name: "",
+          shakingdogstatus: "",
+          cecsstatus: "unknown"
+        }
       },
       dam: {
         create: false,
         selected: null,
-        dog: null
+        dog: {
+          gender: "U",
+          name: "",
+          shakingdogstatus: "",
+          cecsstatus: "unknown"
+        }
       },
-      children: null
+      children: []
     },
     testresult: {
       acceptedStatuses: null,
-      dog: null,
+      selected: null,
       sire: {
         create: false,
         selected: null,
-        dog: null
+        dog: {
+          gender: "U",
+          name: "",
+          shakingdogstatus: "",
+          cecsstatus: "unknown"
+        }
       },
       dam: {
         create: false,
         selected: null,
-        dog: null
+        dog: {
+          gender: "U",
+          name: "",
+          shakingdogstatus: "",
+          cecsstatus: "unknown"
+        }
       }
     }
   },
   ui: {
     adminMode: "newdog",
+    error: null,
     searchMode: "single",
     selectedTab: "search",
     selectedSire: null,
