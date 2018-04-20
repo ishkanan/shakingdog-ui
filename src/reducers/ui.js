@@ -1,13 +1,17 @@
 
-import { CHANGE_SELECTED_TAB } from "../actions/app"
-import { CHANGE_SEARCH_MODE } from "../actions/search"
-import { CHANGE_SELECTED_SIRE, CHANGE_SELECTED_DAM } from "../actions/ui"
+import {
+  CHANGE_SEARCH_MODE,
+  CHANGE_SELECTED_DAM,
+  CHANGE_SELECTED_SIRE,
+  CHANGE_SELECTED_TAB
+} from "../actions/ui"
 
 
 const ui = (state, action) => {
   switch (action.type) {
     case CHANGE_SEARCH_MODE:
       return (state
+        .setIn(["searchMode"], action.mode)
         .setIn(["selectedDam"], null)
         .setIn(["selectedSire"], null)
       )
@@ -16,7 +20,7 @@ const ui = (state, action) => {
     case CHANGE_SELECTED_SIRE:
       return state.setIn(["selectedSire"], action.sireId)
     case CHANGE_SELECTED_TAB:
-      return state.setIn(["selectedTab"], action.tabId)
+      return state.setIn(["selectedTab"], action.tab)
     default:
       return state
   }

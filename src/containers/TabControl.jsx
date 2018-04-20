@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 
-import { changeSelectedTab } from "../actions/app"
+import { changeSelectedTab } from "../actions/ui"
 import SearchTab from "../components/SearchTab.jsx"
 import TabPage from "../components/TabPage.jsx"
 import { toJS } from "../data/util.jsx"

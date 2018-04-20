@@ -4,8 +4,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import { fetchDog, fetchFamily } from "../actions/api"
-import { changeSearchMode } from "../actions/search"
-import { changeSelectedSire, changeSelectedDam } from "../actions/ui"
+import { changeSearchMode, changeSelectedDam, changeSelectedSire } from "../actions/ui"
 import Button from "../components/Button.jsx"
 import HorizontalFormField from "../components/HorizontalFormField.jsx"
 import RadioMultiSelect from "../components/RadioMultiSelect.jsx"
@@ -44,7 +43,7 @@ const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDa
   )
 }
 
-const canSearch = (mode, sire, dam) => {
+const canSearch = (mode, dam, sire) => {
   switch (mode) {
     case "single":
       return (sire !== null)
@@ -59,9 +58,9 @@ const canSearch = (mode, sire, dam) => {
 const doSearchAction = () => {
   return (dispatch, getState) => {
     const state = getState()
-    const mode = state.getIn(["search", "mode"])
-    const sire = state.getIn(["ui", "selectedSire"])
+    const mode = state.getIn(["ui", "searchMode"])
     const dam = state.getIn(["ui", "selectedDam"])
+    const sire = state.getIn(["ui", "selectedSire"])
     const search = canSearch(mode, sire, dam)
 
     if (search && mode === "single") {
@@ -76,14 +75,14 @@ const mapStateToProps = (state) => ({
   dogs: coalesce(state.getIn(["data", "dogs", "list"]), []),
   sires: getSires(coalesce(state.getIn(["data", "dogs", "list"]), [])),
   dams: getDams(coalesce(state.getIn(["data", "dogs", "list"]), [])),
-  searchMode: state.getIn(["search", "mode"]),
-  selectedSire: state.getIn(["ui", "selectedSire"]),
+  searchMode: state.getIn(["ui", "searchMode"]),
   selectedDam: state.getIn(["ui", "selectedDam"]),
+  selectedSire: state.getIn(["ui", "selectedSire"]),
   isSearching: state.getIn(["data", "dogReport", "isFetching"]) || state.getIn(["data", "couplesReport", "isFetching"]),
   canSearch: canSearch(
-    state.getIn(["search", "mode"]),
-    state.getIn(["ui", "selectedSire"]),
-    state.getIn(["ui", "selectedDam"])
+    state.getIn(["ui", "searchMode"]),
+    state.getIn(["ui", "selectedDam"]),
+    state.getIn(["ui", "selectedSire"])
   )
 })
 

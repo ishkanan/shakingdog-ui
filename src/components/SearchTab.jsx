@@ -1,7 +1,6 @@
 
 import PropTypes from "prop-types"
 import React from "react"
-import { connect } from "react-redux"
 
 import SearchControls from "../containers/SearchControls.jsx"
 import SearchResults from "../containers/SearchResults.jsx"

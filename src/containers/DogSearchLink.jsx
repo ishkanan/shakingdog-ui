@@ -4,8 +4,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import { fetchDog } from "../actions/api"
-import { changeSearchMode } from "../actions/search"
-import { changeSelectedSire } from "../actions/ui"
+import { changeSearchMode, changeSelectedSire } from "../actions/ui"
 import { toJS } from "../data/util.jsx"
 
 
