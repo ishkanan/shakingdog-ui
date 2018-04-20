@@ -6,10 +6,19 @@ import {
   FETCH_DOG_BEGIN, FETCH_DOG_SUCCESS, FETCH_DOG_FAILURE,
   FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE
 } from "../actions/api"
+import { CHANGE_ADMIN_MODE } from "../actions/ui"
+import initialState from "../init.data"
 
 
 const data = (state, action) => {
   switch (action.type) {
+    
+    case CHANGE_ADMIN_MODE:
+      return (state
+        .setIn(["data", "newdog"], fromJS(initialState.data.newdog))
+        .setIn(["data", "newlitter"], fromJS(initialState.data.newlitter))
+        .setIn(["data", "testresult"], fromJS(initialState.data.testresult))
+      )
     
     case FETCH_DOGS_BEGIN:
       return state.setIn(["dogs"], Map({

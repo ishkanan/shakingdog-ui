@@ -61,7 +61,7 @@ const doSearchAction = () => {
     const mode = state.getIn(["ui", "searchMode"])
     const dam = state.getIn(["ui", "selectedDam"])
     const sire = state.getIn(["ui", "selectedSire"])
-    const search = canSearch(mode, sire, dam)
+    const search = canSearch(mode, dam, sire)
 
     if (search && mode === "single") {
       dispatch(fetchDog(sire))

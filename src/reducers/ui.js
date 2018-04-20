@@ -1,5 +1,6 @@
 
 import {
+  CHANGE_ADMIN_MODE,
   CHANGE_SEARCH_MODE,
   CHANGE_SELECTED_DAM,
   CHANGE_SELECTED_SIRE,
@@ -9,6 +10,8 @@ import {
 
 const ui = (state, action) => {
   switch (action.type) {
+    case CHANGE_ADMIN_MODE:
+      return state.setIn(["adminMode"], action.mode)
     case CHANGE_SEARCH_MODE:
       return (state
         .setIn(["searchMode"], action.mode)

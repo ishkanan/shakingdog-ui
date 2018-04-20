@@ -2,18 +2,18 @@
 import PropTypes from "prop-types"
 import React from "react"
 
-import AdminOpControls from "./AdminOpControls.jsx"
-import AdminOpMenu from "../containers/AdminOpMenu.jsx"
+import AdminControls from "../containers/AdminControls.jsx"
+import AdminMenu from "../containers/AdminMenu.jsx"
 
 
 const AdminTab = () => {
   return (
     <div className="columns">
       <div className="column is-one-fifth">
-        <AdminOpMenu />
+        <AdminMenu />
       </div>
       <div className="column">
-        <AdminOpControls />
+        <AdminControls />
       </div>
     </div>
   )

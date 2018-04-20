@@ -24,20 +24,6 @@ const initialState = {
       dam: null,
       children: null
     },
-    addtestresult: {
-      acceptedStatuses: null,
-      dog: 0,
-      sire: {
-        create: false,
-        selected: null,
-        dog: null
-      },
-      dam: {
-        create: false,
-        selected: null,
-        dog: null
-      }
-    },
     newdog: {
       acceptedStatuses: ["Affected", "Carrier", "Clear", "Unknown"],
       dog: null
@@ -54,6 +40,20 @@ const initialState = {
         dog: null
       },
       children: null
+    },
+    testresult: {
+      acceptedStatuses: null,
+      dog: null,
+      sire: {
+        create: false,
+        selected: null,
+        dog: null
+      },
+      dam: {
+        create: false,
+        selected: null,
+        dog: null
+      }
     }
   },
   ui: {
