@@ -7,9 +7,9 @@ import {
   changeNewDogGender,
   changeNewDogShakingDogStatus,
   changeNewDogCecsStatus,
+  doSaveNewDog,
   setNewDogName
 } from "../actions/admin"
-import { saveNewDog } from "../actions/api"
 import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"
 import NewDogForm from "../components/NewDogForm.jsx"
@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
   onGenderChange: (gender) => dispatch(changeNewDogGender(gender)),
   onShakingDogStatusChange: (status) => dispatch(changeNewDogShakingDogStatus(status)),
   onCecsStatusChange: (status) => dispatch(changeNewDogCecsStatus(status)),
-  onDoSave: (name, gender, shaking, cecs) => dispatch(saveNewDog(name, gender, shaking, cecs))
+  onDoSave: (name, gender, shaking, cecs) => dispatch(doSaveNewDog(name, gender, shaking, cecs))
 })
 
 export default connect(
