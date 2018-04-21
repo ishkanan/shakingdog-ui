@@ -25,11 +25,12 @@ const initialState = {
       children: null
     },
     newdog: {
+      lastCreatedId: null,
       dog: {
         gender: "U",
         name: "",
-        shakingdogstatus: "",
-        cecsstatus: "unknown"
+        shakingdogstatus: "Unknown",
+        cecsstatus: "Unknown"
       }
     },
     newlitter: {
@@ -39,8 +40,8 @@ const initialState = {
         dog: {
           gender: "U",
           name: "",
-          shakingdogstatus: "",
-          cecsstatus: "unknown"
+          shakingdogstatus: "Unknown",
+          cecsstatus: "Unknown"
         }
       },
       dam: {
@@ -49,8 +50,8 @@ const initialState = {
         dog: {
           gender: "U",
           name: "",
-          shakingdogstatus: "",
-          cecsstatus: "unknown"
+          shakingdogstatus: "Unknown",
+          cecsstatus: "Unknown"
         }
       },
       children: []
@@ -64,8 +65,8 @@ const initialState = {
         dog: {
           gender: "U",
           name: "",
-          shakingdogstatus: "",
-          cecsstatus: "unknown"
+          shakingdogstatus: "Unknown",
+          cecsstatus: "Unknown"
         }
       },
       dam: {
@@ -75,14 +76,17 @@ const initialState = {
           gender: "U",
           name: "",
           shakingdogstatus: "",
-          cecsstatus: "unknown"
+          cecsstatus: "Unknown"
         }
       }
     }
   },
   ui: {
     adminMode: "newdog",
+    canSave: false,
+    canSearch: false,
     error: null,
+    isSaving: false,
     searchMode: "single",
     selectedTab: "search",
     selectedSire: null,

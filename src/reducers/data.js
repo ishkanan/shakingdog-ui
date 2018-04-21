@@ -4,12 +4,14 @@ import { fromJS, Map } from "immutable"
 import {
   CHANGE_NEWDOG_GENDER,
   CHANGE_NEWDOG_NAME,
-  CHANGE_NEWDOG_SHAKINGDOGSTATUS
+  CHANGE_NEWDOG_SHAKINGDOGSTATUS,
+  CHANGE_NEWDOG_CECSSTATUS
 } from "../actions/admin"
 import {
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
   FETCH_DOG_BEGIN, FETCH_DOG_SUCCESS, FETCH_DOG_FAILURE,
-  FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE
+  FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE,
+  SAVE_NEWDOG_SUCCESS
 } from "../actions/api"
 import { CHANGE_ADMIN_MODE } from "../actions/ui"
 import initialState from "../init.data"
@@ -20,9 +22,9 @@ const data = (state, action) => {
     
     case CHANGE_ADMIN_MODE:
       return (state
-        .setIn(["newdog"], fromJS(initialState.data.newdog))
-        .setIn(["newlitter"], fromJS(initialState.data.newlitter))
-        .setIn(["testresult"], fromJS(initialState.data.testresult))
+        .set("newdog", fromJS(initialState.data.newdog))
+        .set("newlitter", fromJS(initialState.data.newlitter))
+        .set("testresult", fromJS(initialState.data.testresult))
       )
     
     case CHANGE_NEWDOG_GENDER:
@@ -33,15 +35,18 @@ const data = (state, action) => {
     
     case CHANGE_NEWDOG_SHAKINGDOGSTATUS:
       return state.setIn(["newdog", "dog", "shakingdogstatus"], action.status)
-    
+
+    case CHANGE_NEWDOG_CECSSTATUS:
+      return state.setIn(["newdog", "dog", "cecsstatus"], action.status)
+
     case FETCH_DOGS_BEGIN:
-      return state.setIn(["dogs"], Map({
+      return state.set("dogs", Map({
         isFetching: true,
         list: null
       }))
     
     case FETCH_DOGS_SUCCESS:
-      return state.setIn(["dogs"], Map({
+      return state.set("dogs", Map({
         isFetching: false,
         list: fromJS(action.dogs)
       }))
@@ -50,20 +55,23 @@ const data = (state, action) => {
       return state.setIn(["dogs", "isFetching"], false)
     
     case FETCH_DOG_BEGIN:
-      return state.setIn(["dogReport"], Map({
-        isFetching: true,
-        dog: null,
-        familyAsChild: null,
-        familiesAsParent: null,
-      })).setIn(["couplesReport"], Map({
-        isFetching: false,
-        sire: null,
-        dam: null,
-        children: null,
-      }))
-    
+      return (state
+        .set("dogReport", Map({
+          isFetching: true,
+          dog: null,
+          familyAsChild: null,
+          familiesAsParent: null,
+        }))
+        .set("couplesReport", Map({
+          isFetching: false,
+          sire: null,
+          dam: null,
+          children: null,
+        }))
+      )
+
     case FETCH_DOG_SUCCESS:
-      return state.setIn(["dogReport"], Map({
+      return state.set("dogReport", Map({
         isFetching: false,
         dog: fromJS(action.dog),
         familyAsChild: fromJS(action.familyAsChild),
@@ -74,20 +82,23 @@ const data = (state, action) => {
       return state.setIn(["dogReport", "isFetching"], false)
     
     case FETCH_FAMILY_BEGIN:
-      return state.setIn(["dogReport"], Map({
-        isFetching: false,
-        dog: null,
-        familyAsChild: null,
-        familiesAsParent: null,
-      })).setIn(["couplesReport"], Map({
-        isFetching: true,
-        sire: null,
-        dam: null,
-        children: null,
-      }))
-    
+      return (state
+        .set("dogReport", Map({
+          isFetching: false,
+          dog: null,
+          familyAsChild: null,
+          familiesAsParent: null,
+        }))
+        .set("couplesReport", Map({
+          isFetching: true,
+          sire: null,
+          dam: null,
+          children: null,
+        }))
+      )
+
     case FETCH_FAMILY_SUCCESS:
-      return state.setIn(["couplesReport"], Map({
+      return state.set("couplesReport", Map({
         isFetching: false,
         sire: fromJS(action.sire),
         dam: fromJS(action.dam),
@@ -96,6 +107,9 @@ const data = (state, action) => {
     
     case FETCH_FAMILY_FAILURE:
       return state.setIn(["couplesReport", "isFetching"], false)
+
+    case SAVE_NEWDOG_SUCCESS:
+      return state.setIn(["newdog", "lastCreatedId"], action.dogId)
     
     default:
       return state

@@ -1,5 +1,4 @@
 
-import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 
@@ -21,11 +20,6 @@ const AdminControls = ({adminMode}) => {
       }
     </React.Fragment>
   )
-}
-
-AdminControls.propTypes = {
-  // Current admin mode
-  adminMode: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

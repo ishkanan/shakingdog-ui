@@ -8,26 +8,23 @@ import { dogStatusUIMap, genderUIMap } from "../util/ui"
 
 
 const NewDogForm = ({name, gender, shakingDogStatus, cecsStatus, onNameChange, onGenderChange, onShakingDogStatusChange, onCecsStatusChange}) => {
-  const sStatus = dogStatusUIMap[shakingDogStatus]
-  const cStatus = dogStatusUIMap[cecsStatus]
-
   const genders = [
-    {id: "D", value: genderUIMap["D"]},
     {id: "B", value: genderUIMap["B"]},
+    {id: "D", value: genderUIMap["D"]},
     {id: "U", value: genderUIMap["U"]}
   ]
-
+  
   const shakingStatuses = [
-    {id: "Affected", value: dogStatusUIMap["Affected"]},
-    {id: "Carrier", value: dogStatusUIMap["Carrier"]},
-    {id: "Clear", value: dogStatusUIMap["Clear"]},
-    {id: "Unknown", value: dogStatusUIMap["Unknown"]}
+    {id: "Affected", value: dogStatusUIMap["Affected"].caption},
+    {id: "Carrier", value: dogStatusUIMap["Carrier"].caption},
+    {id: "Clear", value: dogStatusUIMap["Clear"].caption},
+    {id: "Unknown", value: dogStatusUIMap["Unknown"].caption}
   ]
 
   return (
     <React.Fragment>
       <HorizontalFormField caption="Name:"
-                           content={<input className="input" type="text" value={name} onChange={onNameChange} />}
+                           content={<input className="input" type="text" value={name} onChange={(e) => onNameChange(e.target.value)} />}
                            isNarrow={false} />
       <HorizontalFormField caption="Gender:"
                            content={<Select value={(gender !== null ? gender : "")}
@@ -35,14 +32,18 @@ const NewDogForm = ({name, gender, shakingDogStatus, cecsStatus, onNameChange, o
                                             options={genders}
                                             labelKey="value"
                                             valueKey="id"
+                                            clearable={false}
+                                            searchable={false}
                                             className="field is-expanded" />}
                            isNarrow={false} />
       <HorizontalFormField caption="Shaking Dog Status:"
-                           content={<Select value={(sStatus !== null ? sStatus : "")}
+                           content={<Select value={(shakingDogStatus !== null ? shakingDogStatus : "")}
                                             onChange={(value) => onShakingDogStatusChange(value !== null ? value.id : null)}
                                             options={shakingStatuses}
                                             labelKey="value"
                                             valueKey="id"
+                                            clearable={false}
+                                            searchable={false}
                                             className="field is-expanded" />}
                            isNarrow={false} />
     </React.Fragment>

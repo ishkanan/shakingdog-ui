@@ -46,16 +46,62 @@ function genericAsyncFetch(path, success, failure) {
     })
 }
 
+function genericAsyncPost(path, data, success, failure) {
+  // initiates an asynchronous POST call to the specified path
+  // and fires either a success or failure callback
+
+  return fetch(config.apiUrl + path, {
+      credentials: "include",  // send site cookies
+      body: JSON.stringify(data),
+      method: "POST"
+    })
+    .then(checkValidStatus)
+    .then(response => response.json())
+    .then(checkAuthRedirect)
+    .then(data => success(data))
+    .catch(error => {
+      failure({
+        auth: {
+          redirect: {
+            initiate: (error.redirectUrl !== undefined),
+            url: error.redirectUrl
+          }
+        },
+        error: error
+      })
+    })
+}
+
 export function getDogs(success, failure) {
   return genericAsyncFetch("/api/dogs", success, failure)
 }
 
 export function getDog(dogId, success, failure) {
-  return genericAsyncFetch(sprintf(
-    "/api/dog/%s", dogId), success, failure)
+  return genericAsyncFetch(
+    sprintf("/api/dog/%s", dogId),
+    success,
+    failure
+  )
 }
 
 export function getFamily(sireId, damId, success, failure) {
-  return genericAsyncFetch(sprintf(
-    "/api/family?sireid=%s&damid=%s", sireId, damId), success, failure)
+  return genericAsyncFetch(
+    sprintf("/api/family?sireid=%s&damid=%s", sireId, damId),
+    success,
+    failure
+  )
+}
+
+export function submitNewDog(name, gender, shakingDogStatus, cecsStatus, success, failure) {
+  return genericAsyncPost(
+    "/api/admin/dog",
+    {
+      name: name,
+      gender: gender,
+      shakingdogstatus: shakingDogStatus,
+      cecsstatus: cecsStatus
+    },
+    success,
+    failure
+  )
 }

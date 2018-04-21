@@ -1,5 +1,4 @@
 
-import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 
@@ -17,11 +16,6 @@ const AdminMenu = ({adminMode, onModeChange}) => {
       </ul>
     </aside>
   )
-}
-
-AdminMenu.propTypes = {
-  // Current admin mode
-  adminMode: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => ({

@@ -1,5 +1,4 @@
 
-import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 
@@ -9,7 +8,7 @@ import { toJS } from "../data/util.jsx"
 
 
 const App = ({redirect}) => (
-  <div className="container">
+  <React.Fragment>
     {redirect.initiate &&
     <Redirecter message={redirect.message}
                 url={redirect.url} />
@@ -17,7 +16,7 @@ const App = ({redirect}) => (
     {!redirect.initiate &&
     <TabControl />
     }
-  </div>
+  </React.Fragment>
 )
 
 const mapStateToProps = (state) => ({

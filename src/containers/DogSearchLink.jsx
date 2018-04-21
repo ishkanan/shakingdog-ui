@@ -1,5 +1,4 @@
 
-import PropTypes from "prop-types"
 import React from "react"
 import { connect } from "react-redux"
 
@@ -12,15 +11,6 @@ const DogSearchLink = ({dogId, dogName, className, onDoSearch}) => {
   return (
     <a className={"dogsearchlink " + className} onClick={(e) => {e.preventDefault(); onDoSearch(dogId)}}>{dogName}</a>
   )
-}
-
-DogSearchLink.propTypes = {
-  // Dog ID
-  dogId: PropTypes.number.isRequired,
-  // Dog name
-  dogName: PropTypes.string.isRequired,
-  // Additional CSS
-  className: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => ({

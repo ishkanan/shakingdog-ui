@@ -3,14 +3,14 @@ import _ from "lodash"
 import React from "react"
 import { connect } from "react-redux"
 
-import { fetchDog, fetchFamily } from "../actions/api"
-import { changeSearchMode, changeSelectedDam, changeSelectedSire } from "../actions/ui"
+import { doSearch, setSearchMode, setSelectedDog } from "../actions/search"
 import Button from "../components/Button.jsx"
 import HorizontalFormField from "../components/HorizontalFormField.jsx"
 import RadioMultiSelect from "../components/RadioMultiSelect.jsx"
 import { toJS } from "../data/util.jsx"
 import { getSires, getDams } from "../selectors/dogs"
 import { coalesce } from "../util/data"
+import { canSearch } from "../util/ui"
 
 
 const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDam, canSearch, isSearching, onModeChange, onDogChange, onDoSearch}) => {
@@ -43,34 +43,6 @@ const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDa
   )
 }
 
-const canSearch = (mode, dam, sire) => {
-  switch (mode) {
-    case "single":
-      return (sire !== null)
-    case "couple":
-      return (sire !== null && dam !== null)
-    default:
-      return false
-  }
-}
-
-// https://stackoverflow.com/questions/35836290/access-state-inside-of-mapdispatchtoprops-method
-const doSearchAction = () => {
-  return (dispatch, getState) => {
-    const state = getState()
-    const mode = state.getIn(["ui", "searchMode"])
-    const dam = state.getIn(["ui", "selectedDam"])
-    const sire = state.getIn(["ui", "selectedSire"])
-    const search = canSearch(mode, dam, sire)
-
-    if (search && mode === "single") {
-      dispatch(fetchDog(sire))
-    } else if (search && mode === "couple") {
-      dispatch(fetchFamily(sire, dam))
-    }
-  }
-}
-
 const mapStateToProps = (state) => ({
   dogs: coalesce(state.getIn(["data", "dogs", "list"]), []),
   sires: getSires(coalesce(state.getIn(["data", "dogs", "list"]), [])),
@@ -79,17 +51,13 @@ const mapStateToProps = (state) => ({
   selectedDam: state.getIn(["ui", "selectedDam"]),
   selectedSire: state.getIn(["ui", "selectedSire"]),
   isSearching: state.getIn(["data", "dogReport", "isFetching"]) || state.getIn(["data", "couplesReport", "isFetching"]),
-  canSearch: canSearch(
-    state.getIn(["ui", "searchMode"]),
-    state.getIn(["ui", "selectedDam"]),
-    state.getIn(["ui", "selectedSire"])
-  )
+  canSearch: state.getIn(["ui", "canSearch"])
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onModeChange: (mode) => dispatch(changeSearchMode(mode)),
-  onDogChange: (mode, role, dogId) => dispatch(role === "sire" ? changeSelectedSire(dogId) : changeSelectedDam(dogId)),
-  onDoSearch: () => dispatch(doSearchAction())
+const mapDispatchToProps = (dispatch) => ({
+  onModeChange: (mode) => dispatch(setSearchMode(mode)),
+  onDogChange: (mode, role, dogId) => dispatch(setSelectedDog(mode, role, dogId)),
+  onDoSearch: () => dispatch(doSearch())
 })
 
 export default connect(
