@@ -6,7 +6,6 @@ On API error, show message.
 1) Add New Dog
 Enter a new dog with no relationship to any other dog.
 Allow name, gender and status in [Affected, Carrier, Clear, Unknown].
-Show similar dog names as name is typed, 2 seconds after last keypress.
 
 2) Add New Litter
 Search or create new Sire.
@@ -22,20 +21,14 @@ Display warning if changing from [CarrierByProgeny, ClearByParentage].
 
 Admin -> UI design:
 ===================
-Common UI operations are:
-- Search or create
-- Status change
-- Submit/Save
-
-AdminTab|CP
-  AdminMenu|CT
-  AdminControls|CT
-    NewDogPage|CT
-      NewDogForm|CP
-    NewLitterPage|CT
-      Search
-    TestResultPage|CT
-    Button
+NewLitterPage|CT (mode, sires, dams, selectedSire, selectedDam, onSireChange, onDamChange, newSire, newDam, canSave, isSaving, onNewSirePropChange, onNewDamPropChange, onDoSave)
+  CaptionedFolder "Search or New Sire"
+    SearchOrCreateDog|CP (mode, sires, selectedSire, onSireChange, newSire, onNewSirePropChange)
+  CaptionedFolder "Search or New Dam"
+    SearchOrCreateDog|CP (mode, dams, selectedDam, onDamChange, newDam, onNewDamPropChange)
+  CaptionedFolder "Children"
+    TBC...
+  Button (like NewDogPage)
 
 Admin -> Actions:
 =================
@@ -117,11 +110,6 @@ Admin -> State Tree:
     error: ""
   }
 }
-
-Admin -> API:
-=============
-
-
 
 Other:
 ======
