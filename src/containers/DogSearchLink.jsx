@@ -4,22 +4,24 @@ import { connect } from "react-redux"
 
 import { fetchDog } from "../actions/api"
 import { changeSearchMode, changeSelectedSire } from "../actions/ui"
+import Link from "../components/Link.jsx"
 import { toJS } from "../data/util.jsx"
 
 
-const DogSearchLink = ({dogId, dogName, className, onDoSearch}) => {
+const DogSearchLink = ({dogId, dogName, onDoSearch}) => {
   return (
-    <a className={"dogsearchlink " + className} onClick={(e) => {e.preventDefault(); onDoSearch(dogId)}}>{dogName}</a>
+    <Link caption={dogName}
+          className="dogsearchlink input is-static"
+          onClick={() => onDoSearch(dogId)} />
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({
   dogId: ownProps.dogId,
-  dogName: ownProps.dogName,
-  className: ownProps.className
+  dogName: ownProps.dogName
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
   onDoSearch: (dogId) => {
     dispatch(changeSearchMode("single"))
     dispatch(changeSelectedSire(dogId))

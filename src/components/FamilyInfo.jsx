@@ -16,8 +16,7 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                 <HorizontalFormField caption="Sire:"
                                                      content={<p className="control is-expanded dogsearchlink">
                                                                 <DogSearchLink dogId={sire.id}
-                                                                               dogName={sire.name}
-                                                                               className="input is-static" />
+                                                                               dogName={sire.name} />
                                                                 <DogStatusBadge status={sire.shakingdogstatus}
                                                                                 size="is-6" />
                                                               </p>}
@@ -25,8 +24,7 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                 <HorizontalFormField caption="Dam:"
                                                      content={<p className="control is-expanded dogsearchlink">
                                                                 <DogSearchLink dogId={dam.id}
-                                                                               dogName={dam.name}
-                                                                               className="input is-static" />
+                                                                               dogName={dam.name} />
                                                                 <DogStatusBadge status={dam.shakingdogstatus}
                                                                                 size="is-6" />
                                                               </p>}
@@ -36,8 +34,7 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                                      caption={index === 0 ? "Children:" : ""}
                                                      content={<p className="control is-expanded dogsearchlink">
                                                                 <DogSearchLink dogId={child.id}
-                                                                               dogName={child.name}
-                                                                               className="input is-static" />
+                                                                               dogName={child.name} />
                                                                 <DogStatusBadge status={child.shakingdogstatus}
                                                                                 size="is-6" />
                                                               </p>}
