@@ -3,14 +3,14 @@ import PropTypes from "prop-types"
 import React from "react"
 
 import AdminControls from "../containers/AdminControls.jsx"
-import AdminMenu from "../containers/AdminMenu.jsx"
+import AdminVerticalMenu from "../containers/AdminVerticalMenu.jsx"
 
 
 const AdminTab = () => {
   return (
     <div className="columns">
       <div className="column is-one-fifth">
-        <AdminMenu />
+        <AdminVerticalMenu />
       </div>
       <div className="column">
         <AdminControls />
