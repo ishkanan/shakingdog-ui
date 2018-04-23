@@ -1,5 +1,6 @@
 
 import "bulma/css/bulma.css"
+import "react-select/dist/react-select.css"
 import { fromJS } from "immutable"
 import React from "react"
 import { render } from "react-dom"

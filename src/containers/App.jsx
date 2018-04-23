@@ -8,7 +8,7 @@ import { toJS } from "../data/util.jsx"
 
 
 const App = ({redirect}) => (
-  <React.Fragment>
+  <div className="container">
     {redirect.initiate &&
     <Redirecter message={redirect.message}
                 url={redirect.url} />
@@ -16,7 +16,7 @@ const App = ({redirect}) => (
     {!redirect.initiate &&
     <TabControl />
     }
-  </React.Fragment>
+  </div>
 )
 
 const mapStateToProps = (state) => ({

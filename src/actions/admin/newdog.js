@@ -1,9 +1,7 @@
 
-import { saveNewDog } from "./api"
-import {
-  changeCanSave
-} from "./ui"
-import { canSaveNewDog } from "../util/ui"
+import { saveNewDog } from "../api"
+import { changeCanSave } from "../ui"
+import { canSaveNewDog } from "../../util/ui"
 
 
 export const CHANGE_NEWDOG_GENDER = "CHANGE_NEWDOG_GENDER"
@@ -34,13 +32,19 @@ export const changeNewDogCecsStatus = status => ({
 // Can create composite action creators that have access to the state tree
 // https://stackoverflow.com/questions/35836290/access-state-inside-of-mapdispatchtoprops-method
 
-export const doSaveNewDog = (name, gender, shakingdogstatus, cecsstatus) => {
+export const doSaveNewDog = () => {
   return (dispatch, getState) => {
     const state = getState()
     const canSave = state.getIn(["ui", "canSave"])
+    const dog = state.getIn(["data", "newdog", "dog"])
 
     if (canSave) {
-      dispatch(saveNewDog(name, gender, shakingdogstatus, cecsstatus))
+      dispatch(saveNewDog(
+        dog.get("name"),
+        dog.get("gender"),
+        dog.get("shakingdogstatus"),
+        dog.get("cecsstatus")
+      ))
     }
   }
 }

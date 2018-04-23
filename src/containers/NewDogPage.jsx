@@ -9,7 +9,7 @@ import {
   changeNewDogCecsStatus,
   doSaveNewDog,
   setNewDogName
-} from "../actions/admin"
+} from "../actions/admin/newdog"
 import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"
 import NewDogForm from "../components/NewDogForm.jsx"
@@ -31,7 +31,7 @@ const NewDogPage = ({dog, canSave, isSaving, onNameChange, onGenderChange, onSha
       <Button caption="Save"
               className={"is-primary is-rounded" + (isSaving ? " is-loading" : "")}
               disabled={!canSave}
-              onClick={() => onDoSave(dog.name, dog.gender, dog.shakingdogstatus, dog.cecsstatus)} />
+              onClick={() => onDoSave()} />
     </React.Fragment>
   )
 }
@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
   onGenderChange: (gender) => dispatch(changeNewDogGender(gender)),
   onShakingDogStatusChange: (status) => dispatch(changeNewDogShakingDogStatus(status)),
   onCecsStatusChange: (status) => dispatch(changeNewDogCecsStatus(status)),
-  onDoSave: (name, gender, shaking, cecs) => dispatch(doSaveNewDog(name, gender, shaking, cecs))
+  onDoSave: () => dispatch(doSaveNewDog())
 })
 
 export default connect(

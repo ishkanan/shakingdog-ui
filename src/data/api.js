@@ -105,3 +105,16 @@ export function submitNewDog(name, gender, shakingDogStatus, cecsStatus, success
     failure
   )
 }
+
+export function submitNewLitter(sire, dam, children, success, failure) {
+  return genericAsyncPost(
+    "/api/admin/litter",
+    {
+      sire: sire,
+      dam: dam,
+      children: children
+    },
+    success,
+    failure
+  )
+}

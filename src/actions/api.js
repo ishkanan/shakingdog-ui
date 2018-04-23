@@ -3,7 +3,8 @@ import {
   getDogs,
   getDog,
   getFamily,
-  submitNewDog
+  submitNewDog,
+  submitNewLitter
 } from "../data/api"
 
 
@@ -19,6 +20,9 @@ export const FETCH_FAMILY_FAILURE = "FETCH_FAMILY_FAILURE"
 export const SAVE_NEWDOG_BEGIN = "SAVE_NEWDOG_BEGIN"
 export const SAVE_NEWDOG_SUCCESS = "SAVE_NEWDOG_SUCCESS"
 export const SAVE_NEWDOG_FAILURE = "SAVE_NEWDOG_FAILURE"
+export const SAVE_NEWLITTER_BEGIN = "SAVE_NEWLITTER_BEGIN"
+export const SAVE_NEWLITTER_SUCCESS = "SAVE_NEWLITTER_SUCCESS"
+export const SAVE_NEWLITTER_FAILURE = "SAVE_NEWLITTER_FAILURE"
 
 // Fetch all dogs
 
@@ -128,5 +132,32 @@ export const saveNewDog = (name, gender, shakingdogstatus, cecsstatus) => dispat
     cecsstatus,
     data => dispatch(saveNewDogSuccess(data.dogId)),
     error => dispatch(saveNewDogFailure(error.error, error.auth))
+  )
+}
+
+// Save new litter
+
+const saveNewLitterBegin = () => ({
+  type: SAVE_NEWLITTER_BEGIN
+})
+
+const saveNewLitterSuccess = () => ({
+  type: SAVE_NEWLITTER_SUCCESS
+})
+
+const saveNewLitterFailure = (error, auth) => ({
+  type: SAVE_NEWLITTER_FAILURE,
+  error,
+  auth
+})
+
+export const saveNewLitter = (sire, dam, children) => dispatch => {
+  dispatch(saveNewLitterBegin())
+  return submitNewLitter(
+    sire,
+    dam,
+    children,
+    data => dispatch(saveNewLitterSuccess()),
+    error => dispatch(saveNewLitterFailure(error.error, error.auth))
   )
 }

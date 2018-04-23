@@ -1,4 +1,6 @@
 
+import _ from "lodash"
+
 import { isNilOrEmptyString } from "./data"
 
 
@@ -19,12 +21,28 @@ export const genderUIMap = {
   "U": "Unknown"
 }
 
-export const canSaveNewDog = (name, gender, shakingdogstatus, cecsstatus) => {
+const dogOK = (name, gender, shakingdogstatus, cecsstatus) => {
   return (
     !isNilOrEmptyString(name) &&
     !isNilOrEmptyString(gender) &&
     !isNilOrEmptyString(shakingdogstatus) &&
     !isNilOrEmptyString(cecsstatus)
+  )
+}
+
+export const canSaveNewDog = (name, gender, shakingdogstatus, cecsstatus) => {
+  return dogOK(name, gender, shakingdogstatus, cecsstatus)
+}
+
+export const canSaveNewLitter = (sire, dam, children) => {
+  return (
+    dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus")) &&
+    dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")) &&
+    _.reduce(
+      children,
+      (acc, c) => acc && dogOK(c.get("name"), c.get("gender"), c.get("shakingdogstatus"), c.get("cecsstatus")),
+      children.length > 0
+    )
   )
 }
 

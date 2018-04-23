@@ -27,6 +27,7 @@ const initialState = {
     newdog: {
       lastCreatedId: null,
       dog: {
+        id: null,
         gender: "U",
         name: "",
         shakingdogstatus: "Unknown",
@@ -35,9 +36,10 @@ const initialState = {
     },
     newlitter: {
       sire: {
-        create: false,
+        mode: "search",
         selected: null,
         dog: {
+          id: null,
           gender: "U",
           name: "",
           shakingdogstatus: "Unknown",
@@ -45,9 +47,10 @@ const initialState = {
         }
       },
       dam: {
-        create: false,
+        mode: "search",
         selected: null,
         dog: {
+          id: null,
           gender: "U",
           name: "",
           shakingdogstatus: "Unknown",
@@ -60,9 +63,10 @@ const initialState = {
       acceptedStatuses: null,
       selected: null,
       sire: {
-        create: false,
+        mode: "search",
         selected: null,
         dog: {
+          id: null,
           gender: "U",
           name: "",
           shakingdogstatus: "Unknown",
@@ -70,9 +74,10 @@ const initialState = {
         }
       },
       dam: {
-        create: false,
+        mode: "search",
         selected: null,
         dog: {
+          id: null,
           gender: "U",
           name: "",
           shakingdogstatus: "",

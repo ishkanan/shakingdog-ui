@@ -3,6 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import NewDogPage from "./NewDogPage.jsx"
+import NewLitterPage from "./NewLitterPage.jsx"
 import { toJS } from "../data/util.jsx"
 
 
@@ -13,7 +14,7 @@ const AdminControls = ({adminMode}) => {
       <NewDogPage />
       }
       {adminMode === "newlitter" &&
-      <p>NEW LITTER</p>
+      <NewLitterPage />
       }
       {adminMode === "testresult" &&
       <p>RECORD TEST RESULT</p>

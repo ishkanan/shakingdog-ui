@@ -23,7 +23,7 @@ const DogInfo = ({name, gender, shakingDogStatus, cecsStatus}) => {
                                   </div>
                                   <div className="level-item has-text-centered">
                                     <div>
-                                      <p className="heading">Shaking Dog Status</p>
+                                      <p className="heading">SLEM Status</p>
                                       <DogStatusBadge status={shakingDogStatus}
                                                       size="is-5" />
                                     </div>

@@ -36,7 +36,7 @@ const NewDogForm = ({name, gender, shakingDogStatus, cecsStatus, onNameChange, o
                                             searchable={false}
                                             className="field is-expanded" />}
                            isNarrow={false} />
-      <HorizontalFormField caption="Shaking Dog Status:"
+      <HorizontalFormField caption="SLEM Status:"
                            content={<Select value={(shakingDogStatus !== null ? shakingDogStatus : "")}
                                             onChange={(value) => onShakingDogStatusChange(value !== null ? value.id : null)}
                                             options={shakingStatuses}
