@@ -19,6 +19,15 @@ label[class="radio"] + label[class="radio"] {
   margin-bottom: 0px;
 }
 
+.is-width-full {
+  width: 100%;
+}
+
+.justify-center {
+  display: flex;
+  justify-content: center !important;
+}
+
 .notification {
   margin-bottom: 12px;
 }
@@ -92,4 +101,30 @@ span.dogstatus + span.dogstatus {
 
 .newlitter-remove-child {
   margin-left: 10px;
+}
+
+/* Pagination (ported from Bootstrap) */
+
+.pagination {
+  border-radius: .25rem;
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.paginate-link {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  color: #007bff;
+  display: block;
+  line-height: 1.25;
+  margin-left: -1px;
+  padding: .5rem .75rem;
+  position: relative;
+}
+
+.paginate-item.active .paginate-link  {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
 }

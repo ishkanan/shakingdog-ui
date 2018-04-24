@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import { changeSelectedTab } from "../actions/ui"
 import AdminTab from "../components/AdminTab.jsx"
 import SearchTab from "../components/SearchTab.jsx"
+import ViewTab from "../components/ViewTab.jsx"
 import TabPage from "../components/TabPage.jsx"
 import { toJS } from "../data/util.jsx"
 
@@ -14,10 +15,16 @@ const TabControl = ({selectedTab, onTabChange}) => {
     <React.Fragment>
       <div className="tabs is-boxed">
         <ul>
+          <li className={(selectedTab === "view" ? "is-active" : "")}>
+            <a onClick={(e) => {e.preventDefault(); onTabChange("view")}}>
+              <span className="icon is-small"><i className="fas fa-bars" aria-hidden="true"></i></span>
+              <span>View</span>
+            </a>
+          </li>
           <li className={(selectedTab === "search" ? "is-active" : "")}>
             <a onClick={(e) => {e.preventDefault(); onTabChange("search")}}>
               <span className="icon is-small"><i className="fas fa-search" aria-hidden="true"></i></span>
-              <span>Search / View</span>
+              <span>Search</span>
             </a>
           </li>
           <li className={(selectedTab === "admin" ? "is-active" : "")}>
@@ -28,6 +35,8 @@ const TabControl = ({selectedTab, onTabChange}) => {
           </li>
         </ul>
       </div>
+      <TabPage isVisible={selectedTab === "view"}
+               contents={<ViewTab />} />
       <TabPage isVisible={selectedTab === "search"}
                contents={<SearchTab />} />
       <TabPage isVisible={selectedTab === "admin"}

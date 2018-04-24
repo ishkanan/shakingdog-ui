@@ -11,7 +11,8 @@ import {
   CHANGE_SEARCH_MODE,
   CHANGE_SELECTED_DAM,
   CHANGE_SELECTED_SIRE,
-  CHANGE_SELECTED_TAB
+  CHANGE_SELECTED_TAB,
+  CHANGE_VIEW_PAGENUMBER
 } from "../actions/ui"
 
 
@@ -51,6 +52,9 @@ const ui = (state, action) => {
         .set("selectedTab", action.tab)
       )
 
+    case CHANGE_VIEW_PAGENUMBER:
+      return state.setIn(["view", "pageNumber"], action.page)
+  
     case SAVE_NEWDOG_BEGIN:
       return (state
         .set("canSave", false)

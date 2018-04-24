@@ -1,6 +1,7 @@
 
 import "bulma/css/bulma.css"
 import "react-select/dist/react-select.css"
+import "react-table/react-table.css";
 import { fromJS } from "immutable"
 import React from "react"
 import { render } from "react-dom"
@@ -12,7 +13,7 @@ import thunk from "redux-thunk"
 import "./favicon.ico"
 import "./global.css"
 import { config } from "./app.config"
-import { fetchDogs } from "./actions/api"
+import { fetchDogs, fetchRelationships } from "./actions/api"
 import App from "./containers/App.jsx"
 import initialState from "./init.data"
 import rootReducer from "./reducers"

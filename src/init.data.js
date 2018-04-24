@@ -97,9 +97,12 @@ const initialState = {
     error: null,
     isSaving: false,
     searchMode: "single",
-    selectedTab: "search",
+    selectedTab: "view",
     selectedSire: null,
-    selectedDam: null
+    selectedDam: null,
+    view: {
+      pageNumber: 1
+    }
   }
 }
 
