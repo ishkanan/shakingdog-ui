@@ -1,15 +1,19 @@
 
+import _ from "lodash"
 import PropTypes from "prop-types"
 import React from "react"
 
 
-const CaptionedFolder = ({caption, content, captionClassName, contentClassName}) => {
-  const captionClass = (captionClassName === undefined ? " is-info is-medium" : " " + captionClassName)
-  const contentClass = (contentClassName === undefined ? "" : " " + contentClassName)
+const CaptionedFolder = ({caption, content, postCaptionContent, captionClassName, contentClassName}) => {
+  const captionClass = (_.isNil(captionClassName) ? " is-info is-medium" : " " + captionClassName)
+  const contentClass = (_.isNil(contentClassName) ? "" : " " + contentClassName)
 
   return (
     <React.Fragment>
-      <span className={"tag is-box-header" + captionClass}>{caption}</span>
+      <span className={"tag is-box-header" + captionClass}>
+        {caption}
+        {!_.isNil(postCaptionContent) && postCaptionContent}
+      </span>
       <div className={"notification" + contentClass}>
         {content}
       </div>
@@ -25,6 +29,8 @@ CaptionedFolder.propTypes = {
     PropTypes.array,
     PropTypes.object
   ]).isRequired,
+  // Content to place after caption text
+  postCaptionContent: PropTypes.object,
   // Additional caption styling
   captionClassName: PropTypes.string,
   // Additional content styling

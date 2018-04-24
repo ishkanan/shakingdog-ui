@@ -87,3 +87,9 @@ a.dogsearchlink + span.dogstatus {
 span.dogstatus + span.dogstatus {
   margin-left: 10px;
 }
+
+/* Admin */
+
+.newlitter-remove-child {
+  margin-left: 10px;
+}

@@ -35,14 +35,15 @@ export const canSaveNewDog = (name, gender, shakingdogstatus, cecsstatus) => {
 }
 
 export const canSaveNewLitter = (sire, dam, children) => {
+  console.log("sire=", sire, "dam=", dam, "children=", children)
   return (
     !_.isNil(sire) &&
     dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus")) &&
     !_.isNil(dam) &&
     dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")) &&
     children.reduce(
-      (acc, c) => acc && dogOK(c.get("name"), c.get("gender"), c.get("shakingdogstatus"), c.get("cecsstatus")),
-      children.length > 0
+      (acc, c) => acc && !_.isNil(c) && dogOK(c.get("name"), c.get("gender"), c.get("shakingdogstatus"), c.get("cecsstatus")),
+      children.size > 0
     )
   )
 }

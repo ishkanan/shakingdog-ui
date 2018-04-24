@@ -1,19 +1,19 @@
 
 import { fromJS, Map } from "immutable"
 
-import {
-  CHANGE_NEWDOG_GENDER,
-  CHANGE_NEWDOG_NAME,
-  CHANGE_NEWDOG_SHAKINGDOGSTATUS,
-  CHANGE_NEWDOG_CECSSTATUS
-} from "../actions/admin/newdog"
+import { CHANGE_NEWDOG_PROP } from "../actions/admin/newdog"
 import {
   CHANGE_NEWLITTER_SIRE_MODE,
   CHANGE_NEWLITTER_SELECTED_SIRE,
   CHANGE_NEWLITTER_NEWSIRE_PROP,
   CHANGE_NEWLITTER_DAM_MODE,
   CHANGE_NEWLITTER_SELECTED_DAM,
-  CHANGE_NEWLITTER_NEWDAM_PROP
+  CHANGE_NEWLITTER_NEWDAM_PROP,
+  CHANGE_NEWLITTER_CHILD_MODE,
+  CHANGE_NEWLITTER_SELECTED_CHILD,
+  CHANGE_NEWLITTER_NEWCHILD_PROP,
+  ADD_CHILD_TO_NEWLITTER,
+  REMOVE_CHILD_FROM_NEWLITTER
 } from "../actions/admin/newlitter"
 import {
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
@@ -35,18 +35,9 @@ const data = (state, action) => {
         .set("testresult", fromJS(initialState.data.testresult))
       )
     
-    case CHANGE_NEWDOG_GENDER:
-      return state.setIn(["newdog", "dog", "gender"], action.gender)
+    case CHANGE_NEWDOG_PROP:
+      return state.setIn(["newdog", "dog", action.prop], action.value)
     
-    case CHANGE_NEWDOG_NAME:
-      return state.setIn(["newdog", "dog", "name"], action.name)
-    
-    case CHANGE_NEWDOG_SHAKINGDOGSTATUS:
-      return state.setIn(["newdog", "dog", "shakingdogstatus"], action.status)
-
-    case CHANGE_NEWDOG_CECSSTATUS:
-      return state.setIn(["newdog", "dog", "cecsstatus"], action.status)
-
     case CHANGE_NEWLITTER_SIRE_MODE:
       return state.setIn(["newlitter", "sire", "mode"], action.mode)
 
@@ -64,6 +55,37 @@ const data = (state, action) => {
 
     case CHANGE_NEWLITTER_NEWDAM_PROP:
       return state.setIn(["newlitter", "dam", "dog", action.prop], action.value)
+
+    case CHANGE_NEWLITTER_CHILD_MODE:
+      return state.setIn(["newlitter", "children", action.index, "mode"], action.mode)
+
+    case CHANGE_NEWLITTER_SELECTED_CHILD:
+      return state.setIn(["newlitter", "children", action.index, "selected"], action.childId)
+
+    case CHANGE_NEWLITTER_NEWCHILD_PROP:
+      return state.setIn(["newlitter", "children", action.index, "dog", action.prop], action.value)
+
+    case ADD_CHILD_TO_NEWLITTER:
+      return state.setIn(
+        ["newlitter", "children"],
+        state.getIn(["newlitter", "children"]).push(fromJS({
+          mode: "search",
+          selected: null,
+          dog: {
+            id: null,
+            gender: "U",
+            name: "",
+            shakingdogstatus: "Unknown",
+            cecsstatus: "Unknown"
+          }
+        }))
+      )
+
+    case REMOVE_CHILD_FROM_NEWLITTER:
+      return state.setIn(
+        ["newlitter", "children"],
+        state.getIn(["newlitter", "children"]).delete(action.index)
+      )
 
     case FETCH_DOGS_BEGIN:
       return state.set("dogs", Map({

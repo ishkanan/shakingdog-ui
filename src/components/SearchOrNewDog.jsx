@@ -42,10 +42,7 @@ const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, onM
                   allowedGenders={allowedNewGenders}
                   shakingDogStatus={newDog.shakingdogstatus}
                   cecsStatus={newDog.cecsstatus}
-                  onNameChange={(value) => onNewDogPropChange("name", value)}
-                  onGenderChange={(value) => onNewDogPropChange("gender", value)}
-                  onShakingDogStatusChange={(value) => onNewDogPropChange("shakingdogstatus", value)}
-                  onCecsStatusChange={(value) => onNewDogPropChange("cecsstatus", value)} />
+                  onDogPropChange={(prop, value) => onNewDogPropChange(prop, value)} />
       }
     </React.Fragment>
   )

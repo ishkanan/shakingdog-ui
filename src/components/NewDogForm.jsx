@@ -8,7 +8,7 @@ import HorizontalFormField from "./HorizontalFormField.jsx"
 import { dogStatusUIMap, genderUIMap } from "../util/ui"
 
 
-const NewDogForm = ({name, gender, allowedGenders, shakingDogStatus, cecsStatus, onNameChange, onGenderChange, onShakingDogStatusChange, onCecsStatusChange}) => {
+const NewDogForm = ({name, gender, allowedGenders, shakingDogStatus, cecsStatus, onDogPropChange}) => {
   const genders = _.map(allowedGenders, gender => ({id: gender, value: genderUIMap[gender]}))
   
   const shakingStatuses = [
@@ -21,11 +21,11 @@ const NewDogForm = ({name, gender, allowedGenders, shakingDogStatus, cecsStatus,
   return (
     <React.Fragment>
       <HorizontalFormField caption="Name:"
-                           content={<input className="input" type="text" value={name} onChange={(e) => onNameChange(e.target.value)} />}
+                           content={<input className="input" type="text" value={name} onChange={(e) => onDogPropChange("name", e.target.value)} />}
                            isNarrow={false} />
       <HorizontalFormField caption="Gender:"
                            content={<Select value={(gender !== null ? gender : "")}
-                                            onChange={(value) => onGenderChange(value !== null ? value.id : null)}
+                                            onChange={(value) => onDogPropChange("gender", value !== null ? value.id : null)}
                                             options={genders}
                                             labelKey="value"
                                             valueKey="id"
@@ -35,7 +35,7 @@ const NewDogForm = ({name, gender, allowedGenders, shakingDogStatus, cecsStatus,
                            isNarrow={false} />
       <HorizontalFormField caption="SLEM Status:"
                            content={<Select value={(shakingDogStatus !== null ? shakingDogStatus : "")}
-                                            onChange={(value) => onShakingDogStatusChange(value !== null ? value.id : null)}
+                                            onChange={(value) => onDogPropChange("shakingdogstatus", value !== null ? value.id : null)}
                                             options={shakingStatuses}
                                             labelKey="value"
                                             valueKey="id"
@@ -59,10 +59,7 @@ NewDogForm.propTypes = {
   // CECS status
   cecsStatus: PropTypes.string.isRequired,
   // Events
-  onNameChange: PropTypes.func.isRequired,
-  onGenderChange: PropTypes.func.isRequired,
-  onShakingDogStatusChange: PropTypes.func.isRequired,
-  onCecsStatusChange: PropTypes.func.isRequired
+  onDogPropChange: PropTypes.func.isRequired
 }
 
 export default NewDogForm

@@ -5,11 +5,8 @@ import React from "react"
 import { connect } from "react-redux"
 
 import {
-  changeNewDogGender,
-  changeNewDogShakingDogStatus,
-  changeNewDogCecsStatus,
   doSaveNewDog,
-  setNewDogName
+  setNewDogProp
 } from "../actions/admin/newdog"
 import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"
@@ -17,7 +14,7 @@ import NewDogForm from "../components/NewDogForm.jsx"
 import { toJS } from "../data/util.jsx"
 
 
-const NewDogPage = ({dog, allowedGenders, canSave, isSaving, onNameChange, onGenderChange, onShakingDogStatusChange, onCecsStatusChange, onDoSave}) => {
+const NewDogPage = ({dog, allowedGenders, canSave, isSaving, onDogPropChange, onDoSave}) => {
   return (
     <React.Fragment>
       <CaptionedFolder caption="New Dog Details"
@@ -26,10 +23,8 @@ const NewDogPage = ({dog, allowedGenders, canSave, isSaving, onNameChange, onGen
                                             allowedGenders={allowedGenders}
                                             shakingDogStatus={dog.shakingdogstatus}
                                             cecsStatus={dog.cecsstatus}
-                                            onNameChange={onNameChange}
-                                            onGenderChange={onGenderChange}
-                                            onShakingDogStatusChange={onShakingDogStatusChange}
-                                            onCecsStatusChange={onCecsStatusChange} />} />
+                                            onDogPropChange={onDogPropChange} />} />
+      <hr/>
       <Button caption="Save"
               className={"is-primary is-rounded" + (isSaving ? " is-loading" : "")}
               disabled={!canSave}
@@ -46,10 +41,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onNameChange: (name) => dispatch(setNewDogName(name)),
-  onGenderChange: (gender) => dispatch(changeNewDogGender(gender)),
-  onShakingDogStatusChange: (status) => dispatch(changeNewDogShakingDogStatus(status)),
-  onCecsStatusChange: (status) => dispatch(changeNewDogCecsStatus(status)),
+  onDogPropChange: (prop, value) => dispatch(setNewDogProp(prop, value)),
   onDoSave: () => dispatch(doSaveNewDog())
 })
 
