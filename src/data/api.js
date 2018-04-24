@@ -92,6 +92,10 @@ export function getFamily(sireId, damId, success, failure) {
   )
 }
 
+export function getRelationships(success, failure) {
+  return genericAsyncFetch("/api/relationships", success, failure)
+}
+
 export function submitNewDog(name, gender, shakingDogStatus, cecsStatus, success, failure) {
   return genericAsyncPost(
     "/api/admin/dog",

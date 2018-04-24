@@ -3,6 +3,7 @@ import {
   getDogs,
   getDog,
   getFamily,
+  getRelationships,
   submitNewDog,
   submitNewLitter
 } from "../data/api"
@@ -17,6 +18,9 @@ export const FETCH_DOG_FAILURE = "FETCH_DOG_FAILURE"
 export const FETCH_FAMILY_BEGIN = "FETCH_FAMILY_BEGIN"
 export const FETCH_FAMILY_SUCCESS = "FETCH_FAMILY_SUCCESS"
 export const FETCH_FAMILY_FAILURE = "FETCH_FAMILY_FAILURE"
+export const FETCH_RELATIONSHIPS_BEGIN = "FETCH_RELATIONSHIPS_BEGIN"
+export const FETCH_RELATIONSHIPS_SUCCESS = "FETCH_RELATIONSHIPS_SUCCESS"
+export const FETCH_RELATIONSHIPS_FAILURE = "FETCH_RELATIONSHIPS_FAILURE"
 export const SAVE_NEWDOG_BEGIN = "SAVE_NEWDOG_BEGIN"
 export const SAVE_NEWDOG_SUCCESS = "SAVE_NEWDOG_SUCCESS"
 export const SAVE_NEWDOG_FAILURE = "SAVE_NEWDOG_FAILURE"
@@ -103,6 +107,31 @@ export const fetchFamily = (sireId, damId) => dispatch => {
     damId,
     data => dispatch(fetchFamilySuccess(data.sire, data.dam, data.children)),
     error => dispatch(fetchFamilyFailure(error.error, error.auth))
+  )
+}
+
+// Fetch all relationships
+
+const fetchRelationshipsBegin = () => ({
+  type: FETCH_RELATIONSHIPS_BEGIN
+})
+
+const fetchRelationshipsSuccess = relationships => ({
+  type: FETCH_RELATIONSHIPS_SUCCESS,
+  relationships
+})
+
+const fetchRelationshipsFailure = (error, auth) => ({
+  type: FETCH_RELATIONSHIPS_FAILURE,
+  error,
+  auth
+})
+
+export const fetchRelationships = () => dispatch => {
+  dispatch(fetchRelationshipsBegin())
+  return getRelationships(
+    data => dispatch(fetchRelationshipsSuccess(data.relationships)),
+    error => dispatch(fetchRelationshipsFailure(error.error, error.auth))
   )
 }
 

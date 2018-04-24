@@ -19,6 +19,7 @@ import {
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
   FETCH_DOG_BEGIN, FETCH_DOG_SUCCESS, FETCH_DOG_FAILURE,
   FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE,
+  FETCH_RELATIONSHIPS_BEGIN, FETCH_RELATIONSHIPS_SUCCESS, FETCH_RELATIONSHIPS_FAILURE,
   SAVE_NEWDOG_SUCCESS
 } from "../actions/api"
 import { CHANGE_ADMIN_MODE } from "../actions/ui"
@@ -155,6 +156,21 @@ const data = (state, action) => {
     
     case FETCH_FAMILY_FAILURE:
       return state.setIn(["couplesReport", "isFetching"], false)
+
+    case FETCH_RELATIONSHIPS_BEGIN:
+      return state.set("relationships", Map({
+        isFetching: true,
+        list: null
+      }))
+    
+    case FETCH_RELATIONSHIPS_SUCCESS:
+      return state.set("relationships", Map({
+        isFetching: false,
+        list: fromJS(action.relationships)
+      }))
+    
+    case FETCH_RELATIONSHIPS_FAILURE:
+      return state.setIn(["relationships", "isFetching"], false)
 
     case SAVE_NEWDOG_SUCCESS:
       return state.setIn(["newdog", "lastCreatedId"], action.dogId)

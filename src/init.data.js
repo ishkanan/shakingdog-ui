@@ -24,6 +24,10 @@ const initialState = {
       dam: null,
       children: null
     },
+    relationships: {
+      isFetching: false,
+      list: null
+    },
     newdog: {
       lastCreatedId: null,
       dog: {

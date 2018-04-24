@@ -36,5 +36,5 @@ render(
   document.getElementById("app")
 )
 
-// failure scenario is handled by the UI components
 store.dispatch(fetchDogs())
+store.dispatch(fetchRelationships())
