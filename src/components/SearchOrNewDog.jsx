@@ -9,7 +9,7 @@ import NewDogForm from "./NewDogForm.jsx"
 import { uuidv4 } from "../util/data"
 
 
-const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, onModeChange, onDogChange, onNewDogPropChange}) => {
+const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, onModeChange, onDogChange, onNewDogPropChange}) => {
   const groupId = uuidv4()
 
   return (
@@ -26,23 +26,27 @@ const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, onModeChange, onDogCha
                                       </label>
                                     </React.Fragment>}
                            isNarrow={false} />
+      {mode === "search" &&
       <HorizontalFormField caption="Search"
-                           content={<Select value={(!_.isNil(selectedDog) ? selectedDog.name : "")}
+                           content={<Select value={(!_.isNil(selectedDog) ? selectedDog : "")}
                                             onChange={(value) => onDogChange(value !== null ? value.id : null)}
                                             options={_.map(dogs, d => ({id: d.id, value: d.name}))}
                                             labelKey="value"
                                             valueKey="id"
                                             className="field is-expanded" />}
                            isNarrow={false} />
-      <hr/>
+      }
+      {mode === "new" &&
       <NewDogForm name={newDog.name}
                   gender={newDog.gender}
+                  allowedGenders={allowedNewGenders}
                   shakingDogStatus={newDog.shakingdogstatus}
                   cecsStatus={newDog.cecsstatus}
-                  onNameChange={(value) => onNewDogPropChange("name", name)}
-                  onGenderChange={(value) => onNewDogPropChange("gender", name)}
-                  onShakingDogStatusChange={(value) => onNewDogPropChange("shakingdogstatus", name)}
-                  onCecsStatusChange={(value) => onNewDogPropChange("cecsstatus", name)} />
+                  onNameChange={(value) => onNewDogPropChange("name", value)}
+                  onGenderChange={(value) => onNewDogPropChange("gender", value)}
+                  onShakingDogStatusChange={(value) => onNewDogPropChange("shakingdogstatus", value)}
+                  onCecsStatusChange={(value) => onNewDogPropChange("cecsstatus", value)} />
+      }
     </React.Fragment>
   )
 }
@@ -53,9 +57,11 @@ SearchOrNewDog.propTypes = {
   // Dogs to search
   dogs: PropTypes.array.isRequired,
   // Selected dog from search
-  selectedDog: PropTypes.object,
+  selectedDog: PropTypes.number,
   // New dog
   newDog: PropTypes.object.isRequired,
+  // Allowed genders for new dog form
+  allowedNewGenders: PropTypes.array.isRequired,
   // Events
   onModeChange: PropTypes.func.isRequired,
   onDogChange: PropTypes.func.isRequired,

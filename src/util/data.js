@@ -14,8 +14,9 @@ export const uuidv4 = () => {
 }
 
 // (admin) returns the selected dog entry OR the new dog entry
-export const whichDog = (stateSection, dogs) => (
-  stateSection.get("mode") === "search" ?
-    dogs.find(d => d.id === stateSection.get("selected")) :
+export const whichDog = (dogs, stateSection) => {
+  const ret = stateSection.get("mode") === "search" ?
+    dogs.find(d => d.get("id") === stateSection.get("selected")) :
     stateSection.get("dog")
-)
+  return ret
+}

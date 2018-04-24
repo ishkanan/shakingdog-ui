@@ -1,4 +1,5 @@
 
+import { fromJS } from "immutable"
 import _ from "lodash"
 import React from "react"
 import { connect } from "react-redux"
@@ -16,12 +17,13 @@ import NewDogForm from "../components/NewDogForm.jsx"
 import { toJS } from "../data/util.jsx"
 
 
-const NewDogPage = ({dog, canSave, isSaving, onNameChange, onGenderChange, onShakingDogStatusChange, onCecsStatusChange, onDoSave}) => {
+const NewDogPage = ({dog, allowedGenders, canSave, isSaving, onNameChange, onGenderChange, onShakingDogStatusChange, onCecsStatusChange, onDoSave}) => {
   return (
     <React.Fragment>
       <CaptionedFolder caption="New Dog Details"
                        content={<NewDogForm name={dog.name}
                                             gender={dog.gender}
+                                            allowedGenders={allowedGenders}
                                             shakingDogStatus={dog.shakingdogstatus}
                                             cecsStatus={dog.cecsstatus}
                                             onNameChange={onNameChange}
@@ -38,6 +40,7 @@ const NewDogPage = ({dog, canSave, isSaving, onNameChange, onGenderChange, onSha
 
 const mapStateToProps = (state) => ({
   dog: state.getIn(["data", "newdog", "dog"]),
+  allowedGenders: fromJS(["D", "B", "U"]),
   canSave: state.getIn(["ui", "canSave"]),
   isSaving: state.getIn(["ui", "isSaving"])
 })

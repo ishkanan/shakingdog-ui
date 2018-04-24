@@ -7,41 +7,41 @@ import { whichDog } from "../../util/data"
 import { canSaveNewLitter } from "../../util/ui"
 
 
-export const CHANGE_SIRE_MODE = "CHANGE_SIRE_MODE"
-export const CHANGE_SELECTED_SIRE = "CHANGE_SELECTED_SIRE"
-export const CHANGE_NEWSIRE_PROP = "CHANGE_NEWSIRE_PROP"
-export const CHANGE_DAM_MODE = "CHANGE_DAM_MODE"
-export const CHANGE_SELECTED_DAM = "CHANGE_SELECTED_DAM"
-export const CHANGE_NEWDAM_PROP = "CHANGE_NEWDAM_PROP"
+export const CHANGE_NEWLITTER_SIRE_MODE = "CHANGE_NEWLITTER_SIRE_MODE"
+export const CHANGE_NEWLITTER_SELECTED_SIRE = "CHANGE_NEWLITTER_SELECTED_SIRE"
+export const CHANGE_NEWLITTER_NEWSIRE_PROP = "CHANGE_NEWLITTER_NEWSIRE_PROP"
+export const CHANGE_NEWLITTER_DAM_MODE = "CHANGE_NEWLITTER_DAM_MODE"
+export const CHANGE_NEWLITTER_SELECTED_DAM = "CHANGE_NEWLITTER_SELECTED_DAM"
+export const CHANGE_NEWLITTER_NEWDAM_PROP = "CHANGE_NEWLITTER_NEWDAM_PROP"
 
-export const changeSireMode = (mode) => ({
-  type: CHANGE_SIRE_MODE,
+export const changeNewLitterSireMode = (mode) => ({
+  type: CHANGE_NEWLITTER_SIRE_MODE,
   mode
 })
 
-export const changeSelectedSire = (sireId) => ({
-  type: CHANGE_SELECTED_SIRE,
+export const changeNewLitterSelectedSire = (sireId) => ({
+  type: CHANGE_NEWLITTER_SELECTED_SIRE,
   sireId
 })
 
-export const changeNewSireProp = (prop, value) => ({
-  type: CHANGE_NEWSIRE_PROP,
+export const changeNewLitterNewSireProp = (prop, value) => ({
+  type: CHANGE_NEWLITTER_NEWSIRE_PROP,
   prop,
   value
 })
 
-export const changeDamMode = (mode) => ({
-  type: CHANGE_DAM_MODE,
+export const changeNewLitterDamMode = (mode) => ({
+  type: CHANGE_NEWLITTER_DAM_MODE,
   mode
 })
 
-export const changeSelectedDam = (damId) => ({
-  type: CHANGE_SELECTED_DAM,
+export const changeNewLitterSelectedDam = (damId) => ({
+  type: CHANGE_NEWLITTER_SELECTED_DAM,
   damId
 })
 
-export const changeNewDamProp = (prop, value) => ({
-  type: CHANGE_NEWDAM_PROP,
+export const changeNewLitterNewDamProp = (prop, value) => ({
+  type: CHANGE_NEWLITTER_NEWDAM_PROP,
   prop,
   value
 })
@@ -60,7 +60,7 @@ export const doSaveNewLitter = () => {
       dispatch(saveNewLitter(
         whichDog(dogs, newLitter.get("sire")).toJS(),
         whichDog(dogs, newLitter.get("dam")).toJS(),
-        _.map(newLitter.get("children"), c => whichDog(dogs, c).toJS())
+        newLitter.get("children").map(c => whichDog(dogs, c).toJS())
       ))
     }
   }
@@ -75,49 +75,49 @@ const updateCanSave = (dispatch, state) => {
     canSaveNewLitter(
       whichDog(dogs, newLitter.get("sire")),
       whichDog(dogs, newLitter.get("dam")),
-      _.map(newLitter.get("children"), c => whichDog(dogs, c))
+      newLitter.get("children").map(c => whichDog(dogs, c))
     )
   ))
 }
 
 export const setNewLitterSireMode = (mode) => {
   return (dispatch, getState) => {
-    dispatch(changeSireMode(mode))
+    dispatch(changeNewLitterSireMode(mode))
     updateCanSave(dispatch, getState())
   }
 }
 
 export const setNewLitterSelectedSire = (sireId) => {
   return (dispatch, getState) => {
-    dispatch(changeSelectedSire(sireId))
+    dispatch(changeNewLitterSelectedSire(sireId))
     updateCanSave(dispatch, getState())
   }
 }
 
 export const setNewLitterNewSireProp = (prop, value) => {
   return (dispatch, getState) => {
-    dispatch(changeNewSireProp(prop, value))
+    dispatch(changeNewLitterNewSireProp(prop, value))
     updateCanSave(dispatch, getState())
   }
 }
 
 export const setNewLitterDamMode = (mode) => {
   return (dispatch, getState) => {
-    dispatch(changeDamMode(mode))
+    dispatch(changeNewLitterDamMode(mode))
     updateCanSave(dispatch, getState())
   }
 }
 
 export const setNewLitterSelectedDam = (damId) => {
   return (dispatch, getState) => {
-    dispatch(changeSelectedDam(damId))
+    dispatch(changeNewLitterSelectedDam(damId))
     updateCanSave(dispatch, getState())
   }
 }
 
 export const setNewLitterNewDamProp = (prop, value) => {
   return (dispatch, getState) => {
-    dispatch(changeNewDamProp(prop, value))
+    dispatch(changeNewLitterNewDamProp(prop, value))
     updateCanSave(dispatch, getState())
   }
 }

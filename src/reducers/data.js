@@ -8,12 +8,12 @@ import {
   CHANGE_NEWDOG_CECSSTATUS
 } from "../actions/admin/newdog"
 import {
-  CHANGE_SIRE_MODE,
-  CHANGE_SELECTED_SIRE,
-  CHANGE_NEWSIRE_PROP,
-  CHANGE_DAM_MODE,
-  CHANGE_SELECTED_DAM,
-  CHANGE_NEWDAM_PROP
+  CHANGE_NEWLITTER_SIRE_MODE,
+  CHANGE_NEWLITTER_SELECTED_SIRE,
+  CHANGE_NEWLITTER_NEWSIRE_PROP,
+  CHANGE_NEWLITTER_DAM_MODE,
+  CHANGE_NEWLITTER_SELECTED_DAM,
+  CHANGE_NEWLITTER_NEWDAM_PROP
 } from "../actions/admin/newlitter"
 import {
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
@@ -47,22 +47,22 @@ const data = (state, action) => {
     case CHANGE_NEWDOG_CECSSTATUS:
       return state.setIn(["newdog", "dog", "cecsstatus"], action.status)
 
-    case CHANGE_SIRE_MODE:
+    case CHANGE_NEWLITTER_SIRE_MODE:
       return state.setIn(["newlitter", "sire", "mode"], action.mode)
 
-    case CHANGE_SELECTED_SIRE:
+    case CHANGE_NEWLITTER_SELECTED_SIRE:
       return state.setIn(["newlitter", "sire", "selected"], action.sireId)
 
-    case CHANGE_NEWSIRE_PROP:
+    case CHANGE_NEWLITTER_NEWSIRE_PROP:
       return state.setIn(["newlitter", "sire", "dog", action.prop], action.value)
 
-    case CHANGE_DAM_MODE:
+    case CHANGE_NEWLITTER_DAM_MODE:
       return state.setIn(["newlitter", "dam", "mode"], action.mode)
 
-    case CHANGE_SELECTED_DAM:
+    case CHANGE_NEWLITTER_SELECTED_DAM:
       return state.setIn(["newlitter", "dam", "selected"], action.damId)
 
-    case CHANGE_NEWDAM_PROP:
+    case CHANGE_NEWLITTER_NEWDAM_PROP:
       return state.setIn(["newlitter", "dam", "dog", action.prop], action.value)
 
     case FETCH_DOGS_BEGIN:

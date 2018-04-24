@@ -40,7 +40,7 @@ const initialState = {
         selected: null,
         dog: {
           id: null,
-          gender: "U",
+          gender: "D",
           name: "",
           shakingdogstatus: "Unknown",
           cecsstatus: "Unknown"
@@ -51,7 +51,7 @@ const initialState = {
         selected: null,
         dog: {
           id: null,
-          gender: "U",
+          gender: "B",
           name: "",
           shakingdogstatus: "Unknown",
           cecsstatus: "Unknown"

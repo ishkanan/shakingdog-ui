@@ -1,4 +1,5 @@
 
+import _ from "lodash"
 import PropTypes from "prop-types"
 import React from "react"
 import Select from "react-select"
@@ -7,12 +8,8 @@ import HorizontalFormField from "./HorizontalFormField.jsx"
 import { dogStatusUIMap, genderUIMap } from "../util/ui"
 
 
-const NewDogForm = ({name, gender, shakingDogStatus, cecsStatus, onNameChange, onGenderChange, onShakingDogStatusChange, onCecsStatusChange}) => {
-  const genders = [
-    {id: "B", value: genderUIMap["B"]},
-    {id: "D", value: genderUIMap["D"]},
-    {id: "U", value: genderUIMap["U"]}
-  ]
+const NewDogForm = ({name, gender, allowedGenders, shakingDogStatus, cecsStatus, onNameChange, onGenderChange, onShakingDogStatusChange, onCecsStatusChange}) => {
+  const genders = _.map(allowedGenders, gender => ({id: gender, value: genderUIMap[gender]}))
   
   const shakingStatuses = [
     {id: "Affected", value: dogStatusUIMap["Affected"].caption},
@@ -55,6 +52,8 @@ NewDogForm.propTypes = {
   name: PropTypes.string.isRequired,
   // Gender
   gender: PropTypes.string.isRequired,
+  // Allowed genders
+  allowedGenders: PropTypes.array.isRequired,
   // Shaking dog status
   shakingDogStatus: PropTypes.string.isRequired,
   // CECS status

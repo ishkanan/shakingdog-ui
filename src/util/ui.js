@@ -36,10 +36,11 @@ export const canSaveNewDog = (name, gender, shakingdogstatus, cecsstatus) => {
 
 export const canSaveNewLitter = (sire, dam, children) => {
   return (
+    !_.isNil(sire) &&
     dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus")) &&
+    !_.isNil(dam) &&
     dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")) &&
-    _.reduce(
-      children,
+    children.reduce(
       (acc, c) => acc && dogOK(c.get("name"), c.get("gender"), c.get("shakingdogstatus"), c.get("cecsstatus")),
       children.length > 0
     )
