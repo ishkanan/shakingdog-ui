@@ -93,13 +93,15 @@ const initialState = {
   ui: {
     adminMode: "newdog",
     canSave: false,
-    canSearch: false,
     error: null,
     isSaving: false,
-    searchMode: "single",
+    search: {
+      canSearch: false,
+      mode: "single",
+      selectedDam: null,
+      selectedSire: null
+    },
     selectedTab: "view",
-    selectedSire: null,
-    selectedDam: null,
     view: {
       pageNumber: 1
     }

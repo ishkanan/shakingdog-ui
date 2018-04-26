@@ -47,11 +47,11 @@ const mapStateToProps = (state) => ({
   dogs: coalesce(state.getIn(["data", "dogs", "list"]), []),
   sires: getSires(coalesce(state.getIn(["data", "dogs", "list"]), [])),
   dams: getDams(coalesce(state.getIn(["data", "dogs", "list"]), [])),
-  searchMode: state.getIn(["ui", "searchMode"]),
-  selectedDam: state.getIn(["ui", "selectedDam"]),
-  selectedSire: state.getIn(["ui", "selectedSire"]),
+  searchMode: state.getIn(["ui", "search", "mode"]),
+  selectedDam: state.getIn(["ui", "search", "selectedDam"]),
+  selectedSire: state.getIn(["ui", "search", "selectedSire"]),
   isSearching: state.getIn(["data", "dogReport", "isFetching"]) || state.getIn(["data", "couplesReport", "isFetching"]),
-  canSearch: state.getIn(["ui", "canSearch"])
+  canSearch: state.getIn(["ui", "search", "canSearch"])
 })
 
 const mapDispatchToProps = (dispatch) => ({

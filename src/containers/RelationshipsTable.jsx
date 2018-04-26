@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import ReactTable from "react-table";
 
 import { changeViewPageNumber } from "../actions/ui"
+import DogSearchLink from "./DogSearchLink.jsx"
 import { toJS } from "../data/util.jsx"
 import { dogStatusUIMap } from "../util/ui"
 
@@ -12,19 +13,31 @@ import { dogStatusUIMap } from "../util/ui"
 const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFetching, onPageChange}) => {
   const columns = [
     {
-      Header: "Sire",
+      Header: <div className="view-header">Sire</div>,
       accessor: "sirename",
-      Cell: row => <div className={dogStatusUIMap[row.original.sireshakingdogstatus].badgeClass}>{row.value}</div>
+      Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.sireshakingdogstatus].badgeClass}>
+                     <DogSearchLink dogId={row.original.sireid}
+                                    dogName={row.value}
+                                    additionalClasses={dogStatusUIMap[row.original.sireshakingdogstatus].badgeClass} />
+                   </div>
     },
     {
-      Header: "Dam",
+      Header: <div className="view-header">Dam</div>,
       accessor: "damname",
-      Cell: row => <div className={dogStatusUIMap[row.original.damshakingdogstatus].badgeClass}>{row.value}</div>
+      Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.damshakingdogstatus].badgeClass}>
+                     <DogSearchLink dogId={row.original.damid}
+                                    dogName={row.value}
+                                    additionalClasses={dogStatusUIMap[row.original.damshakingdogstatus].badgeClass} />
+                   </div>
     },
     {
-      Header: "Child",
+      Header: <div className="view-header">Child</div>,
       accessor: "childname",
-      Cell: row => <div className={dogStatusUIMap[row.original.childshakingdogstatus].badgeClass}>{row.value}</div>
+      Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.childshakingdogstatus].badgeClass}>
+                     <DogSearchLink dogId={row.original.childid}
+                                    dogName={row.value}
+                                    additionalClasses={dogStatusUIMap[row.original.childshakingdogstatus].badgeClass} />
+                   </div>
     }
   ]
 
@@ -46,7 +59,7 @@ const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFe
                       hideDisabled={true}
                       pageRangeDisplayed={15}
                       activePage={pageNumber}
-                      itemsCountPerPage={relationships.length}
+                      itemsCountPerPage={50}
                       totalItemsCount={totalRelationships}
                       onChange={onPageChange} />
         </div>

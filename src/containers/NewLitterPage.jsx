@@ -4,18 +4,18 @@ import React from "react"
 import { connect } from "react-redux"
 
 import {
-  setNewLitterSireMode,
-  setNewLitterSelectedSire,
-  setNewLitterNewSireProp,
-  setNewLitterDamMode,
-  setNewLitterSelectedDam,
-  setNewLitterNewDamProp,
-  setNewLitterChildMode,
-  setNewLitterSelectedChild,
-  setNewLitterNewChildProp,
   addNewLitterChild,
+  doSaveNewLitter,
   removeNewChildLitter,
-  doSaveNewLitter
+  setNewLitterChildMode,
+  setNewLitterDamMode,
+  setNewLitterNewChildProp,
+  setNewLitterNewDamProp,
+  setNewLitterNewSireProp,
+  setNewLitterSelectedChild,
+  setNewLitterSelectedDam,
+  setNewLitterSelectedSire,
+  setNewLitterSireMode
 } from "../actions/admin/newlitter"
 import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"

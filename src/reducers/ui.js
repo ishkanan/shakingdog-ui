@@ -5,12 +5,14 @@ import {
   SAVE_NEWDOG_FAILURE
 } from "../actions/api"
 import {
-  CHANGE_ADMIN_MODE,
-  CHANGE_CAN_SAVE,
   CHANGE_CAN_SEARCH,
   CHANGE_SEARCH_MODE,
   CHANGE_SELECTED_DAM,
-  CHANGE_SELECTED_SIRE,
+  CHANGE_SELECTED_SIRE
+} from "../actions/search"
+import {
+  CHANGE_ADMIN_MODE,
+  CHANGE_CAN_SAVE,
   CHANGE_SELECTED_TAB,
   CHANGE_VIEW_PAGENUMBER
 } from "../actions/ui"
@@ -31,20 +33,20 @@ const ui = (state, action) => {
       return state.set("canSave", action.value)
 
     case CHANGE_CAN_SEARCH:
-      return state.set("canSearch", action.value)
+      return state.setIn(["search", "canSearch"], action.value)
 
     case CHANGE_SEARCH_MODE:
       return (state
-        .set("searchMode", action.mode)
-        .set("selectedDam", null)
-        .set("selectedSire", null)
+        .setIn(["search", "mode"], action.mode)
+        .setIn(["search", "selectedDam"], null)
+        .setIn(["search", "selectedSire"], null)
       )
 
     case CHANGE_SELECTED_DAM:
-      return state.set("selectedDam", action.damId)
+      return state.setIn(["search", "selectedDam"], action.damId)
 
     case CHANGE_SELECTED_SIRE:
-      return state.set("selectedSire", action.sireId)
+      return state.setIn(["search", "selectedSire"], action.sireId)
 
     case CHANGE_SELECTED_TAB:
       return (state
