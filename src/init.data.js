@@ -64,27 +64,44 @@ const initialState = {
       children: []
     },
     testresult: {
-      acceptedStatuses: null,
-      selected: null,
-      sire: {
+      dog: {
         mode: "search",
-        selected: null,
+        selected: {
+          id: null,
+          gender: null,
+          name: null,
+          shakingdogstatus: null,
+          cecsstatus: "Unknown"
+        },
         dog: {
           id: null,
           gender: "U",
           name: "",
-          shakingdogstatus: "Unknown",
+          shakingdogstatus: "Affected",
+          cecsstatus: "Unknown"
+        }
+      },
+      sire: {
+        edit: false,
+        mode: "search",
+        selected: null,
+        dog: {
+          id: null,
+          gender: "D",
+          name: "",
+          shakingdogstatus: "Affected",
           cecsstatus: "Unknown"
         }
       },
       dam: {
+        edit: false,
         mode: "search",
         selected: null,
         dog: {
           id: null,
-          gender: "U",
+          gender: "B",
           name: "",
-          shakingdogstatus: "",
+          shakingdogstatus: "Affected",
           cecsstatus: "Unknown"
         }
       }

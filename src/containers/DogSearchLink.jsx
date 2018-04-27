@@ -5,8 +5,8 @@ import { connect } from "react-redux"
 
 import {
   doSearch,
-  setSearchMode,
-  setSelectedDog
+  changeSearchMode,
+  changeSelectedDog
 } from "../actions/search"
 import { changeSelectedTab } from "../actions/ui"
 import Link from "../components/Link.jsx"
@@ -32,8 +32,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   onDoSearch: (dogId) => {
     dispatch(changeSelectedTab("search"))
-    dispatch(setSearchMode("single"))
-    dispatch(setSelectedDog("single", "sire", dogId))
+    dispatch(changeSearchMode("single"))
+    dispatch(changeSelectedDog("single", "sire", dogId))
     dispatch(doSearch())
   }
 })

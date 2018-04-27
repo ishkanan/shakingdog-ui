@@ -9,7 +9,7 @@ import NewDogForm from "./NewDogForm.jsx"
 import { uuidv4 } from "../util/data"
 
 
-const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, onModeChange, onDogChange, onNewDogPropChange}) => {
+const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, allowedNewSlemStatuses, onModeChange, onDogChange, onNewDogPropChange}) => {
   const groupId = uuidv4()
 
   return (
@@ -40,7 +40,8 @@ const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, onM
       <NewDogForm name={newDog.name}
                   gender={newDog.gender}
                   allowedGenders={allowedNewGenders}
-                  shakingDogStatus={newDog.shakingdogstatus}
+                  slemStatus={newDog.shakingdogstatus}
+                  allowedSlemStatuses={allowedNewSlemStatuses}
                   cecsStatus={newDog.cecsstatus}
                   onDogPropChange={(prop, value) => onNewDogPropChange(prop, value)} />
       }
@@ -59,6 +60,8 @@ SearchOrNewDog.propTypes = {
   newDog: PropTypes.object.isRequired,
   // Allowed genders for new dog form
   allowedNewGenders: PropTypes.array.isRequired,
+  // Allowed SLEM statuses for new dog form
+  allowedNewSlemStatuses: PropTypes.array.isRequired,
   // Events
   onModeChange: PropTypes.func.isRequired,
   onDogChange: PropTypes.func.isRequired,

@@ -16,6 +16,20 @@ import {
   REMOVE_CHILD_FROM_NEWLITTER
 } from "../actions/admin/newlitter"
 import {
+  CHANGE_TESTRESULT_DOG_RESULT,
+  CHANGE_TESTRESULT_DOG_MODE,
+  CHANGE_TESTRESULT_SELECTED_DOG,
+  CHANGE_TESTRESULT_NEWDOG_PROP,
+  CHANGE_TESTRESULT_EDIT_SIRE,
+  CHANGE_TESTRESULT_SIRE_MODE,
+  CHANGE_TESTRESULT_SELECTED_SIRE,
+  CHANGE_TESTRESULT_NEWSIRE_PROP,
+  CHANGE_TESTRESULT_EDIT_DAM,
+  CHANGE_TESTRESULT_DAM_MODE,
+  CHANGE_TESTRESULT_SELECTED_DAM,
+  CHANGE_TESTRESULT_NEWDAM_PROP
+} from "../actions/admin/testresult"
+import {
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
   FETCH_DOG_BEGIN, FETCH_DOG_SUCCESS, FETCH_DOG_FAILURE,
   FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE,
@@ -87,6 +101,49 @@ const data = (state, action) => {
         ["newlitter", "children"],
         state.getIn(["newlitter", "children"]).delete(action.index)
       )
+
+    case CHANGE_TESTRESULT_DOG_RESULT:
+      return state.setIn(["testresult", "dog", "selected", action.ailment], action.result)
+
+    case CHANGE_TESTRESULT_DOG_MODE:
+      return state.setIn(["testresult", "dog", "mode"], action.mode)
+
+    case CHANGE_TESTRESULT_SELECTED_DOG:
+      // state tree differs slightly to other admin sections to make for more
+      // reuseable code, so populate more details of selected dog
+      var trDog = state.getIn(["dogs", "list"]).find(d => d.get("id") === action.dogId)
+      return state.mergeIn(["testresult", "dog", "selected"], fromJS({
+        id: trDog.get("id"),
+        name: trDog.get("name"),
+        gender: trDog.get("gender")
+      }))
+
+    case CHANGE_TESTRESULT_NEWDOG_PROP:
+      return state.setIn(["testresult", "dog", "dog", action.prop], action.value)
+
+    case CHANGE_TESTRESULT_EDIT_SIRE:
+      return state.setIn(["testresult", "sire", "edit"], action.edit)
+
+    case CHANGE_TESTRESULT_SIRE_MODE:
+      return state.setIn(["testresult", "sire", "mode"], action.mode)
+
+    case CHANGE_TESTRESULT_SELECTED_SIRE:
+      return state.setIn(["testresult", "sire", "selected"], action.sireId)
+
+    case CHANGE_TESTRESULT_NEWSIRE_PROP:
+      return state.setIn(["testresult", "sire", "dog", action.prop], action.value)
+
+    case CHANGE_TESTRESULT_EDIT_DAM:
+      return state.setIn(["testresult", "dam", "edit"], action.edit)
+
+    case CHANGE_TESTRESULT_DAM_MODE:
+      return state.setIn(["testresult", "dam", "mode"], action.mode)
+
+    case CHANGE_TESTRESULT_SELECTED_DAM:
+      return state.setIn(["testresult", "dam", "selected"], action.damId)
+
+    case CHANGE_TESTRESULT_NEWDAM_PROP:
+      return state.setIn(["testresult", "dam", "dog", action.prop], action.value)
 
     case FETCH_DOGS_BEGIN:
       return state.set("dogs", Map({

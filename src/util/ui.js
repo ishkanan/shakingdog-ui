@@ -35,16 +35,25 @@ export const canSaveNewDog = (name, gender, shakingdogstatus, cecsstatus) => {
 }
 
 export const canSaveNewLitter = (sire, dam, children) => {
-  console.log("sire=", sire, "dam=", dam, "children=", children)
   return (
-    !_.isNil(sire) &&
-    dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus")) &&
-    !_.isNil(dam) &&
-    dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")) &&
+    !_.isNil(sire) && dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus")) &&
+    !_.isNil(dam) && dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")) &&
     children.reduce(
       (acc, c) => acc && !_.isNil(c) && dogOK(c.get("name"), c.get("gender"), c.get("shakingdogstatus"), c.get("cecsstatus")),
       children.size > 0
     )
+  )
+}
+
+export const canSaveTestResult = (result, dog, editSire, sire, editDam, dam) => {
+  console.log("result=", result, "dog=", dog)
+  console.log("editSire=", editSire, "sire=", sire)
+  console.log("editDam=", editDam, "dam=", dam)
+  return (
+    !isNilOrEmptyString(result) &&
+    !_.isNil(dog) && dogOK(dog.get("name"), dog.get("gender"), dog.get("shakingdogstatus"), dog.get("cecsstatus")) &&
+    (!editSire ? true : !_.isNil(sire) && dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus"))) &&
+    (!editDam ? true : !_.isNil(dam) && dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")))
   )
 }
 

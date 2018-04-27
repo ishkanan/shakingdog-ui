@@ -21,14 +21,6 @@ Display warning if changing from [CarrierByProgeny, ClearByParentage].
 
 Admin -> UI design:
 ===================
-NewLitterPage|CT (mode, sires, dams, selectedSire, selectedDam, onSireChange, onDamChange, newSire, newDam, canSave, isSaving, onNewSirePropChange, onNewDamPropChange, onDoSave)
-  CaptionedFolder "Search or New Sire"
-    SearchOrCreateDog|CP (mode, sires, selectedSire, onSireChange, newSire, onNewSirePropChange)
-  CaptionedFolder "Search or New Dam"
-    SearchOrCreateDog|CP (mode, dams, selectedDam, onDamChange, newDam, onNewDamPropChange)
-  CaptionedFolder "Children"
-    TBC...
-  Button (like NewDogPage)
 
 Admin -> Actions:
 =================

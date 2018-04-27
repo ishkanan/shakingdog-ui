@@ -3,7 +3,7 @@ import _ from "lodash"
 import React from "react"
 import { connect } from "react-redux"
 
-import { doSearch, setSearchMode, setSelectedDog } from "../actions/search"
+import { doSearch, changeSearchMode, changeSelectedDog } from "../actions/search"
 import Button from "../components/Button.jsx"
 import HorizontalFormField from "../components/HorizontalFormField.jsx"
 import RadioMultiSelect from "../components/RadioMultiSelect.jsx"
@@ -55,8 +55,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onModeChange: (mode) => dispatch(setSearchMode(mode)),
-  onDogChange: (mode, role, dogId) => dispatch(setSelectedDog(mode, role, dogId)),
+  onModeChange: (mode) => dispatch(changeSearchMode(mode)),
+  onDogChange: (mode, role, dogId) => dispatch(changeSelectedDog(mode, role, dogId)),
   onDoSearch: () => dispatch(doSearch())
 })
 

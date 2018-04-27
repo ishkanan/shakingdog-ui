@@ -6,7 +6,7 @@ import { connect } from "react-redux"
 
 import {
   doSaveNewDog,
-  setNewDogProp
+  changeNewDogProp
 } from "../actions/admin/newdog"
 import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"
@@ -21,7 +21,8 @@ const NewDogPage = ({dog, allowedGenders, canSave, isSaving, onDogPropChange, on
                        content={<NewDogForm name={dog.name}
                                             gender={dog.gender}
                                             allowedGenders={allowedGenders}
-                                            shakingDogStatus={dog.shakingdogstatus}
+                                            slemStatus={dog.shakingdogstatus}
+                                            allowedSlemStatuses={["Affected", "Carrier", "Clear", "Unknown"]}
                                             cecsStatus={dog.cecsstatus}
                                             onDogPropChange={onDogPropChange} />} />
       <hr/>
@@ -41,7 +42,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onDogPropChange: (prop, value) => dispatch(setNewDogProp(prop, value)),
+  onDogPropChange: (prop, value) => dispatch(changeNewDogProp(prop, value)),
   onDoSave: () => dispatch(doSaveNewDog())
 })
 

@@ -8,15 +8,9 @@ import HorizontalFormField from "./HorizontalFormField.jsx"
 import { dogStatusUIMap, genderUIMap } from "../util/ui"
 
 
-const NewDogForm = ({name, gender, allowedGenders, shakingDogStatus, cecsStatus, onDogPropChange}) => {
+const NewDogForm = ({name, gender, allowedGenders, slemStatus, allowedSlemStatuses, cecsStatus, onDogPropChange}) => {
   const genders = _.map(allowedGenders, gender => ({id: gender, value: genderUIMap[gender]}))
-  
-  const shakingStatuses = [
-    {id: "Affected", value: dogStatusUIMap["Affected"].caption},
-    {id: "Carrier", value: dogStatusUIMap["Carrier"].caption},
-    {id: "Clear", value: dogStatusUIMap["Clear"].caption},
-    {id: "Unknown", value: dogStatusUIMap["Unknown"].caption}
-  ]
+  const slemStatuses = _.map(allowedSlemStatuses, status => ({id: status, value: dogStatusUIMap[status].caption}))
 
   return (
     <React.Fragment>
@@ -34,9 +28,9 @@ const NewDogForm = ({name, gender, allowedGenders, shakingDogStatus, cecsStatus,
                                             className="field is-expanded" />}
                            isNarrow={false} />
       <HorizontalFormField caption="SLEM Status:"
-                           content={<Select value={(shakingDogStatus !== null ? shakingDogStatus : "")}
+                           content={<Select value={(slemStatus !== null ? slemStatus : "")}
                                             onChange={(value) => onDogPropChange("shakingdogstatus", value !== null ? value.id : null)}
-                                            options={shakingStatuses}
+                                            options={slemStatuses}
                                             labelKey="value"
                                             valueKey="id"
                                             clearable={false}
@@ -55,7 +49,9 @@ NewDogForm.propTypes = {
   // Allowed genders
   allowedGenders: PropTypes.array.isRequired,
   // Shaking dog status
-  shakingDogStatus: PropTypes.string.isRequired,
+  slemStatus: PropTypes.string.isRequired,
+  // Allowed SLEM statuses
+  allowedSlemStatuses: PropTypes.array.isRequired,
   // CECS status
   cecsStatus: PropTypes.string.isRequired,
   // Events

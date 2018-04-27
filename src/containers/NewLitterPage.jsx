@@ -4,18 +4,18 @@ import React from "react"
 import { connect } from "react-redux"
 
 import {
-  addNewLitterChild,
+  addChildToNewLitter,
   doSaveNewLitter,
-  removeNewChildLitter,
-  setNewLitterChildMode,
-  setNewLitterDamMode,
-  setNewLitterNewChildProp,
-  setNewLitterNewDamProp,
-  setNewLitterNewSireProp,
-  setNewLitterSelectedChild,
-  setNewLitterSelectedDam,
-  setNewLitterSelectedSire,
-  setNewLitterSireMode
+  removeChildFromNewLitter,
+  changeNewLitterChildMode,
+  changeNewLitterDamMode,
+  changeNewLitterNewChildProp,
+  changeNewLitterNewDamProp,
+  changeNewLitterNewSireProp,
+  changeNewLitterSelectedChild,
+  changeNewLitterSelectedDam,
+  changeNewLitterSelectedSire,
+  changeNewLitterSireMode
 } from "../actions/admin/newlitter"
 import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"
@@ -42,6 +42,7 @@ const NewLitterPage = ({dogs,
                                                 selectedDog={selectedSire}
                                                 newDog={newSire}
                                                 allowedNewGenders={["D"]}
+                                                allowedNewSlemStatuses={["Affected", "Carrier", "Clear", "Unknown"]}
                                                 onModeChange={onSireModeChange}
                                                 onDogChange={onSireChange}
                                                 onNewDogPropChange={onNewSirePropChange} />} />
@@ -51,6 +52,7 @@ const NewLitterPage = ({dogs,
                                                 selectedDog={selectedDam}
                                                 newDog={newDam}
                                                 allowedNewGenders={["B"]}
+                                                allowedNewSlemStatuses={["Affected", "Carrier", "Clear", "Unknown"]}
                                                 onModeChange={onDamModeChange}
                                                 onDogChange={onDamChange}
                                                 onNewDogPropChange={onNewDamPropChange} />} />
@@ -60,6 +62,7 @@ const NewLitterPage = ({dogs,
                                                         selectedDog={c.selected}
                                                         newDog={c.dog}
                                                         allowedNewGenders={["D", "B", "U"]}
+                                                        allowedNewSlemStatuses={["Affected", "Carrier", "Clear", "Unknown"]}
                                                         onModeChange={(mode) => onChildModeChange(i, mode)}
                                                         onDogChange={(dog) => onChildChange(i, dog)}
                                                         onNewDogPropChange={(prop, value) => onNewChildPropChange(i, prop, value)} />
@@ -93,17 +96,17 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onSireModeChange: (mode) => dispatch(setNewLitterSireMode(mode)),
-  onSireChange: (dog) => dispatch(setNewLitterSelectedSire(dog)),
-  onNewSirePropChange: (prop, value) => dispatch(setNewLitterNewSireProp(prop, value)),
-  onDamModeChange: (mode) => dispatch(setNewLitterDamMode(mode)),
-  onDamChange: (dog) => dispatch(setNewLitterSelectedDam(dog)),
-  onNewDamPropChange: (prop, value) => dispatch(setNewLitterNewDamProp(prop, value)),
-  onChildModeChange: (index, mode) => dispatch(setNewLitterChildMode(index, mode)),
-  onChildChange: (index, dog) => dispatch(setNewLitterSelectedChild(index, dog)),
-  onNewChildPropChange: (index, prop, value) => dispatch(setNewLitterNewChildProp(index, prop, value)),
-  onChildAdd: () => dispatch(addNewLitterChild()),
-  onChildRemove: (index) => dispatch(removeNewChildLitter(index)),
+  onSireModeChange: (mode) => dispatch(changeNewLitterSireMode(mode)),
+  onSireChange: (dog) => dispatch(changeNewLitterSelectedSire(dog)),
+  onNewSirePropChange: (prop, value) => dispatch(changeNewLitterNewSireProp(prop, value)),
+  onDamModeChange: (mode) => dispatch(changeNewLitterDamMode(mode)),
+  onDamChange: (dog) => dispatch(changeNewLitterSelectedDam(dog)),
+  onNewDamPropChange: (prop, value) => dispatch(changeNewLitterNewDamProp(prop, value)),
+  onChildModeChange: (index, mode) => dispatch(changeNewLitterChildMode(index, mode)),
+  onChildChange: (index, dog) => dispatch(changeNewLitterSelectedChild(index, dog)),
+  onNewChildPropChange: (index, prop, value) => dispatch(changeNewLitterNewChildProp(index, prop, value)),
+  onChildAdd: () => dispatch(addChildToNewLitter()),
+  onChildRemove: (index) => dispatch(removeChildFromNewLitter(index)),
   onDoSave: () => dispatch(doSaveNewLitter()),
 })
 

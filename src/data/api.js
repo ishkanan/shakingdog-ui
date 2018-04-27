@@ -122,3 +122,16 @@ export function submitNewLitter(sire, dam, children, success, failure) {
     failure
   )
 }
+
+export function submitTestResult(dog, sire, dam, success, failure) {
+  return genericAsyncPost(
+    "/api/admin/testresult",
+    {
+      dog: dog,
+      sire: sire,
+      dam: dam
+    },
+    success,
+    failure
+  )
+}

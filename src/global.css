@@ -34,6 +34,10 @@ label[class="radio"] + label[class="radio"] {
   justify-content: center !important;
 }
 
+.checkbox {
+  padding-top: 8px;
+}
+
 .notification {
   margin-bottom: 12px;
 }

@@ -5,7 +5,8 @@ import {
   getFamily,
   getRelationships,
   submitNewDog,
-  submitNewLitter
+  submitNewLitter,
+  submitTestResult
 } from "../data/api"
 
 
@@ -27,6 +28,9 @@ export const SAVE_NEWDOG_FAILURE = "SAVE_NEWDOG_FAILURE"
 export const SAVE_NEWLITTER_BEGIN = "SAVE_NEWLITTER_BEGIN"
 export const SAVE_NEWLITTER_SUCCESS = "SAVE_NEWLITTER_SUCCESS"
 export const SAVE_NEWLITTER_FAILURE = "SAVE_NEWLITTER_FAILURE"
+export const SAVE_TESTRESULT_BEGIN = "SAVE_TESTRESULT_BEGIN"
+export const SAVE_TESTRESULT_SUCCESS = "SAVE_TESTRESULT_SUCCESS"
+export const SAVE_TESTRESULT_FAILURE = "SAVE_TESTRESULT_FAILURE"
 
 // Fetch all dogs
 
@@ -188,5 +192,32 @@ export const saveNewLitter = (sire, dam, children) => dispatch => {
     children,
     data => dispatch(saveNewLitterSuccess()),
     error => dispatch(saveNewLitterFailure(error.error, error.auth))
+  )
+}
+
+// Save test result
+
+const saveTestResultBegin = () => ({
+  type: SAVE_TESTRESULT_BEGIN
+})
+
+const saveTestResultSuccess = () => ({
+  type: SAVE_TESTRESULT_SUCCESS
+})
+
+const saveTestResultFailure = (error, auth) => ({
+  type: SAVE_TESTRESULT_FAILURE,
+  error,
+  auth
+})
+
+export const saveTestResult = (dog, sire, dam) => dispatch => {
+  dispatch(saveTestResultBegin())
+  return submitTestResult(
+    dog,
+    sire,
+    dam,
+    data => dispatch(saveTestResultSuccess()),
+    error => dispatch(saveTestResultFailure(error.error, error.auth))
   )
 }
