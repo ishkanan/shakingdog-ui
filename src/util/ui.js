@@ -46,9 +46,6 @@ export const canSaveNewLitter = (sire, dam, children) => {
 }
 
 export const canSaveTestResult = (result, dog, editSire, sire, editDam, dam) => {
-  console.log("result=", result, "dog=", dog)
-  console.log("editSire=", editSire, "sire=", sire)
-  console.log("editDam=", editDam, "dam=", dam)
   return (
     !isNilOrEmptyString(result) &&
     !_.isNil(dog) && dogOK(dog.get("name"), dog.get("gender"), dog.get("shakingdogstatus"), dog.get("cecsstatus")) &&

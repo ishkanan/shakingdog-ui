@@ -27,7 +27,7 @@ import { toJS } from "../data/util.jsx"
 import { dogStatusUIMap } from "../util/ui"
 
 
-const RecordTestResult = ({dogs, dogSLEMTestResult,
+const RecordTestResult = ({dogs, dogSLEMTestResult, originalSLEMStatus,
                            dogMode, selectedDog, newDog,
                            editSire, sireMode, sires, selectedSire, newSire,
                            editDam, damMode, dams, selectedDam, newDam,
@@ -37,7 +37,9 @@ const RecordTestResult = ({dogs, dogSLEMTestResult,
                            onEditSireChange, onSireModeChange, onSireChange, onNewSirePropChange,
                            onEditDamChange, onDamModeChange, onDamChange, onNewDamPropChange,
                            onDoSave}) => {
-  const slemStatuses = [
+  
+  // do not allow changing from Affected
+  var slemStatuses = [
     {id: "Affected", value: dogStatusUIMap["Affected"].caption},
     {id: "Carrier", value: dogStatusUIMap["Carrier"].caption},
     {id: "Clear", value: dogStatusUIMap["Clear"].caption}
@@ -58,14 +60,19 @@ const RecordTestResult = ({dogs, dogSLEMTestResult,
                                                   onNewDogPropChange={onNewDogPropChange} />
                                   {dogMode === "search" &&
                                   <HorizontalFormField caption="SLEM Test Result:"
-                                                       content={<Select value={(dogSLEMTestResult !== null ? dogSLEMTestResult : "")}
+                                                       content={originalSLEMStatus === "Affected" ?
+                                                                <p className="control is-expanded">
+                                                                  <input className="input is-static" type="email" value="Affected" readOnly />
+                                                                </p> :
+                                                                <Select value={(dogSLEMTestResult !== null ? dogSLEMTestResult : "")}
                                                                         onChange={(value) => onDogTestResultChange("shakingdogstatus", value !== null ? value.id : null)}
                                                                         options={slemStatuses}
                                                                         labelKey="value"
                                                                         valueKey="id"
                                                                         clearable={false}
                                                                         searchable={false}
-                                                                        className="field is-expanded" />}
+                                                                        className="field is-expanded" />
+                                                               }
                                                        labelClass="is-normal"
                                                        bodyClass="is-normal" />
                                   }
@@ -122,6 +129,11 @@ const RecordTestResult = ({dogs, dogSLEMTestResult,
 const mapStateToProps = (state) => ({
   dogs: state.getIn(["data", "dogs", "list"]),
   dogSLEMTestResult: state.getIn(["data", "testresult", "dog", "selected", "shakingdogstatus"]),
+  originalSLEMStatus: function s() {
+    const dogs = state.getIn(["data", "dogs", "list"])
+    const dog = dogs.find(d => d.get("id") === state.getIn(["data", "testresult", "dog", "selected", "id"]))
+    return _.isNil(dog) ? null : dog.get("shakingdogstatus")
+  }(),
   dogMode: state.getIn(["data", "testresult", "dog", "mode"]),
   selectedDog: state.getIn(["data", "testresult", "dog", "selected", "id"]),
   newDog: state.getIn(["data", "testresult", "dog", "dog"]),
