@@ -66,7 +66,8 @@ const RecordTestResult = ({dogs, dogSLEMTestResult,
                                                                         clearable={false}
                                                                         searchable={false}
                                                                         className="field is-expanded" />}
-                                                       isNarrow={false} />
+                                                       labelClass="is-normal"
+                                                       bodyClass="is-normal" />
                                   }
                                 </React.Fragment>} />
       <CaptionedFolder caption="Sire"
@@ -75,7 +76,8 @@ const RecordTestResult = ({dogs, dogSLEMTestResult,
                                                        content={<label className="checkbox">
                                                                   <input type="checkbox" onChange={(e) => onEditSireChange(e.target.checked)} />
                                                                 </label>}
-                                                       isNarrow={false} />
+                                                       labelClass="is-normal"
+                                                       bodyClass="is-normal" />
                                   {editSire &&
                                   <SearchOrNewDog mode={sireMode}
                                                   dogs={sires}
@@ -94,7 +96,8 @@ const RecordTestResult = ({dogs, dogSLEMTestResult,
                                                        content={<label className="checkbox">
                                                                   <input type="checkbox" onChange={(e) => onEditDamChange(e.target.checked)} />
                                                                 </label>}
-                                                       isNarrow={false} />
+                                                       labelClass="is-normal"
+                                                       bodyClass="is-normal" />
                                   {editDam &&
                                   <SearchOrNewDog mode={damMode}
                                                   dogs={dams}

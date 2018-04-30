@@ -38,7 +38,8 @@ const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDa
                                       className={"is-primary is-rounded" + (isSearching ? " is-loading" : "")}
                                       disabled={!canSearch}
                                       onClick={onDoSearch} />}
-                           isNarrow={false} />
+                           labelClass="is-normal"
+                           bodyClass="is-normal" />
     </React.Fragment>
   )
 }

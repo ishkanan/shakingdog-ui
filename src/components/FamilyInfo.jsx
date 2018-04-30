@@ -20,7 +20,8 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                                                 <DogStatusBadge status={sire.shakingdogstatus}
                                                                                 size="is-6" />
                                                               </p>}
-                                                     isNarrow={false} />
+                                                     labelClass="is-normal"
+                                                     bodyClass="is-normal" />
                                 <HorizontalFormField caption="Dam:"
                                                      content={<p className="control is-expanded dogsearchlink">
                                                                 <DogSearchLink dogId={dam.id}
@@ -28,7 +29,8 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                                                 <DogStatusBadge status={dam.shakingdogstatus}
                                                                                 size="is-6" />
                                                               </p>}
-                                                     isNarrow={false} />
+                                                     labelClass="is-normal"
+                                                     bodyClass="is-normal" />
                                 {_.map(children, (child, index) => (
                                 <HorizontalFormField key={index}
                                                      caption={index === 0 ? "Children:" : ""}
@@ -38,14 +40,16 @@ const FamilyInfo = ({headerCaption, sire, dam, children}) => {
                                                                 <DogStatusBadge status={child.shakingdogstatus}
                                                                                 size="is-6" />
                                                               </p>}
-                                                     isNarrow={false} />
+                                                     labelClass="is-normal"
+                                                     bodyClass="is-normal" />
                                 ))}
                                 {children.length === 0 &&
                                 <HorizontalFormField caption="Children:"
                                                      content={<p className="control is-expanded">
                                                                 <input className="input is-static" type="email" value="No children recorded." readOnly />
                                                               </p>}
-                                                     isNarrow={false} />
+                                                     labelClass="is-normal"
+                                                     bodyClass="is-normal" />
                                 }
                               </div>} />
   )

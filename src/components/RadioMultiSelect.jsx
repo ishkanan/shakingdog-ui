@@ -23,7 +23,8 @@ const RadioMultiSelect = ({radios, selects, selectedRadio, selectedValues, onRad
     <React.Fragment>
       <HorizontalFormField caption=""
                            content={renderedOptions}
-                           isNarrow={true} />
+                           labelClass="is-narrow"
+                           bodyClass="is-narrow" />
       {_.map(visibleSelects, (s, i) => (
       <HorizontalFormField key={i}
                            caption={s.caption}
@@ -33,7 +34,8 @@ const RadioMultiSelect = ({radios, selects, selectedRadio, selectedValues, onRad
                                             labelKey="value"
                                             valueKey="id"
                                             className="field is-expanded" />}
-                           isNarrow={false} />
+                           labelClass="is-normal"
+                           bodyClass="is-normal" />
       ))}
     </React.Fragment>
   )

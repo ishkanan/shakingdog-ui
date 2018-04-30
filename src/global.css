@@ -1,6 +1,10 @@
 
 /* General shit */
 
+.checkbox {
+  padding-top: 8px;
+}
+
 .column + .column {
   border-left: 1px solid lightgray;
 }
@@ -21,6 +25,10 @@ label[class="radio"] + label[class="radio"] {
   margin-bottom: 0px;
 }
 
+.is-flex-dwarf {
+  flex-grow: 0;
+}
+
 .is-height-full {
   height: 100%;
 }
@@ -29,13 +37,13 @@ label[class="radio"] + label[class="radio"] {
   width: 100%;
 }
 
+.field-label.is-normal.is-flex-dwarf {
+  padding-top: 0px;
+}
+
 .justify-center {
   display: flex;
   justify-content: center !important;
-}
-
-.checkbox {
-  padding-top: 8px;
 }
 
 .notification {
@@ -152,6 +160,10 @@ span.dogstatus + span.dogstatus {
 
 .rt-th {
   padding: 0px !important;
+}
+
+.rt-noData {
+  visibility: hidden;
 }
 
 /* View */

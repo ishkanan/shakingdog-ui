@@ -25,7 +25,8 @@ const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, all
                                         Create New
                                       </label>
                                     </React.Fragment>}
-                           isNarrow={false} />
+                           labelClass="is-normal"
+                           bodyClass="is-normal" />
       {mode === "search" &&
       <HorizontalFormField caption="Search"
                            content={<Select value={(!_.isNil(selectedDog) ? selectedDog : "")}
@@ -34,7 +35,8 @@ const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, all
                                             labelKey="value"
                                             valueKey="id"
                                             className="field is-expanded" />}
-                           isNarrow={false} />
+                           labelClass="is-normal"
+                           bodyClass="is-normal" />
       }
       {mode === "new" &&
       <NewDogForm name={newDog.name}

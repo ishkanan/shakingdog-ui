@@ -16,7 +16,8 @@ const NewDogForm = ({name, gender, allowedGenders, slemStatus, allowedSlemStatus
     <React.Fragment>
       <HorizontalFormField caption="Name:"
                            content={<input className="input" type="text" value={name} onChange={(e) => onDogPropChange("name", e.target.value)} />}
-                           isNarrow={false} />
+                           labelClass="is-normal"
+                           bodyClass="is-normal" />
       <HorizontalFormField caption="Gender:"
                            content={<Select value={(gender !== null ? gender : "")}
                                             onChange={(value) => onDogPropChange("gender", value !== null ? value.id : null)}
@@ -26,7 +27,8 @@ const NewDogForm = ({name, gender, allowedGenders, slemStatus, allowedSlemStatus
                                             clearable={false}
                                             searchable={false}
                                             className="field is-expanded" />}
-                           isNarrow={false} />
+                           labelClass="is-normal"
+                           bodyClass="is-normal" />
       <HorizontalFormField caption="SLEM Status:"
                            content={<Select value={(slemStatus !== null ? slemStatus : "")}
                                             onChange={(value) => onDogPropChange("shakingdogstatus", value !== null ? value.id : null)}
@@ -36,7 +38,8 @@ const NewDogForm = ({name, gender, allowedGenders, slemStatus, allowedSlemStatus
                                             clearable={false}
                                             searchable={false}
                                             className="field is-expanded" />}
-                           isNarrow={false} />
+                           labelClass="is-normal"
+                           bodyClass="is-normal" />
     </React.Fragment>
   )
 }
