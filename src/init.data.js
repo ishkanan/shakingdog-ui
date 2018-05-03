@@ -110,7 +110,9 @@ const initialState = {
   ui: {
     adminMode: "newdog",
     canSave: false,
-    error: null,
+    notification: {
+      admin: null
+    },
     isSaving: false,
     search: {
       canSearch: false,

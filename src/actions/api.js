@@ -145,9 +145,8 @@ const saveNewDogBegin = () => ({
   type: SAVE_NEWDOG_BEGIN
 })
 
-const saveNewDogSuccess = (dogId) => ({
-  type: SAVE_NEWDOG_SUCCESS,
-  dogId
+const saveNewDogSuccess = () => ({
+  type: SAVE_NEWDOG_SUCCESS
 })
 
 const saveNewDogFailure = (error, auth) => ({
@@ -163,7 +162,7 @@ export const saveNewDog = (name, gender, shakingdogstatus, cecsstatus) => dispat
     gender,
     shakingdogstatus,
     cecsstatus,
-    data => dispatch(saveNewDogSuccess(data.dogId)),
+    data => dispatch(saveNewDogSuccess()),
     error => dispatch(saveNewDogFailure(error.error, error.auth))
   )
 }

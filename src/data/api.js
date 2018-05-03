@@ -13,7 +13,16 @@ function checkAuthRedirect(data) {
   return data
 }
 
-function checkValidStatus(response) {
+function checkErrorResponse(data) {
+  if (data.error !== undefined) {
+    var error = new Error(data.error.message)
+    error.code = data.error.code
+    throw error
+  }
+  return data
+}
+
+function checkValidHTTPStatus(response) {
   if (response.status != 200) {
     var error = new Error(response.statusText)
     error.response = response
@@ -29,9 +38,10 @@ function genericAsyncFetch(path, success, failure) {
   return fetch(config.apiUrl + path, {
       credentials: "include"  // send site cookies
     })
-    .then(checkValidStatus)
+    .then(checkValidHTTPStatus)
     .then(response => response.json())
     .then(checkAuthRedirect)
+    .then(checkErrorResponse)
     .then(data => success(data))
     .catch(error => {
       failure({
@@ -55,9 +65,10 @@ function genericAsyncPost(path, data, success, failure) {
       body: JSON.stringify(data),
       method: "POST"
     })
-    .then(checkValidStatus)
+    .then(checkValidHTTPStatus)
     .then(response => response.json())
     .then(checkAuthRedirect)
+    .then(checkErrorResponse)
     .then(data => success(data))
     .catch(error => {
       failure({

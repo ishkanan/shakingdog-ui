@@ -14,11 +14,23 @@ export const dogStatusUIMap = {
   "Unknown": {caption: "Unknown", badgeClass: "dogstatus is-unknown"}
 }
 
+// mapping from error codes to UI messages
+export const errorCodeUIMap = {
+  1: "Server error",
+  500: "Dog already exists"
+}
+
 // mapping from DB values to UI caption
 export const genderUIMap = {
   "D": "D",
   "B": "B",
   "U": "Unknown"
+}
+
+// mapping from notification type to CSS class
+export const notificationTypeUIMap = {
+  "success": {notifyClass: "is-success", iconClass: "fa-check-circle"},
+  "failure": {notifyClass: "is-danger", iconClass: "fa-times-circle"}
 }
 
 const dogOK = (name, gender, shakingdogstatus, cecsstatus) => {

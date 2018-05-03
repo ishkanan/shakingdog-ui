@@ -50,6 +50,16 @@ label[class="radio"] + label[class="radio"] {
   margin-bottom: 12px;
 }
 
+.notification.is-danger {
+  background-color: #ff38609e;
+  color: black;
+}
+
+.notification.is-success {
+  background-color: #23d1609e;
+  color: black;
+}
+
 .section {
   padding-top: 1.5rem;
 }
