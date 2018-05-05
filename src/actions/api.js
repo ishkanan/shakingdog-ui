@@ -196,6 +196,7 @@ export const saveNewLitter = (sire, dam, children) => dispatch => {
     children,
     data => {
       dispatch(saveNewLitterSuccess())
+      dispatch(fetchDogs())
       dispatch(fetchRelationships())
     },
     error => dispatch(saveNewLitterFailure(error.error, error.auth))
@@ -225,7 +226,11 @@ export const saveTestResult = (dog, sire, dam) => dispatch => {
     dog,
     sire,
     dam,
-    data => dispatch(saveTestResultSuccess()),
+    data => {
+      dispatch(saveTestResultSuccess())
+      dispatch(fetchDogs())
+      dispatch(fetchRelationships())
+    },
     error => dispatch(saveTestResultFailure(error.error, error.auth))
   )
 }

@@ -8,7 +8,10 @@ import {
   SAVE_NEWDOG_FAILURE,
   SAVE_NEWLITTER_BEGIN,
   SAVE_NEWLITTER_SUCCESS,
-  SAVE_NEWLITTER_FAILURE
+  SAVE_NEWLITTER_FAILURE,
+  SAVE_TESTRESULT_BEGIN,
+  SAVE_TESTRESULT_SUCCESS,
+  SAVE_TESTRESULT_FAILURE
 } from "../actions/api"
 import {
   CHANGE_CAN_SEARCH,
@@ -69,6 +72,7 @@ const ui = (state, action) => {
 
     case SAVE_NEWDOG_BEGIN:
     case SAVE_NEWLITTER_BEGIN:
+    case SAVE_TESTRESULT_BEGIN:
       return (state
         .set("canSave", false)
         .set("isSaving", true)
@@ -77,6 +81,7 @@ const ui = (state, action) => {
 
     case SAVE_NEWDOG_FAILURE:
     case SAVE_NEWLITTER_FAILURE:
+    case SAVE_TESTRESULT_FAILURE:
       return (state
         .set("canSave", true)
         .set("isSaving", false)
@@ -106,6 +111,17 @@ const ui = (state, action) => {
           type: "success",
           code: null,
           message: "Successfully saved new litter!"
+        }))
+      )
+
+    case SAVE_TESTRESULT_SUCCESS:
+      return (state
+        .set("canSave", false)
+        .set("isSaving", false)
+        .setIn(["notification", "admin"], Map({
+          type: "success",
+          code: null,
+          message: "Successfully saved test result!"
         }))
       )
 
