@@ -156,6 +156,7 @@ const saveNewDogFailure = (error, auth) => ({
 })
 
 export const saveNewDog = (name, gender, shakingdogstatus, cecsstatus) => dispatch => {
+  window.scrollTo(0, 0)
   dispatch(saveNewDogBegin())
   return submitNewDog(
     name,
@@ -187,12 +188,16 @@ const saveNewLitterFailure = (error, auth) => ({
 })
 
 export const saveNewLitter = (sire, dam, children) => dispatch => {
+  window.scrollTo(0, 0)
   dispatch(saveNewLitterBegin())
   return submitNewLitter(
     sire,
     dam,
     children,
-    data => dispatch(saveNewLitterSuccess()),
+    data => {
+      dispatch(saveNewLitterSuccess())
+      dispatch(fetchRelationships())
+    },
     error => dispatch(saveNewLitterFailure(error.error, error.auth))
   )
 }
@@ -214,6 +219,7 @@ const saveTestResultFailure = (error, auth) => ({
 })
 
 export const saveTestResult = (dog, sire, dam) => dispatch => {
+  window.scrollTo(0, 0)
   dispatch(saveTestResultBegin())
   return submitTestResult(
     dog,

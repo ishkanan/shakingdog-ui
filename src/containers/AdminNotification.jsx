@@ -20,8 +20,8 @@ const AdminNotification = ({notification, onDismiss}) => {
   // determine what to render and how
   var message = notification.message
   if (notification.type === "failure" ) {
-    message = sprintf("ERROR #%s: %s (%s)",
-      notification.code,
+    message = sprintf("%s: %s (%s)",
+      _.isNil(notification.code) ? "GENERAL ERROR" : "API ERROR #" + notification.code.toString(),
       coalesce(errorCodeUIMap[notification.code], "Unknown server error"),
       coalesce(notification.message, "UNKNOWN")
     )

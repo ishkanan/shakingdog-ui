@@ -5,7 +5,10 @@ import _ from "lodash"
 import {
   SAVE_NEWDOG_BEGIN,
   SAVE_NEWDOG_SUCCESS,
-  SAVE_NEWDOG_FAILURE
+  SAVE_NEWDOG_FAILURE,
+  SAVE_NEWLITTER_BEGIN,
+  SAVE_NEWLITTER_SUCCESS,
+  SAVE_NEWLITTER_FAILURE
 } from "../actions/api"
 import {
   CHANGE_CAN_SEARCH,
@@ -65,15 +68,28 @@ const ui = (state, action) => {
       return state.setIn(["notification", "admin"], null)
 
     case SAVE_NEWDOG_BEGIN:
+    case SAVE_NEWLITTER_BEGIN:
       return (state
         .set("canSave", false)
         .set("isSaving", true)
         .setIn(["notification", "admin"], null)
       )
 
-    case SAVE_NEWDOG_SUCCESS:
+    case SAVE_NEWDOG_FAILURE:
+    case SAVE_NEWLITTER_FAILURE:
       return (state
         .set("canSave", true)
+        .set("isSaving", false)
+        .setIn(["notification", "admin"], Map({
+          type: "failure",
+          code: action.error.code,
+          message: action.error.message
+        }))
+      )
+
+    case SAVE_NEWDOG_SUCCESS:
+      return (state
+        .set("canSave", false)
         .set("isSaving", false)
         .setIn(["notification", "admin"], Map({
           type: "success",
@@ -82,14 +98,14 @@ const ui = (state, action) => {
         }))
       )
 
-    case SAVE_NEWDOG_FAILURE:
+    case SAVE_NEWLITTER_SUCCESS:
       return (state
-        .set("canSave", true)
+        .set("canSave", false)
         .set("isSaving", false)
         .setIn(["notification", "admin"], Map({
-          type: "failure",
-          code: action.error.code,
-          message: action.error.message
+          type: "success",
+          code: null,
+          message: "Successfully saved new litter!"
         }))
       )
 

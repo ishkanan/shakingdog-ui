@@ -29,7 +29,6 @@ const initialState = {
       list: null
     },
     newdog: {
-      lastCreatedId: null,
       dog: {
         id: null,
         gender: "U",

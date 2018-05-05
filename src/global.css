@@ -110,7 +110,13 @@ label[class="radio"] + label[class="radio"] {
 }
 
 .dogstatus.is-unknown {
+  background-color: white;
+  border: none;
+  color: black !important;
+}
 
+.title.dogstatus.is-unknown {
+  border: 1px solid silver;
 }
 
 p.dogsearchlink {
