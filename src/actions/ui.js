@@ -25,6 +25,7 @@ export const changeViewPageNumber = page => ({
   page
 })
 
-export const dismissAdminNotification = () => ({
-  type: DISMISS_ADMIN_NOTIFICATION
+export const dismissAdminNotification = section => ({
+  type: DISMISS_ADMIN_NOTIFICATION,
+  section
 })

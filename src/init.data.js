@@ -70,7 +70,9 @@ const initialState = {
           gender: null,
           name: null,
           shakingdogstatus: null,
-          cecsstatus: "Unknown"
+          cecsstatus: "Unknown",
+          origshakingdogstatus: null,
+          origcecsstatus: "Unknown"
         },
         dog: {
           id: null,
@@ -109,10 +111,12 @@ const initialState = {
   ui: {
     adminMode: "newdog",
     canSave: false,
-    notification: {
-      admin: null
-    },
     isSaving: false,
+    notification: {
+      admin: {
+        save: null
+      }
+    },
     search: {
       canSearch: false,
       mode: "single",

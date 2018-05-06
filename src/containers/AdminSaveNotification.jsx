@@ -11,7 +11,7 @@ import { coalesce, isNilOrEmptyString } from "../util/data"
 import { errorCodeUIMap, notificationTypeUIMap } from "../util/ui"
 
 
-const AdminNotification = ({notification, onDismiss}) => {
+const AdminSaveNotification = ({notification, onDismiss}) => {
   // can have nothing to render
   if (_.isNil(notification)) {
     return null
@@ -40,11 +40,11 @@ const mapStateToProps = (state) => ({
   notification: state.getIn(["ui", "notification", "admin"])
 })
 
-const mapDispatchToProps = ({
-  onDismiss: dismissAdminNotification
+const mapDispatchToProps = (dispatch) => ({
+  onDismiss: () => dispatch(dismissAdminNotification("save"))
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(toJS(AdminNotification))
+)(toJS(AdminSaveNotification))

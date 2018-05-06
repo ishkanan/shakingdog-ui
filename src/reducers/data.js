@@ -118,7 +118,9 @@ const data = (state, action) => {
       return state.mergeIn(["testresult", "dog", "selected"], fromJS({
         id: trDog.get("id"),
         name: trDog.get("name"),
-        gender: trDog.get("gender")
+        gender: trDog.get("gender"),
+        origshakingdogstatus: trDog.get("shakingdogstatus"),
+        origcecsstatus: trDog.get("cecsstatus")
       }))
 
     case CHANGE_TESTRESULT_NEWDOG_PROP:

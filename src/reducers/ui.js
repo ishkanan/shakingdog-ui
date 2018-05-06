@@ -1,5 +1,5 @@
 
-import { Map } from "immutable"
+import { fromJS, Map } from "immutable"
 import _ from "lodash"
 
 import {
@@ -24,20 +24,25 @@ import {
   CHANGE_CAN_SAVE,
   CHANGE_SELECTED_TAB,
   CHANGE_VIEW_PAGENUMBER,
-  DISMISS_ADMIN_NOTIFICATION
+  DISMISS_ADMINSAVE_NOTIFICATION
 } from "../actions/ui"
+import initialState from "../init.data"
 
 
 const ui = (state, action) => {
   switch (action.type) {
 
     case CHANGE_ADMIN_MODE:
-      // refuse changing modes and resetting flags if we are saving
+      // deny changing modes and resetting flags if we are saving
       return (state
         .set("adminMode", state.get("isSaving") ? state.get("adminMode") : action.mode)
         .set("canSave", state.get("isSaving"))
-        .setIn(["notification", "admin"], state.get("isSaving") ? state.getIn(["notification", "admin"]) : null)
-      )
+        .setIn(
+          ["notification", "admin"],
+          state.get("isSaving") ?
+            state.getIn(["notification", "admin"]) :
+            fromJS(initialState.ui.notification.admin)
+      ))
 
     case CHANGE_CAN_SAVE:
       return state.set("canSave", action.value)
@@ -60,7 +65,7 @@ const ui = (state, action) => {
 
     case CHANGE_SELECTED_TAB:
       return (state
-        .setIn(["notification", "admin"], null)
+        .setIn(["notification", "admin"], fromJS(initialState.ui.notification.admin))
         .set("selectedTab", action.tab)
       )
 
@@ -68,7 +73,10 @@ const ui = (state, action) => {
       return state.setIn(["view", "pageNumber"], action.page)
   
     case DISMISS_ADMIN_NOTIFICATION:
-      return state.setIn(["notification", "admin"], null)
+      return state.setIn(
+        ["notification", "admin", action.section],
+        fromJS(initialState.ui.notification.admin[action.section])
+      )
 
     case SAVE_NEWDOG_BEGIN:
     case SAVE_NEWLITTER_BEGIN:
@@ -76,8 +84,10 @@ const ui = (state, action) => {
       return (state
         .set("canSave", false)
         .set("isSaving", true)
-        .setIn(["notification", "admin"], null)
-      )
+        .setIn(
+          ["notification", "admin", "save"],
+          fromJS(initialState.ui.notification.admin.save)
+      ))
 
     case SAVE_NEWDOG_FAILURE:
     case SAVE_NEWLITTER_FAILURE:
@@ -85,7 +95,7 @@ const ui = (state, action) => {
       return (state
         .set("canSave", true)
         .set("isSaving", false)
-        .setIn(["notification", "admin"], Map({
+        .setIn(["notification", "admin", "save"], Map({
           type: "failure",
           code: action.error.code,
           message: action.error.message
@@ -96,7 +106,7 @@ const ui = (state, action) => {
       return (state
         .set("canSave", false)
         .set("isSaving", false)
-        .setIn(["notification", "admin"], Map({
+        .setIn(["notification", "admin", "save"], Map({
           type: "success",
           code: null,
           message: "Successfully saved new dog!"
@@ -107,7 +117,7 @@ const ui = (state, action) => {
       return (state
         .set("canSave", false)
         .set("isSaving", false)
-        .setIn(["notification", "admin"], Map({
+        .setIn(["notification", "admin", "save"], Map({
           type: "success",
           code: null,
           message: "Successfully saved new litter!"
@@ -118,7 +128,7 @@ const ui = (state, action) => {
       return (state
         .set("canSave", false)
         .set("isSaving", false)
-        .setIn(["notification", "admin"], Map({
+        .setIn(["notification", "admin", "save"], Map({
           type: "success",
           code: null,
           message: "Successfully saved test result!"

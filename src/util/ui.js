@@ -30,7 +30,8 @@ export const genderUIMap = {
 // mapping from notification type to CSS class
 export const notificationTypeUIMap = {
   "success": {notifyClass: "is-success", iconClass: "fa-check-circle"},
-  "failure": {notifyClass: "is-danger", iconClass: "fa-times-circle"}
+  "failure": {notifyClass: "is-danger", iconClass: "fa-times-circle"},
+  "warning": {notifyClass: "is-warning", iconClass: "fa-exclamation-circle"}
 }
 
 const dogOK = (name, gender, shakingdogstatus, cecsstatus) => {

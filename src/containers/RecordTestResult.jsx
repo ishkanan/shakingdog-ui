@@ -23,6 +23,7 @@ import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"
 import HorizontalFormField from "../components/HorizontalFormField.jsx"
 import SearchOrNewDog from "../components/SearchOrNewDog.jsx"
+import AdminStatusOverrideNotification from "./AdminStatusOverrideNotification.jsx"
 import { toJS } from "../data/util.jsx"
 import { dogStatusUIMap } from "../util/ui"
 
@@ -47,6 +48,7 @@ const RecordTestResult = ({dogs, dogSLEMTestResult, originalSLEMStatus,
 
   return (
     <React.Fragment>
+      <AdminStatusOverrideNotification />
       <CaptionedFolder caption="Dog"
                        content={<React.Fragment>
                                   <SearchOrNewDog mode={dogMode}

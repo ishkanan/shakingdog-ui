@@ -1,4 +1,5 @@
 
+import _ from "lodash"
 import PropTypes from "prop-types"
 import React from "react"
 
@@ -6,7 +7,9 @@ import React from "react"
 const Notification = ({message, className, iconClass, onDismiss}) => {
   return (
     <div className={"notification " + className}>
+      {!_.isNil(onDismiss) &&
       <button className="delete" onClick={(e) => onDismiss()}></button>
+      }
       <nav className="level">
         <div className="level-left">
           <div className="level-item">
@@ -31,7 +34,7 @@ Notification.propTypes = {
   // FAS icon
   iconClass: PropTypes.string.isRequired,
   // Events
-  onDismiss: PropTypes.func.isRequired
+  onDismiss: PropTypes.func
 }
 
 export default Notification
