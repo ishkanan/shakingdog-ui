@@ -16,9 +16,12 @@ export const dogStatusUIMap = {
 
 // mapping from error codes to UI messages
 export const errorCodeUIMap = {
-  1: "Server error",
+  1: "Dog already exists",
   2: "Both parents required",
-  500: "Dog already exists"
+  400: "Bad request",
+  403: "Forbidden",
+  404: "Not found",
+  500: "Server error"
 }
 
 // mapping from DB values to UI caption
