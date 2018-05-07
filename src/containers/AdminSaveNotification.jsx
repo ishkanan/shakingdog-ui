@@ -37,7 +37,7 @@ const AdminSaveNotification = ({notification, onDismiss}) => {
 }
 
 const mapStateToProps = (state) => ({
-  notification: state.getIn(["ui", "notification", "admin"])
+  notification: state.getIn(["ui", "notification", "admin", "save"])
 })
 
 const mapDispatchToProps = (dispatch) => ({

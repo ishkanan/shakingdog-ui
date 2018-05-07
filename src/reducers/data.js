@@ -1,5 +1,6 @@
 
 import { fromJS, Map } from "immutable"
+import _ from "lodash"
 
 import { CHANGE_NEWDOG_PROP } from "../actions/admin/newdog"
 import {
@@ -116,11 +117,11 @@ const data = (state, action) => {
       // reuseable code, so populate more details of selected dog
       var trDog = state.getIn(["dogs", "list"]).find(d => d.get("id") === action.dogId)
       return state.mergeIn(["testresult", "dog", "selected"], fromJS({
-        id: trDog.get("id"),
-        name: trDog.get("name"),
-        gender: trDog.get("gender"),
-        origshakingdogstatus: trDog.get("shakingdogstatus"),
-        origcecsstatus: trDog.get("cecsstatus")
+        id: _.isNil(trDog) ? null : trDog.get("id"),
+        name: _.isNil(trDog) ? null : trDog.get("name"),
+        gender: _.isNil(trDog) ? null : trDog.get("gender"),
+        origshakingdogstatus: _.isNil(trDog) ? null : trDog.get("shakingdogstatus"),
+        origcecsstatus: _.isNil(trDog) ? null : trDog.get("cecsstatus")
       }))
 
     case CHANGE_TESTRESULT_NEWDOG_PROP:

@@ -1,4 +1,5 @@
 
+import { List } from "immutable"
 import _ from "lodash"
 import React from "react"
 import { connect } from "react-redux"
@@ -25,6 +26,7 @@ import HorizontalFormField from "../components/HorizontalFormField.jsx"
 import SearchOrNewDog from "../components/SearchOrNewDog.jsx"
 import AdminStatusOverrideNotification from "./AdminStatusOverrideNotification.jsx"
 import { toJS } from "../data/util.jsx"
+import { coalesce } from "../util/data"
 import { dogStatusUIMap } from "../util/ui"
 
 
@@ -83,7 +85,7 @@ const RecordTestResult = ({dogs, dogSLEMTestResult, originalSLEMStatus,
                        content={<React.Fragment>
                                   <HorizontalFormField caption="Update Sire?"
                                                        content={<label className="checkbox">
-                                                                  <input type="checkbox" onChange={(e) => onEditSireChange(e.target.checked)} />
+                                                                  <input type="checkbox" checked={editSire} onChange={(e) => onEditSireChange(e.target.checked)} />
                                                                 </label>}
                                                        labelClass="is-normal"
                                                        bodyClass="is-normal" />
@@ -103,7 +105,7 @@ const RecordTestResult = ({dogs, dogSLEMTestResult, originalSLEMStatus,
                        content={<React.Fragment>
                                   <HorizontalFormField caption="Update Dam?"
                                                        content={<label className="checkbox">
-                                                                  <input type="checkbox" onChange={(e) => onEditDamChange(e.target.checked)} />
+                                                                  <input type="checkbox" checked={editDam} onChange={(e) => onEditDamChange(e.target.checked)} />
                                                                 </label>}
                                                        labelClass="is-normal"
                                                        bodyClass="is-normal" />
@@ -129,24 +131,20 @@ const RecordTestResult = ({dogs, dogSLEMTestResult, originalSLEMStatus,
 }
 
 const mapStateToProps = (state) => ({
-  dogs: state.getIn(["data", "dogs", "list"]),
+  dogs: coalesce(state.getIn(["data", "dogs", "list"]), List()),
   dogSLEMTestResult: state.getIn(["data", "testresult", "dog", "selected", "shakingdogstatus"]),
-  originalSLEMStatus: function s() {
-    const dogs = state.getIn(["data", "dogs", "list"])
-    const dog = dogs.find(d => d.get("id") === state.getIn(["data", "testresult", "dog", "selected", "id"]))
-    return _.isNil(dog) ? null : dog.get("shakingdogstatus")
-  }(),
+  originalSLEMStatus: state.getIn(["data", "testresult", "dog", "selected", "origshakingdogstatus"]),
   dogMode: state.getIn(["data", "testresult", "dog", "mode"]),
   selectedDog: state.getIn(["data", "testresult", "dog", "selected", "id"]),
   newDog: state.getIn(["data", "testresult", "dog", "dog"]),
   editSire: state.getIn(["data", "testresult", "sire", "edit"]),
   sireMode: state.getIn(["data", "testresult", "sire", "mode"]),
-  sires: state.getIn(["data", "dogs", "list"]).filter(d => d.get("gender") === "D"),
+  sires: coalesce(state.getIn(["data", "dogs", "list"]), List()).filter(d => d.get("gender") === "D"),
   selectedSire: state.getIn(["data", "testresult", "sire", "selected"]),
   newSire: state.getIn(["data", "testresult", "sire", "dog"]),
   editDam: state.getIn(["data", "testresult", "dam", "edit"]),
   damMode: state.getIn(["data", "testresult", "dam", "mode"]),
-  dams: state.getIn(["data", "dogs", "list"]).filter(d => d.get("gender") === "B"),
+  dams: coalesce(state.getIn(["data", "dogs", "list"]), List()).filter(d => d.get("gender") === "B"),
   selectedDam: state.getIn(["data", "testresult", "dam", "selected"]),
   newDam: state.getIn(["data", "testresult", "dam", "dog"]),
   canSave: state.getIn(["ui", "canSave"]),

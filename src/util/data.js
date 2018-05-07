@@ -13,13 +13,20 @@ export const uuidv4 = () => {
   });
 }
 
-// (admin) returns the selected dog entry OR the new dog entry
+// returns the selected dog entry OR the new dog entry
+// used by "Add New Dog" and "Add New Litter" admin functions
 export const whichDog = (dogs, stateSection) => {
-  var selectedId = stateSection.getIn(["selected", "id"])
-  selectedId = _.isNil(selectedId) ? stateSection.get("selected") : selectedId
+  var selectedId = stateSection.get("selected")
 
-  const ret = stateSection.get("mode") === "search" ?
+  return stateSection.get("mode") === "search" ?
     dogs.find(d => d.get("id") === selectedId) :
     stateSection.get("dog")
-  return ret
+}
+
+// returns the (modified) selected dog entry OR the new dog entry
+// used by "Record Test Result" admin function
+export const whichTestResultDog = (stateSection) => {
+  return stateSection.get("mode") === "search" ?
+    stateSection.get("selected") :
+    stateSection.get("dog")
 }

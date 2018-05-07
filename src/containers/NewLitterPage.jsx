@@ -1,4 +1,5 @@
 
+import { List } from "immutable"
 import _ from "lodash"
 import React from "react"
 import { connect } from "react-redux"
@@ -22,6 +23,7 @@ import CaptionedFolder from "../components/CaptionedFolder.jsx"
 import MultiCaptionedFolder from "../components/MultiCaptionedFolder.jsx"
 import SearchOrNewDog from "../components/SearchOrNewDog.jsx"
 import { toJS } from "../data/util.jsx"
+import { coalesce } from "../util/data"
 
 
 const NewLitterPage = ({dogs,
@@ -83,11 +85,11 @@ const NewLitterPage = ({dogs,
 const mapStateToProps = (state) => ({
   dogs: state.getIn(["data", "dogs", "list"]),
   sireMode: state.getIn(["data", "newlitter", "sire", "mode"]),
-  sires: state.getIn(["data", "dogs", "list"]).filter(d => d.get("gender") === "D"),
+  sires: coalesce(state.getIn(["data", "dogs", "list"]), List()).filter(d => d.get("gender") === "D"),
   selectedSire: state.getIn(["data", "newlitter", "sire", "selected"]),
   newSire: state.getIn(["data", "newlitter", "sire", "dog"]),
   damMode: state.getIn(["data", "newlitter", "dam", "mode"]),
-  dams: state.getIn(["data", "dogs", "list"]).filter(d => d.get("gender") === "B"),
+  dams: coalesce(state.getIn(["data", "dogs", "list"]), List()).filter(d => d.get("gender") === "B"),
   selectedDam: state.getIn(["data", "newlitter", "dam", "selected"]),
   newDam: state.getIn(["data", "newlitter", "dam", "dog"]),
   children: state.getIn(["data", "newlitter", "children"]),

@@ -24,7 +24,7 @@ import {
   CHANGE_CAN_SAVE,
   CHANGE_SELECTED_TAB,
   CHANGE_VIEW_PAGENUMBER,
-  DISMISS_ADMINSAVE_NOTIFICATION
+  DISMISS_ADMIN_NOTIFICATION
 } from "../actions/ui"
 import initialState from "../init.data"
 

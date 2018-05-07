@@ -3,7 +3,7 @@ import _ from "lodash"
 
 import { saveTestResult } from "../api"
 import { changeCanSave } from "../ui"
-import { whichDog } from "../../util/data"
+import { whichDog, whichTestResultDog } from "../../util/data"
 import { canSaveTestResult } from "../../util/ui"
 
 
@@ -34,7 +34,7 @@ const updateCanSave = (dispatch, state) => {
   dispatch(changeCanSave(
     canSaveTestResult(
       dog.get("mode") === "search" ? dog.getIn(["selected", "shakingdogstatus"]) : dog.getIn(["dog", "shakingdogstatus"]),
-      whichDog(dogs, dog),
+      whichTestResultDog(dog),
       sire.get("edit"),
       (sire.get("edit") ? whichDog(dogs, sire) : null),
       dam.get("edit"),
@@ -178,7 +178,7 @@ export const doSaveTestResult = () => {
 
     if (canSave) {
       dispatch(saveTestResult(
-        whichDog(dogs, testResult.get("dog")).toJS(),
+        whichTestResultDog(testResult.get("dog")).toJS(),
         (sire.get("edit") ? whichDog(dogs, sire).toJS() : null),
         (dam.get("edit") ? whichDog(dogs, dam).toJS() : null)
       ))

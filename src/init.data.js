@@ -70,9 +70,9 @@ const initialState = {
           gender: null,
           name: null,
           shakingdogstatus: null,
-          cecsstatus: "Unknown",
+          cecsstatus: "Unknown", // change to null if/when we take on CECS
           origshakingdogstatus: null,
-          origcecsstatus: "Unknown"
+          origcecsstatus: null
         },
         dog: {
           id: null,

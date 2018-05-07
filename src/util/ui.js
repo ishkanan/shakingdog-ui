@@ -17,6 +17,7 @@ export const dogStatusUIMap = {
 // mapping from error codes to UI messages
 export const errorCodeUIMap = {
   1: "Server error",
+  2: "Both parents required",
   500: "Dog already exists"
 }
 
