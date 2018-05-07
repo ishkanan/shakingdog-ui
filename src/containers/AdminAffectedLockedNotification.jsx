@@ -8,16 +8,16 @@ import Notification from "../components/Notification.jsx"
 import { notificationTypeUIMap } from "../util/ui"
 
 
-const AdminStatusOverrideNotification = ({isOverriding, status}) => {
+const AdminAffectedLockedNotification = ({isAffected}) => {
   // can have nothing to render
-  if (!isOverriding) {
+  if (!isAffected) {
     return null
   }
 
   const ui = notificationTypeUIMap["warning"]
 
   return (
-    <Notification message={"WARNING: Overriding an inferred status ("+status+")!"}
+    <Notification message="WARNING: Cannot override 'Affected' status!"
                   className={ui.notifyClass}
                   iconClass={ui.iconClass}
                   onDismiss={null} />
@@ -25,13 +25,9 @@ const AdminStatusOverrideNotification = ({isOverriding, status}) => {
 }
 
 const mapStateToProps = (state) => ({
-  isOverriding: _.includes(
-    ["CarrierByProgeny", "ClearByParentage"],
-    state.getIn(["data", "testresult", "dog", "selected", "origshakingdogstatus"])
-  ),
-  status: state.getIn(["data", "testresult", "dog", "selected", "origshakingdogstatus"])
+  isAffected: state.getIn(["data", "testresult", "dog", "selected", "origshakingdogstatus"]) === "Affected"
 })
 
 export default connect(
   mapStateToProps
-)(toJS(AdminStatusOverrideNotification))
+)(toJS(AdminAffectedLockedNotification))
