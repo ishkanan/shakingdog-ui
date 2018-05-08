@@ -1,5 +1,5 @@
 
 export const config = {
-  apiUrl: "https://ubuntudev:3000",
+  apiUrl: "/shakingdog",
   env: "development"
 }

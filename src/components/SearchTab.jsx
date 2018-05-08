@@ -2,6 +2,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 
+import FetchNotification from "../containers/FetchNotification.jsx"
 import SearchControls from "../containers/SearchControls.jsx"
 import SearchResults from "../containers/SearchResults.jsx"
 
@@ -13,6 +14,7 @@ const SearchTab = () => {
         <SearchControls />
       </div>
       <div className="column">
+        <FetchNotification />
         <SearchResults />
       </div>
     </div>

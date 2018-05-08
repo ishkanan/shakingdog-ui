@@ -115,7 +115,8 @@ const initialState = {
     notification: {
       admin: {
         save: null
-      }
+      },
+      fetch: null
     },
     search: {
       canSearch: false,

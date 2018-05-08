@@ -3,6 +3,14 @@ import { fromJS, Map } from "immutable"
 import _ from "lodash"
 
 import {
+  FETCH_DOG_BEGIN,
+  FETCH_DOG_FAILURE,
+  FETCH_DOGS_BEGIN,
+  FETCH_DOGS_FAILURE,
+  FETCH_FAMILY_BEGIN,
+  FETCH_FAMILY_FAILURE,
+  FETCH_RELATIONSHIPS_BEGIN,
+  FETCH_RELATIONSHIPS_FAILURE,
   SAVE_NEWDOG_BEGIN,
   SAVE_NEWDOG_SUCCESS,
   SAVE_NEWDOG_FAILURE,
@@ -24,7 +32,8 @@ import {
   CHANGE_CAN_SAVE,
   CHANGE_SELECTED_TAB,
   CHANGE_VIEW_PAGENUMBER,
-  DISMISS_ADMIN_NOTIFICATION
+  DISMISS_ADMIN_NOTIFICATION,
+  DISMISS_FETCH_NOTIFICATION
 } from "../actions/ui"
 import initialState from "../init.data"
 
@@ -77,6 +86,25 @@ const ui = (state, action) => {
         ["notification", "admin", action.section],
         fromJS(initialState.ui.notification.admin[action.section])
       )
+
+    case DISMISS_FETCH_NOTIFICATION:
+      return state.setIn(["notification", "fetch"], null)
+
+    case FETCH_DOG_BEGIN:
+    case FETCH_DOGS_BEGIN:
+    case FETCH_FAMILY_BEGIN:
+    case FETCH_RELATIONSHIPS_BEGIN:
+      return state.setIn(["notification", "fetch"], null)
+
+    case FETCH_DOG_FAILURE:
+    case FETCH_DOGS_FAILURE:
+    case FETCH_FAMILY_FAILURE:
+    case FETCH_RELATIONSHIPS_FAILURE:
+      return state.setIn(["notification", "fetch"], Map({
+        type: "failure",
+        code: action.error.code,
+        message: action.error.message
+      }))
 
     case SAVE_NEWDOG_BEGIN:
     case SAVE_NEWLITTER_BEGIN:
