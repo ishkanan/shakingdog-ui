@@ -30,7 +30,7 @@ import {
 import {
   CHANGE_ADMIN_MODE,
   CHANGE_CAN_SAVE,
-  CHANGE_SELECTED_TAB,
+  CHANGE_SELECTED_TAB_SUCCESS,
   CHANGE_VIEW_PAGENUMBER,
   DISMISS_ADMIN_NOTIFICATION,
   DISMISS_FETCH_NOTIFICATION
@@ -72,7 +72,7 @@ const ui = (state, action) => {
     case CHANGE_SELECTED_SIRE:
       return state.setIn(["search", "selectedSire"], action.sireId)
 
-    case CHANGE_SELECTED_TAB:
+    case CHANGE_SELECTED_TAB_SUCCESS:
       return (state
         .setIn(["notification", "admin"], fromJS(initialState.ui.notification.admin))
         .set("selectedTab", action.tab)

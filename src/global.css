@@ -9,8 +9,14 @@
   border-left: 1px solid lightgray;
 }
 
-.hero-body.is-narrow {
-  padding: 1.5rem;
+.footer {
+  padding-bottom: 48px;
+  padding-top: 48px;
+}
+
+.hero-body {
+  padding-bottom: 36px;
+  padding-top: 36px;
 }
 
 input[type="radio"] {

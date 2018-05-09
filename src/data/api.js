@@ -83,6 +83,10 @@ function genericAsyncPost(path, data, success, failure) {
     })
 }
 
+export function doAuthCheck(success, failure) {
+  return genericAsyncFetch("/auth", success, failure)
+}
+
 export function getDogs(success, failure) {
   return genericAsyncFetch("/api/dogs", success, failure)
 }
