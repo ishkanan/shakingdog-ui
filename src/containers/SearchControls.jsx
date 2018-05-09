@@ -20,9 +20,9 @@ const SearchControls = ({dogs, sires, dams, searchMode, selectedSire, selectedDa
   ]
 
   const selects = [
-    {radioId: "single", id: "sire", caption: "Dog", data: _.map(dogs, d => ({id: d.id, value: d.name}))},
-    {radioId: "couple", id: "sire", caption: "Sire", data: _.map(sires, d => ({id: d.id, value: d.name}))},
-    {radioId: "couple", id: "dam", caption: "Dam", data: _.map(dams, d => ({id: d.id, value: d.name}))}
+    {radioId: "single", id: "sire", caption: "Dog:", data: _.map(dogs, d => ({id: d.id, value: d.name}))},
+    {radioId: "couple", id: "sire", caption: "Sire:", data: _.map(sires, d => ({id: d.id, value: d.name}))},
+    {radioId: "couple", id: "dam", caption: "Dam:", data: _.map(dams, d => ({id: d.id, value: d.name}))}
   ]
 
   return (

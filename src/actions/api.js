@@ -5,6 +5,7 @@ import {
   getFamily,
   getRelationships,
   submitNewDog,
+  submitNewGender,
   submitNewLitter,
   submitTestResult
 } from "../data/api"
@@ -28,6 +29,9 @@ export const SAVE_NEWDOG_FAILURE = "SAVE_NEWDOG_FAILURE"
 export const SAVE_NEWLITTER_BEGIN = "SAVE_NEWLITTER_BEGIN"
 export const SAVE_NEWLITTER_SUCCESS = "SAVE_NEWLITTER_SUCCESS"
 export const SAVE_NEWLITTER_FAILURE = "SAVE_NEWLITTER_FAILURE"
+export const SAVE_SETGENDER_BEGIN = "SAVE_SETGENDER_BEGIN"
+export const SAVE_SETGENDER_SUCCESS = "SAVE_SETGENDER_SUCCESS"
+export const SAVE_SETGENDER_FAILURE = "SAVE_SETGENDER_FAILURE"
 export const SAVE_TESTRESULT_BEGIN = "SAVE_TESTRESULT_BEGIN"
 export const SAVE_TESTRESULT_SUCCESS = "SAVE_TESTRESULT_SUCCESS"
 export const SAVE_TESTRESULT_FAILURE = "SAVE_TESTRESULT_FAILURE"
@@ -168,6 +172,36 @@ export const saveNewDog = (name, gender, shakingdogstatus, cecsstatus) => dispat
       dispatch(fetchDogs())
     },
     error => dispatch(saveNewDogFailure(error.error, error.auth))
+  )
+}
+
+// Set gender
+
+const saveSetGenderBegin = () => ({
+  type: SAVE_SETGENDER_BEGIN
+})
+
+const saveSetGenderSuccess = () => ({
+  type: SAVE_SETGENDER_SUCCESS
+})
+
+const saveSetGenderFailure = (error, auth) => ({
+  type: SAVE_SETGENDER_FAILURE,
+  error,
+  auth
+})
+
+export const saveSetGender = (dogId, gender) => dispatch => {
+  window.scrollTo(0, 0)
+  dispatch(saveSetGenderBegin())
+  return submitNewGender(
+    dogId,
+    gender,
+    data => {
+      dispatch(saveSetGenderSuccess())
+      dispatch(fetchDogs())
+    },
+    error => dispatch(saveSetGenderFailure(error.error, error.auth))
   )
 }
 

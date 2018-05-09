@@ -18,6 +18,7 @@ export const dogStatusUIMap = {
 export const errorCodeUIMap = {
   1: "Dog already exists",
   2: "Both parents required",
+  3: "Dog is already a parent",
   400: "Bad request",
   403: "Forbidden",
   404: "Not found",
@@ -60,6 +61,10 @@ export const canSaveNewLitter = (sire, dam, children) => {
       children.size > 0
     )
   )
+}
+
+export const canSaveSetGender = (dogId, gender) => {
+  return !_.isNil(dogId) && !isNilOrEmptyString(gender)
 }
 
 export const canSaveTestResult = (result, dog, editSire, sire, editDam, dam) => {

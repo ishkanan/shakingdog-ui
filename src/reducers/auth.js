@@ -4,6 +4,7 @@ import { Map } from "immutable"
 import {
   SAVE_NEWDOG_FAILURE,
   SAVE_NEWLITTER_FAILURE,
+  SAVE_SETGENDER_FAILURE,
   SAVE_TESTRESULT_FAILURE
 } from "../actions/api"
 import { CHANGE_SELECTED_TAB_FAILURE } from "../actions/ui"
@@ -14,6 +15,7 @@ const auth = (state, action) => {
     case CHANGE_SELECTED_TAB_FAILURE:
     case SAVE_NEWDOG_FAILURE:
     case SAVE_NEWLITTER_FAILURE:
+    case SAVE_SETGENDER_FAILURE:
     case SAVE_TESTRESULT_FAILURE:
       return state.set("redirect", Map({
         initiate: action.auth.redirect.initiate,

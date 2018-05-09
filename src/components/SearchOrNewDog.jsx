@@ -28,7 +28,7 @@ const SearchOrNewDog = ({mode, dogs, selectedDog, newDog, allowedNewGenders, all
                            labelClass="is-normal"
                            bodyClass="is-normal" />
       {mode === "search" &&
-      <HorizontalFormField caption="Search"
+      <HorizontalFormField caption="Search:"
                            content={<Select value={(!_.isNil(selectedDog) ? selectedDog : "")}
                                             onChange={(value) => onDogChange(value !== null ? value.id : null)}
                                             options={_.map(dogs, d => ({id: d.id, value: d.name}))}

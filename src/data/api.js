@@ -56,14 +56,14 @@ function genericAsyncFetch(path, success, failure) {
     })
 }
 
-function genericAsyncPost(path, data, success, failure) {
+function genericAsyncSubmit(method, path, data, success, failure) {
   // initiates an asynchronous POST call to the specified path
   // and fires either a success or failure callback
 
   return fetch(config.apiUrl + path, {
       credentials: "include",  // send site cookies
       body: JSON.stringify(data),
-      method: "POST"
+      method: method
     })
     .then(checkValidHTTPStatus)
     .then(response => response.json())
@@ -112,7 +112,8 @@ export function getRelationships(success, failure) {
 }
 
 export function submitNewDog(name, gender, shakingDogStatus, cecsStatus, success, failure) {
-  return genericAsyncPost(
+  return genericAsyncSubmit(
+    "POST",
     "/api/admin/dog",
     {
       name: name,
@@ -125,8 +126,22 @@ export function submitNewDog(name, gender, shakingDogStatus, cecsStatus, success
   )
 }
 
+export function submitNewGender(dogId, gender, success, failure) {
+  return genericAsyncSubmit(
+    "PUT",
+    "/api/admin/dog",
+    {
+      dogId: dogId,
+      gender: gender
+    },
+    success,
+    failure
+  )
+}
+
 export function submitNewLitter(sire, dam, children, success, failure) {
-  return genericAsyncPost(
+  return genericAsyncSubmit(
+    "POST",
     "/api/admin/litter",
     {
       sire: sire,
@@ -139,7 +154,8 @@ export function submitNewLitter(sire, dam, children, success, failure) {
 }
 
 export function submitTestResult(dog, sire, dam, success, failure) {
-  return genericAsyncPost(
+  return genericAsyncSubmit(
+    "POST",
     "/api/admin/testresult",
     {
       dog: dog,

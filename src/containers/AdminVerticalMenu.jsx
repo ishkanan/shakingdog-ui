@@ -12,7 +12,8 @@ const mapStateToProps = (state) => ({
   items: [
     {id: "newdog", value: "Add New Dog"},
     {id: "newlitter", value: "Add New Litter"},
-    {id: "testresult", value: "Record Test Result"}
+    {id: "testresult", value: "Record Test Result"},
+    {id: "setgender", value: "Update Gender"}
   ],
   selectedItem: state.getIn(["ui", "adminMode"])
 })

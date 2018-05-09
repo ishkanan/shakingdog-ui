@@ -62,6 +62,10 @@ const initialState = {
       },
       children: []
     },
+    setgender: {
+      selected: null,
+      gender: null
+    },
     testresult: {
       dog: {
         mode: "search",
