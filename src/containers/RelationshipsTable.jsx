@@ -13,6 +13,15 @@ import { dogStatusUIMap } from "../util/ui"
 const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFetching, onPageChange}) => {
   const columns = [
     {
+      Header: <div className="view-header">Child</div>,
+      accessor: "childname",
+      Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.childshakingdogstatus].badgeClass}>
+                     <DogSearchLink dogId={row.original.childid}
+                                    dogName={row.value}
+                                    additionalClasses={dogStatusUIMap[row.original.childshakingdogstatus].badgeClass} />
+                   </div>
+    },
+    {
       Header: <div className="view-header">Sire</div>,
       accessor: "sirename",
       Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.sireshakingdogstatus].badgeClass}>
@@ -28,15 +37,6 @@ const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFe
                      <DogSearchLink dogId={row.original.damid}
                                     dogName={row.value}
                                     additionalClasses={dogStatusUIMap[row.original.damshakingdogstatus].badgeClass} />
-                   </div>
-    },
-    {
-      Header: <div className="view-header">Child</div>,
-      accessor: "childname",
-      Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.childshakingdogstatus].badgeClass}>
-                     <DogSearchLink dogId={row.original.childid}
-                                    dogName={row.value}
-                                    additionalClasses={dogStatusUIMap[row.original.childshakingdogstatus].badgeClass} />
                    </div>
     }
   ]
