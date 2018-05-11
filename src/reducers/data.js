@@ -35,6 +35,7 @@ import {
   CHANGE_TESTRESULT_NEWDAM_PROP
 } from "../actions/admin/testresult"
 import {
+  FETCH_AUDITLOG_BEGIN, FETCH_AUDITLOG_SUCCESS, FETCH_AUDITLOG_FAILURE,
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
   FETCH_DOG_BEGIN, FETCH_DOG_SUCCESS, FETCH_DOG_FAILURE,
   FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE,
@@ -162,6 +163,23 @@ const data = (state, action) => {
 
     case CHANGE_TESTRESULT_NEWDAM_PROP:
       return state.setIn(["testresult", "dam", "dog", action.prop], action.value)
+
+    case FETCH_AUDITLOG_BEGIN:
+      return state.set("auditLog", Map({
+        isFetching: true,
+        systemEntries: null,
+        userEntries: null
+      }))
+    
+    case FETCH_AUDITLOG_SUCCESS:
+      return state.set("auditLog", Map({
+        isFetching: false,
+        systemEntries: fromJS(action.entries.system),
+        userEntries: fromJS(action.entries.user)
+      }))
+    
+    case FETCH_AUDITLOG_FAILURE:
+      return state.setIn(["auditLog", "isFetching"], false)
 
     case FETCH_DOGS_BEGIN:
       return state.set("dogs", Map({

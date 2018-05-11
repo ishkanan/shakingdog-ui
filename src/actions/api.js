@@ -1,5 +1,6 @@
 
 import {
+  getAuditLog,
   getDogs,
   getDog,
   getFamily,
@@ -11,6 +12,9 @@ import {
 } from "../data/api"
 
 
+export const FETCH_AUDITLOG_BEGIN = "FETCH_AUDITLOG_BEGIN"
+export const FETCH_AUDITLOG_SUCCESS = "FETCH_AUDITLOG_SUCCESS"
+export const FETCH_AUDITLOG_FAILURE = "FETCH_AUDITLOG_FAILURE"
 export const FETCH_DOGS_BEGIN = "FETCH_DOGS_BEGIN"
 export const FETCH_DOGS_SUCCESS = "FETCH_DOGS_SUCCESS"
 export const FETCH_DOGS_FAILURE = "FETCH_DOGS_FAILURE"
@@ -35,6 +39,31 @@ export const SAVE_SETGENDER_FAILURE = "SAVE_SETGENDER_FAILURE"
 export const SAVE_TESTRESULT_BEGIN = "SAVE_TESTRESULT_BEGIN"
 export const SAVE_TESTRESULT_SUCCESS = "SAVE_TESTRESULT_SUCCESS"
 export const SAVE_TESTRESULT_FAILURE = "SAVE_TESTRESULT_FAILURE"
+
+// Fetch audit log
+
+const fetchAuditLogBegin = () => ({
+  type: FETCH_AUDITLOG_BEGIN
+})
+
+const fetchAuditLogSuccess = entries => ({
+  type: FETCH_AUDITLOG_SUCCESS,
+  entries
+})
+
+const fetchAuditLogFailure = (error, auth) => ({
+  type: FETCH_AUDITLOG_FAILURE,
+  error,
+  auth
+})
+
+export const fetchAuditLog = () => dispatch => {
+  dispatch(fetchAuditLogBegin())
+  return getAuditLog(
+    data => dispatch(fetchAuditLogSuccess(data)),
+    error => dispatch(fetchAuditLogFailure(error.error, error.auth))
+  )
+}
 
 // Fetch all dogs
 
@@ -170,6 +199,7 @@ export const saveNewDog = (name, gender, shakingdogstatus, cecsstatus) => dispat
     data => {
       dispatch(saveNewDogSuccess())
       dispatch(fetchDogs())
+      dispatch(fetchAuditLog())
     },
     error => dispatch(saveNewDogFailure(error.error, error.auth))
   )
@@ -200,6 +230,7 @@ export const saveSetGender = (dogId, gender) => dispatch => {
     data => {
       dispatch(saveSetGenderSuccess())
       dispatch(fetchDogs())
+      dispatch(fetchAuditLog())
     },
     error => dispatch(saveSetGenderFailure(error.error, error.auth))
   )
@@ -232,6 +263,7 @@ export const saveNewLitter = (sire, dam, children) => dispatch => {
       dispatch(saveNewLitterSuccess())
       dispatch(fetchDogs())
       dispatch(fetchRelationships())
+      dispatch(fetchAuditLog())
     },
     error => dispatch(saveNewLitterFailure(error.error, error.auth))
   )
@@ -264,6 +296,7 @@ export const saveTestResult = (dog, sire, dam) => dispatch => {
       dispatch(saveTestResultSuccess())
       dispatch(fetchDogs())
       dispatch(fetchRelationships())
+      dispatch(fetchAuditLog())
     },
     error => dispatch(saveTestResultFailure(error.error, error.auth))
   )

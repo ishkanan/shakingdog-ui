@@ -8,6 +8,11 @@ const initialState = {
     }
   },
   data: {
+    auditLog: {
+      isFetching: false,
+      systemEntries: null,
+      userEntries: null
+    },
     dogs: {
       isFetching: false,
       list: null
@@ -114,6 +119,10 @@ const initialState = {
   },
   ui: {
     adminMode: "newdog",
+    auditLog: {
+      systemPageNumber: 1,
+      userPageNumber: 1
+    },
     canSave: false,
     isSaving: false,
     notification: {

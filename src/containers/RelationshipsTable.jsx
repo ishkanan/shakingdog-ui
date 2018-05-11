@@ -7,13 +7,14 @@ import ReactTable from "react-table";
 import { changeViewPageNumber } from "../actions/ui"
 import DogSearchLink from "./DogSearchLink.jsx"
 import { toJS } from "../data/util.jsx"
+import { sliceOfPie } from "../util/data"
 import { dogStatusUIMap } from "../util/ui"
 
 
 const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFetching, onPageChange}) => {
   const columns = [
     {
-      Header: <div className="view-header">Child</div>,
+      Header: <div className="dark-header">Child</div>,
       accessor: "childname",
       Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.childshakingdogstatus].badgeClass}>
                      <DogSearchLink dogId={row.original.childid}
@@ -22,7 +23,7 @@ const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFe
                    </div>
     },
     {
-      Header: <div className="view-header">Sire</div>,
+      Header: <div className="dark-header">Sire</div>,
       accessor: "sirename",
       Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.sireshakingdogstatus].badgeClass}>
                      <DogSearchLink dogId={row.original.sireid}
@@ -31,7 +32,7 @@ const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFe
                    </div>
     },
     {
-      Header: <div className="view-header">Dam</div>,
+      Header: <div className="dark-header">Dam</div>,
       accessor: "damname",
       Cell: row => <div className={"is-height-full is-width-full no-radius " + dogStatusUIMap[row.original.damshakingdogstatus].badgeClass}>
                      <DogSearchLink dogId={row.original.damid}
@@ -76,20 +77,14 @@ const RelationshipsTable = ({relationships, totalRelationships, pageNumber, isFe
 }
 
 const mapStateToProps = (state) => ({
-  relationships: function r() {
-    if (state.getIn(["data", "relationships", "list"]) === null) {
-      return null
-    }
-    const rships = state.getIn(["data", "relationships", "list"])
-    const page = state.getIn(["ui", "view", "pageNumber"])
-    const baseIndex = (page - 1) * 50
-    return rships.slice(baseIndex, Math.min(baseIndex + 50, rships.size))
-  }(),
+  relationships: sliceOfPie(
+    state.getIn(["data", "relationships", "list"]),
+    state.getIn(["ui", "view", "pageNumber"]),
+    50
+  ),
   totalRelationships: function r() {
-    if (state.getIn(["data", "relationships", "list"]) === null) {
-      return 0
-    }
-    return state.getIn(["data", "relationships", "list"]).size
+    const items = state.getIn(["data", "relationships", "list"])
+    return _.isNil(items) ? 0 : items.size
   }(),
   pageNumber: state.getIn(["ui", "view", "pageNumber"]),
   isFetching: state.getIn(["data", "relationships", "isFetching"])

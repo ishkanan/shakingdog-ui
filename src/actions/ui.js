@@ -3,6 +3,8 @@ import { doAuthCheck } from "../data/api"
 
 
 export const CHANGE_ADMIN_MODE = "CHANGE_ADMIN_MODE"
+export const CHANGE_AUDITLOG_SYSTEM_PAGENUMBER = "CHANGE_AUDITLOG_SYSTEM_PAGENUMBER"
+export const CHANGE_AUDITLOG_USER_PAGENUMBER = "CHANGE_AUDITLOG_USER_PAGENUMBER"
 export const CHANGE_CAN_SAVE = "CHANGE_CAN_SAVE"
 export const CHANGE_SELECTED_TAB_BEGIN = "CHANGE_SELECTED_TAB_BEGIN"
 export const CHANGE_SELECTED_TAB_SUCCESS = "CHANGE_SELECTED_TAB_SUCCESS"
@@ -15,6 +17,16 @@ export const DISMISS_FETCH_NOTIFICATION = "DISMISS_FETCH_NOTIFICATION"
 export const changeAdminMode = mode => ({
   type: CHANGE_ADMIN_MODE,
   mode
+})
+
+export const changeAuditLogSystemPageNumber = page => ({
+  type: CHANGE_AUDITLOG_USER_PAGENUMBER,
+  page
+})
+
+export const changeAuditLogUserPageNumber = page => ({
+  type: CHANGE_AUDITLOG_SYSTEM_PAGENUMBER,
+  page
 })
 
 export const changeCanSave = value => ({

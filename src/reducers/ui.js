@@ -31,6 +31,8 @@ import {
   CHANGE_SELECTED_SIRE
 } from "../actions/search"
 import {
+  CHANGE_AUDITLOG_SYSTEM_PAGENUMBER,
+  CHANGE_AUDITLOG_USER_PAGENUMBER,
   CHANGE_ADMIN_MODE,
   CHANGE_CAN_SAVE,
   CHANGE_SELECTED_TAB_SUCCESS,
@@ -44,6 +46,12 @@ import initialState from "../init.data"
 const ui = (state, action) => {
   switch (action.type) {
 
+    case CHANGE_AUDITLOG_SYSTEM_PAGENUMBER:
+      return state.setIn(["auditLog", "systemPageNumber"], action.page)
+  
+    case CHANGE_AUDITLOG_USER_PAGENUMBER:
+      return state.setIn(["auditLog", "userPageNumber"], action.page)
+  
     case CHANGE_ADMIN_MODE:
       // deny changing modes and resetting flags if we are saving
       return (state

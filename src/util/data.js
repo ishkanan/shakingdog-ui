@@ -6,6 +6,16 @@ export const coalesce = (value, def) => (!_.isNil(value) ? value : def)
 
 export const isNilOrEmptyString = (value) => _.isNil(value) || value === ""
 
+// returns a slice of a larger array, used for pagination UI
+export const sliceOfPie = (items, pageNumber, pageSize) => {
+  console.log("items=", items, "pageNumber=", pageNumber, "pageSize=", pageSize)
+  if (_.isNil(items)) {
+    return null
+  }
+  const baseIndex = (pageNumber - 1) * pageSize
+  return items.slice(baseIndex, Math.min(baseIndex + 50, items.size))
+}
+
 export const uuidv4 = () => {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
     var r = Math.random() * 16 | 0, v = c == "x" ? r : (r & 0x3 | 0x8);

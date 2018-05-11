@@ -9,6 +9,14 @@
   border-left: 1px solid lightgray;
 }
 
+.dark-header {
+  background-color: #101010;
+  color: #EEEEEE;
+  font-weight: bold;
+  margin-bottom: 1px;
+  padding: 3px 0px 3px 0px;
+}
+
 .footer {
   padding-bottom: 48px;
   padding-top: 48px;
@@ -143,6 +151,40 @@ span.dogstatus + span.dogstatus {
 
 /* Admin */
 
+.auditlog-entries {
+  font-size: 0.9rem !important;
+}
+
+.auditlog-entries .rt-td:nth-of-type(1) {
+  flex: 40 0 auto !important;
+  width: 40px !important;
+}
+
+.auditlog-entries .rt-td:nth-of-type(2) {
+  flex: 80 0 auto !important;
+  width: 80px !important;
+}
+
+.auditlog-entries .rt-td:nth-of-type(3) {
+  flex: 180 0 auto !important;
+  width: 180px !important;
+}
+
+.auditlog-entries .rt-th:nth-of-type(1) {
+  flex: 40 0 auto !important;
+  width: 40px !important;
+}
+
+.auditlog-entries .rt-th:nth-of-type(2) {
+  flex: 80 0 auto !important;
+  width: 80px !important;
+}
+
+.auditlog-entries .rt-th:nth-of-type(3) {
+  flex: 180 0 auto !important;
+  width: 180px !important;
+}
+
 .newlitter-remove-child {
   margin-left: 10px;
 }
@@ -186,14 +228,4 @@ span.dogstatus + span.dogstatus {
 
 .rt-noData {
   visibility: hidden;
-}
-
-/* View */
-
-.view-header {
-  background-color: #101010;
-  color: #EEEEEE;
-  font-weight: bold;
-  margin-bottom: 1px;
-  padding: 3px 0px 3px 0px;
 }

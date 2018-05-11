@@ -87,6 +87,10 @@ export function doAuthCheck(success, failure) {
   return genericAsyncFetch("/auth", success, failure)
 }
 
+export function getAuditLog(success, failure) {
+  return genericAsyncFetch("/api/admin/audit", success, failure)
+}
+
 export function getDogs(success, failure) {
   return genericAsyncFetch("/api/dogs", success, failure)
 }

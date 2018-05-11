@@ -2,6 +2,7 @@
 import React from "react"
 import { connect } from "react-redux"
 
+import AuditLogTable from "./AuditLogTable.jsx"
 import NewDogPage from "./NewDogPage.jsx"
 import NewLitterPage from "./NewLitterPage.jsx"
 import RecordTestResult from "./RecordTestResult.jsx"
@@ -23,6 +24,9 @@ const AdminControls = ({adminMode}) => {
       }
       {adminMode === "testresult" &&
       <RecordTestResult />
+      }
+      {adminMode === "auditlog" &&
+      <AuditLogTable />
       }
     </React.Fragment>
   )

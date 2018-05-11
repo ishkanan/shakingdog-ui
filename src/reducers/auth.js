@@ -2,6 +2,7 @@
 import { Map } from "immutable"
 
 import {
+  FETCH_AUDITLOG_FAILURE,
   SAVE_NEWDOG_FAILURE,
   SAVE_NEWLITTER_FAILURE,
   SAVE_SETGENDER_FAILURE,
@@ -13,6 +14,7 @@ import { CHANGE_SELECTED_TAB_FAILURE } from "../actions/ui"
 const auth = (state, action) => {
   switch (action.type) {
     case CHANGE_SELECTED_TAB_FAILURE:
+    case FETCH_AUDITLOG_FAILURE:
     case SAVE_NEWDOG_FAILURE:
     case SAVE_NEWLITTER_FAILURE:
     case SAVE_SETGENDER_FAILURE:
