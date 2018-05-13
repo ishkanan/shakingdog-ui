@@ -8,7 +8,6 @@ export const isNilOrEmptyString = (value) => _.isNil(value) || value === ""
 
 // returns a slice of a larger array, used for pagination UI
 export const sliceOfPie = (items, pageNumber, pageSize) => {
-  console.log("items=", items, "pageNumber=", pageNumber, "pageSize=", pageSize)
   if (_.isNil(items)) {
     return null
   }

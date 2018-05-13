@@ -58,7 +58,7 @@ const AuditLogTable = ({systemEntries, totalSystemEntries, systemPageNumber,
                                                   itemsCountPerPage={15}
                                                   totalItemsCount={totalSystemEntries}
                                                   onChange={onSystemPageChange} />}
-                             labelClass="is-normal"
+                             labelClass="is-normal has-text-left"
                              bodyClass="is-normal" />
         <br/>
         <ReactTable className="auditlog-entries"
@@ -83,7 +83,7 @@ const AuditLogTable = ({systemEntries, totalSystemEntries, systemPageNumber,
                                                   itemsCountPerPage={15}
                                                   totalItemsCount={totalUserEntries}
                                                   onChange={onUserPageChange} />}
-                             labelClass="is-normal"
+                             labelClass="is-normal has-text-left"
                              bodyClass="is-normal" />
         <br/>
         <ReactTable className="auditlog-entries"
