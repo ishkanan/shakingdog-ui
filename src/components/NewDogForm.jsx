@@ -15,7 +15,7 @@ const NewDogForm = ({name, gender, allowedGenders, slemStatus, allowedSlemStatus
   return (
     <React.Fragment>
       <HorizontalFormField caption="Name:"
-                           content={<input className="input" type="text" value={name} onChange={(e) => onDogPropChange("name", e.target.value)} />}
+                           content={<input className="input" type="text" maxLength={180} value={name} onChange={(e) => onDogPropChange("name", e.target.value)} />}
                            labelClass="is-normal"
                            bodyClass="is-normal" />
       <HorizontalFormField caption="Gender:"
