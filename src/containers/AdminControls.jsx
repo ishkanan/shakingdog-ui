@@ -6,7 +6,7 @@ import AuditLogTable from "./AuditLogTable.jsx"
 import NewDogPage from "./NewDogPage.jsx"
 import NewLitterPage from "./NewLitterPage.jsx"
 import RecordTestResult from "./RecordTestResult.jsx"
-import SetGenderPage from "./SetGenderPage.jsx"
+import UpdateDogPage from "./UpdateDogPage.jsx"
 import { toJS } from "../data/util.jsx"
 
 
@@ -16,8 +16,8 @@ const AdminControls = ({adminMode}) => {
       {adminMode === "newdog" &&
       <NewDogPage />
       }
-      {adminMode === "setgender" &&
-      <SetGenderPage />
+      {adminMode === "updatedog" &&
+      <UpdateDogPage />
       }
       {adminMode === "newlitter" &&
       <NewLitterPage />

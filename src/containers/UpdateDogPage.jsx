@@ -5,17 +5,18 @@ import { connect } from "react-redux"
 import Select from "react-select"
 
 import {
-  doSaveSetGender,
-  changeSetGenderGender,
-  changeSetGenderSelected
-} from "../actions/admin/setgender"
+  doSaveUpdateDog,
+  changeUpdateDogGender,
+  changeUpdateDogName,
+  changeUpdateDogSelected
+} from "../actions/admin/updatedog"
 import Button from "../components/Button.jsx"
 import CaptionedFolder from "../components/CaptionedFolder.jsx"
 import HorizontalFormField from "../components/HorizontalFormField.jsx"
 import { toJS } from "../data/util.jsx"
 
 
-const SetGenderPage = ({dogs, selectedDog, gender, canSave, isSaving, onDogChange, onGenderChange, onDoSave}) => {
+const UpdateDogPage = ({dogs, selectedDog, name, gender, canSave, isSaving, onDogChange, onNameChange, onGenderChange, onDoSave}) => {
   const genders = [
     {id: "D", value: "D"},
     {id: "B", value: "B"}
@@ -32,6 +33,10 @@ const SetGenderPage = ({dogs, selectedDog, gender, canSave, isSaving, onDogChang
                                                                         labelKey="value"
                                                                         valueKey="id"
                                                                         className="field is-expanded" />}
+                                                       labelClass="is-normal"
+                                                       bodyClass="is-normal" />
+                                  <HorizontalFormField caption="Name:"
+                                                       content={<input className="input" type="text" maxLength={180} value={name} onChange={(e) => onNameChange(e.target.value)} />}
                                                        labelClass="is-normal"
                                                        bodyClass="is-normal" />
                                   <HorizontalFormField caption="Gender:"
@@ -57,19 +62,21 @@ const SetGenderPage = ({dogs, selectedDog, gender, canSave, isSaving, onDogChang
 
 const mapStateToProps = (state) => ({
   dogs: state.getIn(["data", "dogs", "list"]),
-  selectedDog: state.getIn(["data", "setgender", "selected"]),
-  gender: state.getIn(["data", "setgender", "gender"]),
+  selectedDog: state.getIn(["data", "updatedog", "selected"]),
+  name: state.getIn(["data", "updatedog", "name"]),
+  gender: state.getIn(["data", "updatedog", "gender"]),
   canSave: state.getIn(["ui", "canSave"]),
   isSaving: state.getIn(["ui", "isSaving"])
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onDogChange: (dogId) => dispatch(changeSetGenderSelected(dogId)),
-  onGenderChange: (gender) => dispatch(changeSetGenderGender(gender)),
-  onDoSave: () => dispatch(doSaveSetGender()),
+  onDogChange: (dogId) => dispatch(changeUpdateDogSelected(dogId)),
+  onNameChange: (name) => dispatch(changeUpdateDogName(name)),
+  onGenderChange: (gender) => dispatch(changeUpdateDogGender(gender)),
+  onDoSave: () => dispatch(doSaveUpdateDog()),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(toJS(SetGenderPage))
+)(toJS(UpdateDogPage))

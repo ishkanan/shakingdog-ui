@@ -17,10 +17,6 @@ import {
   REMOVE_CHILD_FROM_NEWLITTER
 } from "../actions/admin/newlitter"
 import {
-  CHANGE_SETGENDER_GENDER,
-  CHANGE_SETGENDER_SELECTED
-} from "../actions/admin/setgender"
-import {
   CHANGE_TESTRESULT_DOG_RESULT,
   CHANGE_TESTRESULT_DOG_MODE,
   CHANGE_TESTRESULT_SELECTED_DOG,
@@ -35,12 +31,17 @@ import {
   CHANGE_TESTRESULT_NEWDAM_PROP
 } from "../actions/admin/testresult"
 import {
+  CHANGE_UPDATEDOG_GENDER,
+  CHANGE_UPDATEDOG_NAME,
+  CHANGE_UPDATEDOG_SELECTED
+} from "../actions/admin/updatedog"
+import {
   FETCH_AUDITLOG_BEGIN, FETCH_AUDITLOG_SUCCESS, FETCH_AUDITLOG_FAILURE,
   FETCH_DOGS_BEGIN, FETCH_DOGS_SUCCESS, FETCH_DOGS_FAILURE,
   FETCH_DOG_BEGIN, FETCH_DOG_SUCCESS, FETCH_DOG_FAILURE,
   FETCH_FAMILY_BEGIN, FETCH_FAMILY_SUCCESS, FETCH_FAMILY_FAILURE,
   FETCH_RELATIONSHIPS_BEGIN, FETCH_RELATIONSHIPS_SUCCESS, FETCH_RELATIONSHIPS_FAILURE,
-  SAVE_NEWDOG_SUCCESS, SAVE_NEWLITTER_SUCCESS, SAVE_SETGENDER_SUCCESS, SAVE_TESTRESULT_SUCCESS
+  SAVE_NEWDOG_SUCCESS, SAVE_NEWLITTER_SUCCESS, SAVE_TESTRESULT_SUCCESS, SAVE_UPDATEDOG_SUCCESS
 } from "../actions/api"
 import { CHANGE_ADMIN_MODE } from "../actions/ui"
 import initialState from "../init.data"
@@ -52,13 +53,13 @@ const data = (state, action) => {
     case CHANGE_ADMIN_MODE:
     case SAVE_NEWDOG_SUCCESS:
     case SAVE_NEWLITTER_SUCCESS:
-    case SAVE_SETGENDER_SUCCESS:
     case SAVE_TESTRESULT_SUCCESS:
+    case SAVE_UPDATEDOG_SUCCESS:
       return (state
         .set("newdog", fromJS(initialState.data.newdog))
         .set("newlitter", fromJS(initialState.data.newlitter))
-        .set("setgender", fromJS(initialState.data.setgender))
         .set("testresult", fromJS(initialState.data.testresult))
+        .set("updatedog", fromJS(initialState.data.updatedog))
       )
     
     case CHANGE_NEWDOG_PROP:
@@ -113,12 +114,6 @@ const data = (state, action) => {
         state.getIn(["newlitter", "children"]).delete(action.index)
       )
 
-    case CHANGE_SETGENDER_GENDER:
-      return state.setIn(["setgender", "gender"], action.gender)
-
-    case CHANGE_SETGENDER_SELECTED:
-      return state.setIn(["setgender", "selected"], action.dogId)
-
     case CHANGE_TESTRESULT_DOG_RESULT:
       return state.setIn(["testresult", "dog", "selected", action.ailment], action.result)
 
@@ -163,6 +158,20 @@ const data = (state, action) => {
 
     case CHANGE_TESTRESULT_NEWDAM_PROP:
       return state.setIn(["testresult", "dam", "dog", action.prop], action.value)
+
+    case CHANGE_UPDATEDOG_GENDER:
+      return state.setIn(["updatedog", "gender"], action.gender)
+
+    case CHANGE_UPDATEDOG_NAME:
+      return state.setIn(["updatedog", "name"], action.name)
+
+    case CHANGE_UPDATEDOG_SELECTED:
+      var upDog = state.getIn(["dogs", "list"]).find(d => d.get("id") === action.dogId)
+      return state.mergeIn(["updatedog"], Map({
+        "selected": upDog.get("id"),
+        "name": upDog.get("name"),
+        "gender": upDog.get("gender")
+      }))
 
     case FETCH_AUDITLOG_BEGIN:
       return state.set("auditLog", Map({

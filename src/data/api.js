@@ -130,12 +130,13 @@ export function submitNewDog(name, gender, shakingDogStatus, cecsStatus, success
   )
 }
 
-export function submitNewGender(dogId, gender, success, failure) {
+export function submitUpdateDog(dogId, name, gender, success, failure) {
   return genericAsyncSubmit(
     "PUT",
     "/api/admin/dog",
     {
       dogId: dogId,
+      name: name,
       gender: gender
     },
     success,

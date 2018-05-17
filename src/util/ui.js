@@ -63,10 +63,6 @@ export const canSaveNewLitter = (sire, dam, children) => {
   )
 }
 
-export const canSaveSetGender = (dogId, gender) => {
-  return !_.isNil(dogId) && !isNilOrEmptyString(gender)
-}
-
 export const canSaveTestResult = (result, dog, editSire, sire, editDam, dam) => {
   return (
     !isNilOrEmptyString(result) &&
@@ -74,6 +70,10 @@ export const canSaveTestResult = (result, dog, editSire, sire, editDam, dam) => 
     (!editSire ? true : !_.isNil(sire) && dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus"))) &&
     (!editDam ? true : !_.isNil(dam) && dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")))
   )
+}
+
+export const canSaveUpdateDog = (dogId, name, gender) => {
+  return !_.isNil(dogId) && !isNilOrEmptyString(name) && !isNilOrEmptyString(gender)
 }
 
 export const canSearch = (mode, dam, sire) => {

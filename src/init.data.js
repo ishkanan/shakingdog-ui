@@ -67,10 +67,6 @@ const initialState = {
       },
       children: []
     },
-    setgender: {
-      selected: null,
-      gender: null
-    },
     testresult: {
       dog: {
         mode: "search",
@@ -115,6 +111,11 @@ const initialState = {
           cecsstatus: "Unknown"
         }
       }
+    },
+    updatedog: {
+      selected: null,
+      name: "",
+      gender: null
     }
   },
   ui: {

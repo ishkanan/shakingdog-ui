@@ -6,9 +6,9 @@ import {
   getFamily,
   getRelationships,
   submitNewDog,
-  submitNewGender,
   submitNewLitter,
-  submitTestResult
+  submitTestResult,
+  submitUpdateDog
 } from "../data/api"
 
 
@@ -33,12 +33,12 @@ export const SAVE_NEWDOG_FAILURE = "SAVE_NEWDOG_FAILURE"
 export const SAVE_NEWLITTER_BEGIN = "SAVE_NEWLITTER_BEGIN"
 export const SAVE_NEWLITTER_SUCCESS = "SAVE_NEWLITTER_SUCCESS"
 export const SAVE_NEWLITTER_FAILURE = "SAVE_NEWLITTER_FAILURE"
-export const SAVE_SETGENDER_BEGIN = "SAVE_SETGENDER_BEGIN"
-export const SAVE_SETGENDER_SUCCESS = "SAVE_SETGENDER_SUCCESS"
-export const SAVE_SETGENDER_FAILURE = "SAVE_SETGENDER_FAILURE"
 export const SAVE_TESTRESULT_BEGIN = "SAVE_TESTRESULT_BEGIN"
 export const SAVE_TESTRESULT_SUCCESS = "SAVE_TESTRESULT_SUCCESS"
 export const SAVE_TESTRESULT_FAILURE = "SAVE_TESTRESULT_FAILURE"
+export const SAVE_UPDATEDOG_BEGIN = "SAVE_UPDATEDOG_BEGIN"
+export const SAVE_UPDATEDOG_SUCCESS = "SAVE_UPDATEDOG_SUCCESS"
+export const SAVE_UPDATEDOG_FAILURE = "SAVE_UPDATEDOG_FAILURE"
 
 // Fetch audit log
 
@@ -205,34 +205,35 @@ export const saveNewDog = (name, gender, shakingdogstatus, cecsstatus) => dispat
   )
 }
 
-// Set gender
+// Update dog details
 
-const saveSetGenderBegin = () => ({
-  type: SAVE_SETGENDER_BEGIN
+const saveUpdateDogBegin = () => ({
+  type: SAVE_UPDATEDOG_BEGIN
 })
 
-const saveSetGenderSuccess = () => ({
-  type: SAVE_SETGENDER_SUCCESS
+const saveUpdateDogSuccess = () => ({
+  type: SAVE_UPDATEDOG_SUCCESS
 })
 
-const saveSetGenderFailure = (error, auth) => ({
-  type: SAVE_SETGENDER_FAILURE,
+const saveUpdateDogFailure = (error, auth) => ({
+  type: SAVE_UPDATEDOG_FAILURE,
   error,
   auth
 })
 
-export const saveSetGender = (dogId, gender) => dispatch => {
+export const saveUpdateDog = (dogId, name, gender) => dispatch => {
   window.scrollTo(0, 0)
-  dispatch(saveSetGenderBegin())
-  return submitNewGender(
+  dispatch(saveUpdateDogBegin())
+  return submitUpdateDog(
     dogId,
+    name,
     gender,
     data => {
-      dispatch(saveSetGenderSuccess())
+      dispatch(saveUpdateDogSuccess())
       dispatch(fetchDogs())
       dispatch(fetchAuditLog())
     },
-    error => dispatch(saveSetGenderFailure(error.error, error.auth))
+    error => dispatch(saveUpdateDogFailure(error.error, error.auth))
   )
 }
 
