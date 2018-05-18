@@ -40,6 +40,29 @@ const initialState = {
         name: "",
         shakingdogstatus: "Unknown",
         cecsstatus: "Unknown"
+      },
+      setParents: false,
+      sire: {
+        mode: "search",
+        selected: null,
+        dog: {
+          id: null,
+          gender: "D",
+          name: "",
+          shakingdogstatus: "Unknown",
+          cecsstatus: "Unknown"
+        }
+      },
+      dam: {
+        mode: "search",
+        selected: null,
+        dog: {
+          id: null,
+          gender: "B",
+          name: "",
+          shakingdogstatus: "Unknown",
+          cecsstatus: "Unknown"
+        }
       }
     },
     newlitter: {

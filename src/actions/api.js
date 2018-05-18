@@ -1,6 +1,5 @@
 
 import {
-  getAuditLog,
   getDogs,
   getDog,
   getFamily,
@@ -188,52 +187,19 @@ const saveNewDogFailure = (error, auth) => ({
   auth
 })
 
-export const saveNewDog = (name, gender, shakingdogstatus, cecsstatus) => dispatch => {
+export const saveNewDog = (dog, sire, dam) => dispatch => {
   window.scrollTo(0, 0)
   dispatch(saveNewDogBegin())
   return submitNewDog(
-    name,
-    gender,
-    shakingdogstatus,
-    cecsstatus,
+    dog,
+    sire,
+    dam,
     data => {
       dispatch(saveNewDogSuccess())
       dispatch(fetchDogs())
-      dispatch(fetchAuditLog())
+      dispatch(fetchRelationships())
     },
     error => dispatch(saveNewDogFailure(error.error, error.auth))
-  )
-}
-
-// Update dog details
-
-const saveUpdateDogBegin = () => ({
-  type: SAVE_UPDATEDOG_BEGIN
-})
-
-const saveUpdateDogSuccess = () => ({
-  type: SAVE_UPDATEDOG_SUCCESS
-})
-
-const saveUpdateDogFailure = (error, auth) => ({
-  type: SAVE_UPDATEDOG_FAILURE,
-  error,
-  auth
-})
-
-export const saveUpdateDog = (dogId, name, gender) => dispatch => {
-  window.scrollTo(0, 0)
-  dispatch(saveUpdateDogBegin())
-  return submitUpdateDog(
-    dogId,
-    name,
-    gender,
-    data => {
-      dispatch(saveUpdateDogSuccess())
-      dispatch(fetchDogs())
-      dispatch(fetchAuditLog())
-    },
-    error => dispatch(saveUpdateDogFailure(error.error, error.auth))
   )
 }
 
@@ -264,7 +230,6 @@ export const saveNewLitter = (sire, dam, children) => dispatch => {
       dispatch(saveNewLitterSuccess())
       dispatch(fetchDogs())
       dispatch(fetchRelationships())
-      dispatch(fetchAuditLog())
     },
     error => dispatch(saveNewLitterFailure(error.error, error.auth))
   )
@@ -297,8 +262,38 @@ export const saveTestResult = (dog, sire, dam) => dispatch => {
       dispatch(saveTestResultSuccess())
       dispatch(fetchDogs())
       dispatch(fetchRelationships())
-      dispatch(fetchAuditLog())
     },
     error => dispatch(saveTestResultFailure(error.error, error.auth))
+  )
+}
+
+// Update dog details
+
+const saveUpdateDogBegin = () => ({
+  type: SAVE_UPDATEDOG_BEGIN
+})
+
+const saveUpdateDogSuccess = () => ({
+  type: SAVE_UPDATEDOG_SUCCESS
+})
+
+const saveUpdateDogFailure = (error, auth) => ({
+  type: SAVE_UPDATEDOG_FAILURE,
+  error,
+  auth
+})
+
+export const saveUpdateDog = (dogId, name, gender) => dispatch => {
+  window.scrollTo(0, 0)
+  dispatch(saveUpdateDogBegin())
+  return submitUpdateDog(
+    dogId,
+    name,
+    gender,
+    data => {
+      dispatch(saveUpdateDogSuccess())
+      dispatch(fetchDogs())
+    },
+    error => dispatch(saveUpdateDogFailure(error.error, error.auth))
   )
 }

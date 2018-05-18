@@ -115,29 +115,14 @@ export function getRelationships(success, failure) {
   return genericAsyncFetch("/api/relationships", success, failure)
 }
 
-export function submitNewDog(name, gender, shakingDogStatus, cecsStatus, success, failure) {
+export function submitNewDog(dog, sire, dam, success, failure) {
   return genericAsyncSubmit(
     "POST",
     "/api/admin/dog",
     {
-      name: name,
-      gender: gender,
-      shakingdogstatus: shakingDogStatus,
-      cecsstatus: cecsStatus
-    },
-    success,
-    failure
-  )
-}
-
-export function submitUpdateDog(dogId, name, gender, success, failure) {
-  return genericAsyncSubmit(
-    "PUT",
-    "/api/admin/dog",
-    {
-      dogId: dogId,
-      name: name,
-      gender: gender
+      dog: dog,
+      sire: sire,
+      dam: dam
     },
     success,
     failure
@@ -166,6 +151,20 @@ export function submitTestResult(dog, sire, dam, success, failure) {
       dog: dog,
       sire: sire,
       dam: dam
+    },
+    success,
+    failure
+  )
+}
+
+export function submitUpdateDog(dogId, name, gender, success, failure) {
+  return genericAsyncSubmit(
+    "PUT",
+    "/api/admin/dog",
+    {
+      dogId: dogId,
+      name: name,
+      gender: gender
     },
     success,
     failure

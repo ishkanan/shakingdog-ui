@@ -2,7 +2,16 @@
 import { fromJS, Map } from "immutable"
 import _ from "lodash"
 
-import { CHANGE_NEWDOG_PROP } from "../actions/admin/newdog"
+import {
+  CHANGE_NEWDOG_PROP,
+  CHANGE_NEWDOG_SET_PARENTS,
+  CHANGE_NEWDOG_SIRE_MODE,
+  CHANGE_NEWDOG_SELECTED_SIRE,
+  CHANGE_NEWDOG_NEWSIRE_PROP,
+  CHANGE_NEWDOG_DAM_MODE,
+  CHANGE_NEWDOG_SELECTED_DAM,
+  CHANGE_NEWDOG_NEWDAM_PROP
+} from "../actions/admin/newdog"
 import {
   CHANGE_NEWLITTER_SIRE_MODE,
   CHANGE_NEWLITTER_SELECTED_SIRE,
@@ -64,7 +73,28 @@ const data = (state, action) => {
     
     case CHANGE_NEWDOG_PROP:
       return state.setIn(["newdog", "dog", action.prop], action.value)
-    
+
+    case CHANGE_NEWDOG_SET_PARENTS:
+      return state.setIn(["newdog", "setParents"], action.value)
+
+    case CHANGE_NEWDOG_SIRE_MODE:
+      return state.setIn(["newdog", "sire", "mode"], action.mode)
+
+    case CHANGE_NEWDOG_SELECTED_SIRE:
+      return state.setIn(["newdog", "sire", "selected"], action.sireId)
+
+    case CHANGE_NEWDOG_NEWSIRE_PROP:
+      return state.setIn(["newdog", "sire", "dog", action.prop], action.value)
+
+    case CHANGE_NEWDOG_DAM_MODE:
+      return state.setIn(["newdog", "dam", "mode"], action.mode)
+
+    case CHANGE_NEWDOG_SELECTED_DAM:
+      return state.setIn(["newdog", "dam", "selected"], action.damId)
+
+    case CHANGE_NEWDOG_NEWDAM_PROP:
+      return state.setIn(["newdog", "dam", "dog", action.prop], action.value)
+
     case CHANGE_NEWLITTER_SIRE_MODE:
       return state.setIn(["newlitter", "sire", "mode"], action.mode)
 

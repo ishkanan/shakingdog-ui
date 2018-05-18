@@ -48,8 +48,12 @@ const dogOK = (name, gender, shakingdogstatus, cecsstatus) => {
   )
 }
 
-export const canSaveNewDog = (name, gender, shakingdogstatus, cecsstatus) => {
-  return dogOK(name, gender, shakingdogstatus, cecsstatus)
+export const canSaveNewDog = (dog, setParents, sire, dam) => {
+  return (
+    dogOK(dog.get("name"), dog.get("gender"), dog.get("shakingdogstatus"), dog.get("cecsstatus")) &&
+    (!setParents ? true : !_.isNil(sire) && dogOK(sire.get("name"), sire.get("gender"), sire.get("shakingdogstatus"), sire.get("cecsstatus"))) &&
+    (!setParents ? true : !_.isNil(dam) && dogOK(dam.get("name"), dam.get("gender"), dam.get("shakingdogstatus"), dam.get("cecsstatus")))
+  )
 }
 
 export const canSaveNewLitter = (sire, dam, children) => {
