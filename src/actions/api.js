@@ -1,5 +1,6 @@
 
 import {
+  getAuditLog,
   getDogs,
   getDog,
   getFamily,
